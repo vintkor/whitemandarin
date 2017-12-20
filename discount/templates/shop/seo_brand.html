@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load fishca_tags %}
+{% block title %}{{ page.title }}{% endblock %}
+{% block description %}{{ page.metaDesc }}{% endblock %}
+{% block keywords %}{{ page.metaKey }}{% endblock %}
+{% block canonical %}{{ page.get_url }}{% endblock %}
+
+{% block bred %}
+
+<div class="breadcrumb" itemscope="" itemtype="http://schema.org/WebPage">
+        <span temprop="breadcrumb" itemscope="" itemtype="http://schema.org/Breadcrumb"><a href="/" itemprop="url">
+            Магазин электроники
+            </a>
+             ›
+        </span>
+
+        <span temprop="breadcrumb" itemscope="" itemtype="http://schema.org/Breadcrumb"><a href="/{{category.slug }}/" itemprop="url">
+            {{category.name }}
+            </a>
+             ›
+        </span>
+
+        <span temprop="breadcrumb" itemscope="" itemtype="http://schema.org/Breadcrumb">
+            {{page.name }}
+
+
+        </span>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div id="column-left">
+    <div class="box">
+	  <div class="box-heading">Полезное</div>
+	  <div class="box-content">
+	      <div class="product-list2 inhome">
+
+	        {% usfull category %}
+
+	      </div>
+	  </div>
+	</div>
+  </div>
+
+
+  <div id="column-right">
+    <div class="box">
+  <div class="box-heading">Рекомендуем</div>
+  <div class="box-content">
+      <div class="product-list2 inhome">
+
+        {% top_prod category %}
+
+      </div>
+  </div>
+</div>
+<br/>
+
+
+  </div>
+
+<div id="content"><!-- breadcrumbs old place -->
+  <h1>{{ page.name }}</h1>
+
+
+    <div class="product-filter">
+
+		{{ page.full_text|safe }}
+
+	</div>
+
+  <div class="product-compare"><a href="{% if compare_count >= 2 %}/compare/{% endif %}" id="compare-total">Сравнение товаров ({{ compare_count }})</a></div>
+
+  <div class="product-grid">
+  {% for item in items  %}
+
+    <div class="prod_wrap" data-id="{{ item.id }}">
+      <div class="prod_wrap_wrap">
+        <div class="image" style="position:relative;">
+          {% if item.has_gift %}
+          <img class="prod_gift" src="/static_cdn/design/img/giftn.png"/>
+          {% endif %}
+            <a class="catalog_img" href="{% url 'product' item.category.slug item.brand.slug item.slug %}">
+                <img src="{% thumbnail  item.image 150x150 sharpen %}" title="{{ item.name }}" alt="{{ item.name }}">
+                {% if item.oldprice %}
+                      <div class="ak_img"></div>
+                  {% endif %}
+            </a>
+        </div>
+        <div class="name">
+            <a href="{% url 'product' item.category.slug item.brand.slug item.slug %}">
+                {{ item.name|cut_name }} {{ item.colorname }}
+            </a>
+        </div>
+
+        <label class="to-compare">
+            <input type="checkbox" value="{{item.id}}" data-compare="{% if item.id in items_id %}true{% else %}false{% endif %}"> <span class="to-compare__add">К сравнению</span>
+        </label>
+
+        {% if item.oldprice %}
+            <div class="old_price">{{ item.oldprice }}грн.</div>
+          {% endif %}
+        <div class="price">
+
+            <br>
+            {% if item.price %}
+            {{ item.price }}грн.
+            {% else %}
+            <span class="notnall">Нет в наличии</span>
+            {% endif %}
+        </div>
+        {% if item.price %}
+        <div class="cart">
+            <a href="{% url 'product' item.category.slug item.brand.slug item.slug %}"  class="button">Купить</a>
+        </div>
+        {% endif %}
+        <div class="wishlist">
+            <a onclick="addToWishList('{{ item.id }}');">В закладки</a>
+        </div>
+        <div class="compare"><a onclick="addToCompare('{{ item.id }}');">В сравнение</a></div>
+
+         <div class="description">
+
+            {{ item.description|safe }}
+
+        </div>
+
+
+        {% if item.get_colors|length > 0 %}
+          <div class="colors">
+            <ul id="color_prod_{{item.id}}">
+              {% for color in item.get_colors %}
+              <li {% if forloop.counter > 2 %}class="hid"{% endif %}><a href="{% url 'product' item.category.slug item.brand.slug item.slug color.id %}">
+
+                  <span class="color-name">{{ color.name }}</span>
+                  <br />
+                  <img src="{% thumbnail  color.image1 40x40 sharpen %}" alt="{{ product.name }} {{ color.name }}">
+                  <br />
+                  <span class="color_price">{{ color.price }}</span>
+
+                </a></li>
+
+
+              {% endfor %}
+              {% if item.get_colors|length > 3 %}
+              <li class="show_more" onclick="more('color_prod_{{item.id}}');">+Еще</li>
+              {% endif %}
+            </ul>
+          </div>
+
+        {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+
+    </div>
+
+<div></div>
+
+</div>
+
+
+
+
+
+
+
+
+
+<!--
+OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
+Please donate via PayPal to donate@opencart.com
+//-->
+
+<script>
+  $(document).ready(function(){
+
+    var max_price = parseInt({{ max_price}}),
+        min_price = parseInt({{ min_price}}),
+        max_now = parseInt({{ max_now}}),
+        min_now = parseInt({{ min_now }});
+
+
+    $( "#price-range" ).slider({
+        range: true,
+        min: {{ min_price }},
+        max: {{ max_price }},
+        // values: [ 75, 300 ],
+        slide: function( event, ui ) {
+            $( ".min_now" ).val( ui.values[ 0 ] );
+            $( ".max_now" ).val( ui.values[ 1 ] );
+        }
+    });
+
+    if (max_now == 0){
+      max_now = max_price;
+    }
+
+    if (min_now == 0){
+      min_now = min_price;
+    }
+
+    $('#price-range').slider({
+      values: [min_now, max_now]
+    });
+
+    $('.min_now').val(min_now);
+    $('.max_now').val(max_now);
+
+  });
+</script>
+
+
+
+
+
+
+
+
+{% endblock %}

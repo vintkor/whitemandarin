@@ -1,0 +1,17 @@
+{% load thumbnail %}
+{% load fishca_tags %}
+
+{% if items %}
+<!-- Recommended Goods -->
+<section class="{% if type == 'cat' %}recommended-goods {% endif %}slider-goods">
+  <h2>Рекомендуемые товары</h2>
+  <div class="goods-carousel owl-carousel owl-theme">
+
+    {% for one in items %}
+      {% product one items_id type='bx' nofollow=True%}
+    {% endfor %}
+
+  </div>
+</section>
+<!-- End of Recommended Goods -->
+{% endif %}

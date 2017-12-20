@@ -1,0 +1,38 @@
+<div class="box">
+  <div class="box-heading">{{ product.category.name }}</div>
+  <div class="box-content">
+    <div class="box-category">
+        <ul>
+            {% for item in items %}
+                <li>
+                    <a href="{% url 'brandcategory' category.slug item.slug %}" class="leftmenu{% if item.brand == product.brand %} active{% endif %}">{{ item.brand.name }}</a>
+                    <ul>
+                    {% for one in item.products %}
+                        <li>
+                            <a href="{{ one.get_url }}" {% if one == product %}class="active"{% endif %}>{{ one.name }}{% if one.action %} <span class="action">Акция!</span>{% endif %}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+  </div>
+{% if seo_pages or seo_brand%}
+    <div class="box-category">
+        <ul>
+            <li>
+                <a href="" class="leftmenu active"></a>
+                <ul>
+                  {% for s in seo_pages %}
+                  <li><a href="{{s.get_url}}">{{s.name}}</a></li>
+                  {% endfor %}
+                  {% if seo_brand %}
+                  <li><a href="{{seo_brand.get_url}}">{{seo_brand.name}}</a></li>
+                  {% endif %}
+                </ul>
+            </li>
+        </ul>
+    </div>
+{% endif %}
+</div>

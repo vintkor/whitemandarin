@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load fishca_tags %}
+{% load comments_tags %}
+
+
+{% load thumbnail %}
+{% block title %}Полезные статьи о электронике и бытовой технике{% endblock %}
+{% block description %}Как правильно выбрать лучший товар? это и многое другое Вы узнаете иэ этих статей{% endblock %}
+{% block keywords %}{% endblock %}
+{% block canonical %}/usfull/{% endblock %}
+
+{% block bred %}
+
+<div class="breadcrumb" itemscope="" itemtype="http://schema.org/WebPage">
+        <span temprop="breadcrumb" itemscope="" itemtype="http://schema.org/Breadcrumb"><a href="/" itemprop="url">
+            Магазин электроники
+            </a>
+             ›
+        </span>
+        <span temprop="breadcrumb" itemscope="" itemtype="http://schema.org/Breadcrumb">
+            Полезные статьи
+        </span>
+
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+
+<div id="content" ><!-- breadcrumbs old place -->
+  <h1 >Полезные статьи</h1>
+  {% for i in items %}
+  <div class="usfull_item">
+    <a href="{% url 'usfull_item' i.slug %}">
+        <img class="usfull_thumb" style="margin:5px;" align="left" alt="{{i.name}}" src="{% thumbnail  i.image 200x150 sharpen %}"/>
+        </a>
+         <div class="usfull_name">
+        <a href="{% url 'usfull_item' i.slug %}">{{i.name}}</a>
+      </div>
+      {{i.short_text|safe}}
+
+  </div>
+  <br clear="all"/>
+  <br clear="all"/>
+  {% endfor %}
+
+</div>
+{% endblock %}

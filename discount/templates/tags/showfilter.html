@@ -1,0 +1,22 @@
+{% if one.slug %}
+  <div class="filter-checkbox checkbox">
+    <label>
+      <i class="custom-checkbox">
+        <span><a href="{% url 'brandcategory' category.slug one.slug %}" class="leftmenu{% if one.id in active_brands %} active{% endif %}"><i class="fa fa-square-o"></i>{{ one.value }}</a> {% if one.id not in active_filters %}
+
+        {% endif %}</span>
+      </i>
+    </label>
+  </div>
+{% else %}
+  <div class="filter-checkbox checkbox">
+    <label for="prop_{{ one.id }}">
+      <input type="checkbox" name="prop_{{ one.id }}" id="prop_{{ one.id }}" value="1" {% if one.id in active_filters %}checked{% endif %}>
+      <i class="custom-checkbox">
+        <i class="fa fa-square-o"></i>
+        <i class="fa fa-check-square-o"></i>
+        <span>{{ one.value }}{% if one.id not in active_filters %}{% endif %}</span>
+      </i>
+    </label>
+  </div>
+{% endif %}

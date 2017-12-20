@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+{% load fishca_tags %}
+<price date="{{ now.year }}-{{ now.month }}-{{ now.day }} {{ now.hour }}:{{ now.minute }}">
+<name>Интернет-магазин 20К</name>
+
+<currency id="USD" rate="23.00"/>
+
+        <catalog>
+        {% for item in categories %}
+            <category id="{{ item.id }}" {% if item.parent %}parentID="{{ item.parent.id }}"{% endif %}>{{ item.name }}</category>
+        {% endfor %}
+        </catalog>
+
+        <items>
+        {% for item in items %}
+            <item id="{{ item.id }}">
+                <name>{{ item.name }}</name>
+                <categoryId>{{item.category.id}}</categoryId>
+                <price>{{ item.price }}</price>
+                <url>http://20k.com.ua{{ item.get_url}}</url>
+                <currencyId>UAH</currencyId>
+                <image>http://20k.com.ua/media/{{ item.image }}</image>
+                <vendor>{{ item.brand.name }}</vendor>
+                <description>{{ item.description|striptags|removenbsp }}</description>
+                <warranty>{{ item.waranty }}</warranty>
+            </item>
+        {% endfor %}
+        </items>
+
+</price>

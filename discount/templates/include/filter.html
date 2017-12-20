@@ -1,0 +1,112 @@
+{% load fishca_tags %}
+
+<div class="filters">
+
+  <input type="hidden" class="filter__info" data-brand-qt="{{ active_brands|length }}" data-url="/{{ category.slug }}/">
+  <form class="all-filters other">
+    <!-- Filter Category -->
+    <div class="filter-box">
+      <header class="filter-box-h"><strong>Цена</strong></header>
+      <div class="filters-wrap filters--price">
+        <div class="clearfix">
+          <div class="col-sm-5 col-no-padding"><input type="number" name="min_now" class="form-control input-sm min_now" placeholder="0"></div>
+          <div class="col-sm-2 text-center col-no-padding">—</div>
+          <div class="col-sm-5 col-no-padding"><input type="number" name="max_now" class="form-control input-sm max_now" placeholder="500"></div>
+        </div>
+        <div id="price-range"></div>
+      </div>
+    </div>
+    <!-- End of Filter Category -->
+  </form>
+
+  <form class="all-filters brand">
+    <!-- Filter Category Brand -->
+    <div class="filter-box filter-box--brands">
+      <header class="filter-box-h"><strong><a href="#filter_0" data-toggle="collapse" aria-expanded="false" aria-controls="filter_0" class="filter-box-h__lnk">Бренды <i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up"></i></a></strong></header>
+      <div class="filters-wrap collapse in" id="filter_0">
+        {% if brands %}
+            {% for one in brands %}
+              {% showbrand category active_brands active_filters one %}
+            {% endfor %}
+        {% endif %}
+
+      </div>
+    </div>
+    <!-- End of Filter Category Brand -->
+  </form>
+
+  <form class="all-filters other">
+    {% for filter in filters %}
+    <!-- Filter Category -->
+    <div class="filter-box">
+      <header class="filter-box-h"><strong><a href="#filter_{{ filter.id }}" data-toggle="collapse" aria-expanded="false" aria-controls="filter_{{ filter.id }}" class="filter-box-h__lnk">{{ filter.name }} <i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up"></i></a></strong></header>
+      <div class="filters-wrap collapse in" id="filter_{{ filter.id }}">
+
+        {% for one in filter.items %}
+
+          {% showfilter category active_brands active_filters one %}
+
+        {% endfor %}
+
+      </div>
+    </div>
+    <!-- End of Filter Category -->
+    {% endfor %}
+
+  </form>
+</div>
+<script>
+  $(document).ready(function(){
+
+    var max_price = parseInt({{ max_price}}),
+        min_price = parseInt({{ min_price}}),
+        max_now = parseInt({{ max_now}}),
+        min_now = parseInt({{ min_now }});
+
+
+    $( "#price-range, #price-range2" ).slider({
+        range: true,
+        min: {{ min_price }},
+        max: {{ max_price }},
+        // values: [ 75, 300 ],
+        slide: function( event, ui ) {
+            $( ".min_now" ).val( ui.values[ 0 ] );
+            $( ".max_now" ).val( ui.values[ 1 ] );
+        }
+    });
+
+    if (max_now == 0){
+      max_now = max_price;
+    }
+
+    if (min_now == 0){
+      min_now = min_price;
+    }
+
+    $('#price-range, #price-range2').slider({
+      values: [min_now, max_now]
+    });
+
+    $('.min_now').val(min_now);
+    $('.max_now').val(max_now);
+
+    $( "#price-range" ).slider({
+        change: function( event, ui ) {
+            setTimeout(function(){
+
+              if (max_price == parseInt($('.max_now').val())) {
+                  $('.max_now').remove();
+              }
+
+              if (min_price == parseInt($('.min_now').val())) {
+                  $('.min_now').remove();
+              }
+
+              filter();
+
+            }, 1000)
+        }
+    });
+
+  });
+</script>

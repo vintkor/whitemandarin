@@ -1,0 +1,47 @@
+<form class="form-horizontal {% if 'answer' in type %}form-review-reply{% elif 'review' in type %}form-review{% endif %}">
+  <div class="form-group form-group-sm">
+    <div class="col-sm-12">
+      <strong>Ваше сообщение</strong>
+      <textarea class="form-control required" rows="3" name="review_text_{{one.id}}"></textarea>
+    </div>
+  </div>
+
+  {% if 'review' in type %}
+  <div class="form-group form-group-sm">
+    <script src="/static_cdn/design/js/rating_star.js"></script>
+    <script>
+    jQuery(document).ready(function(){
+      jQuery("#rating_comment").webwidget_rating_sex({
+          rating_star_length: '5',
+          rating_initial_value: '',
+          rating_function_name: '',//this is function name for click
+          directory: '/static/img/'
+      });
+    })
+    </script>
+    <label class="col-sm-3 control-label">Оценка</label>
+    <div class="col-sm-9">
+      <input name="reit_review" value="5" id="rating_comment"  type="hidden">
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="form-group form-group-sm">
+    <label for="inputNameReply" class="col-sm-3 control-label">Ваше имя</label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control required" id="inputNameReply" name="review_name_{{one.id}}">
+    </div>
+  </div>
+  <!-- <div class="form-group form-group-sm">
+    <label for="inputEmailReply" class="col-sm-3 control-label">Email</label>
+    <div class="col-sm-9">
+      <input type="email" class="form-control" id="inputEmailReply" name="review_email_{{one.id}}">
+    </div>
+  </div> -->
+  <div class="form-group form-group-sm">
+    <div class="col-sm-offset-3 col-sm-9">
+      <div class="alert alert-success success-form thank-form" role="alert">Благодарим за Ваш отзыв</div>
+      <button type="button" class="btn btn-success btn-buy btn-sm" onclick=" {% if 'answer' in type %}send_answer({{one.id}});{% elif 'review' in type %}send_review();{% endif %}"><i class="fa fa-paper-plane-o"></i> Написать</button>
+    </div>
+  </div>
+</form>

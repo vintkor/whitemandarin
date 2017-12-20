@@ -1,0 +1,51 @@
+{% load fishca_tags %}
+{% load cache %}
+
+<!-- Footer -->
+<footer class="main-footer">
+  <div class="row">
+    <div class="col-md-4 col-lg-2 created_relative">
+      <span class="copyright">© Интернет-магазин «20K»<br>2013–2017</span><br><br>
+      <b>Режим работы:</b><br>
+      Пн-Пт <b>9:00-19:00</b><br>
+      Сб,Вс <b>9:00-18:00</b>
+      
+      <div id="created" class="created">
+        <span class="created_text">Создание сайта</span>
+        <a class="created_logo" href="http://gowius.com" target="_blank" rel="nofollow"><span>go</span>wius</a>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <ul class="list-unstyled footer-m-l">
+
+        {% cache 50000 menu_1 %}
+          {% menu 1%}
+        {% endcache %}
+
+      </ul>
+    </div>
+    <div class="col-md-4 col-lg-2">
+      <address>
+      Ул. Ушинского, 3<br>Киев, 03058<br>
+      <a href="mailto:20konlinemail@gmail.com">20konlinemail@gmail.com</a><br><br>
+      <strong>(093) 226-01-39</strong><br>
+      <strong>(096) 077-75-19</strong><br>
+      <strong>(066) 740-03-83</strong><br>
+      <strong>(044) 228-29-37</strong><br>
+    </address>
+    </div>
+    <div class="hidden-xs col-md-4 col-lg-2">
+      <!-- VK Widget -->
+      <div id="vk_groups"></div>
+      <!--
+      <script type="text/javascript">
+      VK.Widgets.Group("vk_groups", {mode: 0, width: "200", height: "250", color1: 'FFFFFF', color2: '2B587A', color3: '5B7FA6'}, 86613266);
+      </script>
+      -->
+    </div>
+    <div class="hidden-xs col-md-4 col-lg-3">
+      <div class="fb-page" data-href="https://www.facebook.com/20k.com.ua/" data-height="300" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/20k.com.ua/"><a href="https://www.facebook.com/20k.com.ua/">20k</a></blockquote></div></div>
+    </div>
+  </div>
+</footer>
+  <!-- End of Footer -->

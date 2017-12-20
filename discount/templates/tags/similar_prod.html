@@ -1,0 +1,13 @@
+{% load fishca_tags %}
+
+{% if items %}
+  <div class="slider-goods">
+    <div class="goods-carousel owl-carousel owl-theme">
+
+    	{% for one in items %}
+		    {% product one items_id type='bx' nofollow=True %}
+	    {% endfor %}
+
+    </div>
+</div>
+{% endif %}

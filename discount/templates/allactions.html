@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Ecommerce module</title>
+
+    <!-- Bootstrap -->
+    <link href="/static_cdn/ecommerce/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static_cdn/ecommerce/css/style.css" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  </head>
+  <body>
+<!-- Button trigger modal -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-10">
+            <div class="status"></div>
+        </div>
+      </div>
+        <div class="ecommerce">
+          <div class="row">
+            <div class="col-md-3 tree">
+              <div id="tree"></div>
+            </div>
+            <div class="col-md-9 work-area">
+
+              <form class="active-complects">
+                <h2>Активные акции</h2>
+
+                <div class="aitems"></div>
+              </form>
+	            <form class="maincat-form">
+
+		            <div class="second">
+		            	<h2>Создание акции</h2>
+	            		<div class="items">
+
+	            		</div>
+                  <input type="hidden" name="ids">
+                  <input type="text" name="name" placeholder="Название акции"><br>
+                  <input type="text" name="date" placeholder="Дата окончания"><br>
+                  <input type="text" name="recomendproduct" placeholder="Рекомендованные продукты"><br>
+                  <button type="submit" class="create">Create</button>
+		            </div>
+	            </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <script type="text/template" id="one">
+    	<div>
+        <input type="checkbox" data-id="<%= id %>" name="item_<%= id %>" value="1">&nbsp;&nbsp;&nbsp;<%= name %>
+      </div>
+
+    </script>
+
+    <script type="text/template" id="action">
+      <div data-id="<%= id %>">
+        <%= name %> (<%= actionname %>)<a href="javascript:;" class="delete">Удалить</a>
+      </div>
+    </script>
+    <!-- Modal -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/static_cdn/ecommerce/js/bootstrap.min.js"></script>
+    <script src="/static_cdn/ecommerce/js/jstree/jstree.js"></script>
+    <script src="/static_cdn/ecommerce/js/underscore.js"></script>
+    <script src="/static_cdn/ecommerce/js/action.js"></script>
+  </body>
+</html>

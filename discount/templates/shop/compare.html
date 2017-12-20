@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load fishca_tags %}
+{% block title %}Сравнение товаров{% endblock %}
+{% block description %}{% endblock %}
+{% block keywords %}{% endblock %}
+{% block canonical %}/to_compare/{{ category.id }}/{% endblock %}
+
+
+{% block content %}
+
+<section class="compare">
+
+    <div class="compare-inner">
+        <h1>Сравнение товаров:</h1>
+        <table class="table table-hover table-compare compare__body">
+          <thead>
+            <tr class="product-grid">
+                <td class="compare-add">
+                    <div class="btn-group-vertical compare-filter-btns" role="group" aria-label="...">
+                      <a href="{% url 'category' category.slug %}" class="btn btn-default compare__add-btn" onclick="allProperties();">Добавить товар</a>
+                      <a href="javascript:;" class="btn btn-default active compare__filter-all" onclick="allProperties();">Все параметры</a>
+                      <a href="javascript:;" class="btn btn-default compare__filter-differences" onclick="differencesProperties();">Только отличия</a>
+                    </div>
+
+                </td>
+
+                {% for item in prods %}
+                <td data-id="{{item.id}}">
+                    <div class="good-compare-i">
+                        <div class="good-compare-img" style="position:relative;">
+                          {% if item.has_gift %}
+                          <div class="good-gift"><img class="good-gift-img" src="/static_cdn/design/img/giftn.png"/></div>
+                          {% endif %}
+                            <a href="{% url 'product' item.category.slug item.brand.slug item.slug %}">
+                                <img src="{% thumbnail  item.image 150x150 sharpen %}" title="{{ item.name }}" alt="{{ item.name }}" class="img-responsive">
+                                {% if item.oldprice %}
+                                      <div class="ak_img"></div>
+                                  {% endif %}
+                            </a>
+                        </div>
+                        <div class="good-i-t good-compare-name">
+                            <a href="{% url 'product' item.category.slug item.brand.slug item.slug %}">
+                                {{ item.name|cut_name }} {{ item.colorname }}
+                            </a>
+                        </div>
+
+                        {% if item.oldprice %}
+                            <div class="good-compare-oldprice">{{ item.oldprice }}грн.</div>
+                          {% endif %}
+                        <div class="good-i-price good-compare-price">
+                            {% if item.price %}
+                            <strong>{{ item.price }}</strong><small>грн.</small>
+                            {% else %}
+                            <span class="notnall">Нет в наличии</span>
+                            {% endif %}
+                        </div>
+                        {% if item.price %}
+                        <div class="good-compare-buy">
+                            <a href="{% url 'product' item.category.slug item.brand.slug item.slug %}"  class="btn btn-sm btn-success btn-buy">Купить</a>
+                        </div>
+                        {% endif %}
+                        <div class="good-compare-remove" onclick="compareRemove({{item.id}}, {{category.id}});" data-toggle="tooltip" data-placement="top" title="Удалить из сравнения"><i class="fa fa-times"></i></div>
+                    </div>
+                </td>
+                {% endfor %}
+
+            </tr>
+          </thead>
+          <tbody>
+            {% for property in properties %}
+            <tr data-property="{{ property.id }}" class="compare-row">
+                <th>{{property.name}}:</th>
+
+                {% for product in prods %}
+                  {% for prod_property in product.get_properties %}
+
+                    {% if prod_property.name == property.name %}
+                      {% if prod_property.value %}
+                      <td data-property="{{ product.id }}" data-value="{{prod_property.value}}">{{prod_property.value}}</td>
+                      {% else %}
+                      <td data-property="{{ product.id }}" data-value=""></td>
+                      {% endif %}
+                    {% endif %}
+
+                  {% endfor %}
+                {% endfor %}
+
+            </tr>
+            {% endfor %}
+          </tbody>
+
+          <tfoot>
+            <tr class="product-grid">
+                <td class="compare-add">
+
+                </td>
+
+                {% for item in prods %}
+                <td data-id="{{item.id}}">
+                    <div class="good-compare-i">
+                        <div class="good-compare-img" style="position:relative;">
+                          {% if item.has_gift %}
+                          <div class="good-gift">
+                            <img class="good-gift-img" src="/static_cdn/design/img/giftn.png"/>
+                          </div>
+                          {% endif %}
+                            <a href="{% url 'product' item.category.slug item.brand.slug item.slug %}">
+                                <img src="{% thumbnail  item.image 150x150 sharpen %}" title="{{ item.name }}" alt="{{ item.name }}" class="img-responsive">
+                                {% if item.oldprice %}
+                                      <div class="ak_img"></div>
+                                  {% endif %}
+                            </a>
+                        </div>
+                        <div class="good-i-t good-compare-name">
+                            <a href="{% url 'product' item.category.slug item.brand.slug item.slug %}">
+                                {{ item.name|cut_name }} {{ item.colorname }}
+                            </a>
+                        </div>
+
+                        {% if item.oldprice %}
+                            <div class="good-compare-oldprice">{{ item.oldprice }}грн.</div>
+                          {% endif %}
+                        <div class="good-i-price good-compare-price">
+                            {% if item.price %}
+                            <strong>{{ item.price }}</strong><small>грн.</small>
+                            {% else %}
+                            <span class="notnall">Нет в наличии</span>
+                            {% endif %}
+                        </div>
+                        {% if item.price %}
+                        <div class="good-compare-buy">
+                            <a href="{% url 'product' item.category.slug item.brand.slug item.slug %}"  class="btn btn-sm btn-success btn-buy">Купить</a>
+                        </div>
+                        {% endif %}
+                        <div class="good-compare-remove" onclick="compareRemove({{item.id}}, {{category.id}});" data-toggle="tooltip" data-placement="top" title="Удалить из сравнения"><i class="fa fa-times"></i></div>
+                    </div>
+                </td>
+                {% endfor %}
+
+            </tr>
+          </tfoot>
+
+        </table>
+    </div>
+</section>
+
+{% if  prods.count > 4 %}
+<script>
+$(document).ready(function(){
+  scroll();
+})
+</script>
+{% endif %}
+{% endblock %}

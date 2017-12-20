@@ -1,0 +1,5 @@
+<ul class="main-menu">
+	{% for item in items %}
+    <li{% if request.get_full_path == item.slug %} class="active"{% endif %}><a href="{{ item.slug }}">{{ item.name }}</a></li>
+	{% endfor %}
+</ul>

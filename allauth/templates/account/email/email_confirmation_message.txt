@@ -1,0 +1,8 @@
+{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Приветствуем Вас!
+
+Вы получили этот мейл потому что {{ user_display }} зарегистрировался на сайте {{ site_domain }}
+
+Для подтверждения перейдите по ссылке {{ activate_url }}
+{% endblocktrans %}{% endautoescape %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
+Спасибо, Ваш {{ site_name }}!{% endblocktrans %}

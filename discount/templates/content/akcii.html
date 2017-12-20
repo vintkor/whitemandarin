@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load fishca_tags %}
+{% load comments_tags %}
+
+
+{% load thumbnail %}
+{% block title %}{{ category.title }}{% endblock %}
+{% block description %}{{ category.metaDesc }}{% endblock %}
+{% block keywords %}{{ category.metaKey }}{% endblock %}
+
+{% block bred %}
+
+<div class="breadcrumb" itemscope="" itemtype="http://schema.org/WebPage">
+        <span temprop="breadcrumb" itemscope="" itemtype="http://schema.org/Breadcrumb"><a href="/" itemprop="url">
+            Магазин электроники
+            </a>
+             ›
+        </span>
+
+
+        <span temprop="breadcrumb" itemscope="" itemtype="http://schema.org/Breadcrumb">
+
+            {{ category.name }}
+
+
+        </span>
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+
+<div id="content" ><!-- breadcrumbs old place -->
+  <h1 >{{ category.name }}</h1>
+  {% for p in pages %}
+  <table class="ak_item" width="100%">
+    <tr>
+      <td width="200" align="center">
+        {% thumbnail p.image 190x0 upscale as im %}
+        <a href="{% url 'akcya' p.slug %}">
+        <img src="{{im.url}}" alt="{{p.name}}">
+      </a>
+
+      </td>
+      <td valign="top">
+        <h2><i class="glyphicons fire" data-name="fire" data-type="" data-prefix="glyphicons" data-utf="E023"></i><a href="{% url 'akcya' p.slug %}">{{p.name}}</a></h2>
+        <p class="date_pub">{{p.pub_date}}</p>
+        {{p.short_text|safe}}
+
+      </td>
+    </tr>
+
+  </table>
+
+  {% endfor %}
+
+</div>
+{% endblock %}

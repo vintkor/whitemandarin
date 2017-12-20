@@ -1,0 +1,30 @@
+{% load comments_tags %}
+
+<div class="row">
+  <div class="col-md-5 col-md-push-7">
+    <h2 id="send_review_h">Написать свой отзыв</h2>
+    <div class="well">
+
+      <input type="hidden" name="paket" value="{{paket}}">
+      <input type="hidden" name="item_model" value="{{item_model}}">
+      <input type="hidden" name="item_id" value="{{item_id.id}}">
+      <input type="hidden" name="path" value="{% url 'comment_save' %}">
+      <input type="hidden" name="path_answer" value="{% url 'save_answer' %}">
+      <input type="hidden" name="path_utility" value="{% url 'utility' %}">
+
+      {% comment_form 'None' type='review' %}
+
+    </div>
+  </div>
+  <div class="col-md-7 col-md-pull-5">
+    <h2>{{ item_id.catsin }} {{ item_id.name }} отзывы<small>({{ nodes.count }})</small></h2>
+    <div class="reviews all-reviews">
+
+      {% for one in nodes %}
+        {% comment one com_class='.all-reviews' item_id=item_id show=True %}
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+<script src="/static_cdn/design/js/rating_star.js"></script>

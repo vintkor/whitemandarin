@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Ecommerce module</title>
+
+    <!-- Bootstrap -->
+    <link href="/static_cdn/ecommerce/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static_cdn/ecommerce/css/style.css" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  </head>
+  <body>
+<!-- Button trigger modal -->
+    <div class="container-fluid">
+      <div class="row">
+        <form action="/price/" method="GET">
+          <div class="col-md-3">
+          Поставщик:<br>
+          <select name="provider" id="provider">
+            <option value="0">Все</option>
+            {% for one in providers %}
+              <option value="{{ one.id }}" {% if one.id == provider %}selected="selected"{% endif %}>{{ one.name }}</option>
+            {% endfor %}
+          </select></div>
+          <div class="col-md-3">Связанность: <br>
+          <select name="type" id="type">
+            {% for one in types %}
+              <option value="{{ one.id }}" {% if one.id == type %}selected="selected"{% endif %}>{{ one.name }}</option>
+            {% endfor %}
+          </select>
+          </div>
+          <div class="col-md-3">Название: <br>
+          <input type="text" name="name" value="{{ name }}">
+          </div>
+          <div class="col-md-3"><input type="submit" name="Отправить"></div>
+        </form>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-hover">
+              <thead><tr><th>Строчка</th><th>Входящая цена</th><th>Найти</th></tr></thead>
+              <tbody>
+                {% for item in items %}
+                  <tr data-id="{{ item.id }}"  {% if item.linked %}style="background:#CCC"{% endif %}>
+                  <td style="width: 260px;"><input type="text" value="{{ item.articul }}"><input type="button" value="search"></td>
+                  <td class="nametext">{{ item.provider.name }} {{ item.brand }} {{ item.model }} {{ item.articul }}</td><td>{{ item.price_grn }}</td>
+                  </tr>
+                  {% if item.hotline_products_list or item.site_products_list %}
+
+                  {% endif %}
+                  <tr data-id="{{ item.id }}"  {% if item.linked %}style="background:#CCC"{% endif %}>
+
+                    <td colspan="2">
+
+                      <h4>Создать с хотлайна</h4>
+                        {% for h in item.hotline_products_list %}
+                        <a href="javascript:;" onclick="createnewproduct({{ item.id }}, '{{ h.id }}')">{{ h.name }}</a>
+                      <br>
+                        {% endfor %}
+
+
+                  </td>
+
+                  <td colspan="2">
+                    <h4>Связать</h4>
+                      {% for h in item.site_products_list %}
+
+                      <a href="javascript:;" onclick="createconnection({{ item.id }}, '{{ h.id }}')">{{ h.name }}</a>
+                      <br>
+                      {% endfor %}
+                  </td>
+                    <td colspan="3">
+
+                    </td>
+                  </tr>
+
+                {% endfor %}
+              </tbody>
+          </table>
+        </div>
+      </div>
+      {% if items.paginator.num_pages > 1 %}
+      <div class="row">
+      <!-- Pagination -->
+              <nav class="col-sm-12 col-md-offset-2 col-md-10">
+                <ul class="pagination">
+
+                  {% if items.has_previous %}
+                  <li>
+                    <a href="{{ newpath }}&page={{ items.previous_page_number }}" aria-label="Назад">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  {% endif %}
+
+                  {% for i in items.paginator.page_range %}
+                  <li{% if i == items.number %} class="active"{% endif %}><a href="{{ newpath }}&page={{ i }}">{{ i }}</a></li>
+                  {% endfor %}
+
+                  {% if items.has_next %}
+                  <li>
+                    <a href="{{ newpath }}&page={{ items.next_page_number }}" aria-label="Вперед">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                  {% endif %}
+
+                </ul>
+              </nav>
+              <!-- End of Pagination -->
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form method="post" action="." class="importcsv">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Соответствия <span></span></h4>
+            </div>
+            <div class="modal-body">
+              <ul class="connect"></ul>
+              <div class="row">
+                  <div class="col-md-4 col-ld-4">
+                    <h4>Со строчки</h4>
+                    <ul class="fromprice"></ul>
+                  </div>  
+                  <div class="col-md-4 col-ld-4">
+                    <h4>Карточки с хотлайна</h4>
+                    <ul class="newitems"></ul>
+                  </div>
+                  <div class="col-md-4 col-ld-4">
+                    <h4>Карточки с сайта</h4>
+                    <ul class="fromsite"></ul>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-footer hidden">
+              <a href="" class="hidden newresult2" target="_blank">Открыть в новом</a>
+              <button type="button" class="btn btn-lg btn-primary createproduct2">Создать карточку товара</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Create Product -->
+    <div class="modal fade modal-create-product" id="createProductModal" tabindex="-1" role="dialog" aria-labelledby="createProductModalLabel">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="createProductModalLabel">Создание нового товара</h4>
+          </div>
+          <div class="modal-body">
+
+          </div>
+          <div class="modal-footer">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/template" id="addproduct">
+            <form action="/newproduct/" class="newproduct">
+             <input type="hidden" name="id" value="<%= id %>">
+             <input type="hidden" name="photos" value="<%= hotline_photos %>">
+             <input type="hidden" name="videos" value="<%= hotline_videos %>">
+             <table class="table">
+              <thead>
+                <tr>
+                  <th>Название в прайсе</th>
+                  <th>Цена ВХОД</th>
+                  <th>Цена на сайте</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%= name %></td>
+                  <td><%= price_in %></td>
+                  <td><input type="text" name="price_new" value="<%= price_new %>"></td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr>
+                  <th style="padding-top: 20px">Название на Хотлайне</th>
+                  <th style="padding-top: 20px">Цена Мин</th>
+                  <th style="padding-top: 20px">Цена Макс</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%= hotline_name %></td>
+                  <td><%= hotline_price_min %></td>
+                  <td><%= hotline_price_max %></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="input-group">
+                  <input type="text" name="hotlineurl" class="form-control" placeholder="Ссылка на товар..." value="<%= hotline %>">
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary saveandparse" type="button">сохранить и спарсить</button>
+                  </span>
+                  <a href="http://hotline.ua<%= hotline%>" target="_blank">Открыть</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Images -->
+            <% if (hotline_photos){ %>
+            <div class="new-good-photos">
+              <h4>Фото товара</h4>
+              <div class="row">
+                <% _.each(hotline_photos, function(item){ %>
+                <div class="col-xs-6 col-md-2">
+                  <a href="#" class="thumbnail">
+                    <img src="http://hotline.ua<%= item %>" alt="...">
+                  </a>
+                </div>
+                <% })%>
+              </div>
+            </div>
+
+            <% } %>
+            <!-- End of Images -->
+            <!-- Video -->
+
+            <% if (hotline_videos){ %>
+            <div class="new-good-photos">
+              <h4>Видео товара</h4>
+              <div class="row">
+                <% _.each(hotline_videos, function(item){ %>
+                <div class="col-xs-6 col-md-2">
+                  <a href="#" class="thumbnail">
+                    <img src="http://img.youtube.com/vi/<%= item %>/0.jpg" alt="...">
+                  </a>
+                </div>
+                <% })%>
+              </div>
+            </div>
+
+            <% } %>
+            <!-- End of Video -->
+            <!-- Filters -->
+            <div class="new-good-filters">
+              <div class="row new-good-category">
+                <div class="col-md-12">
+                <h4>Категория</h4>
+                </div>
+                <div class="col-md-4">
+                  <select class="form-control" name="cat">
+                    <% _.each(categories, function(cat){ %>
+                        <option <% if (activecat==cat.id){ %>selected="selected"<% } %>value="<%= cat.id %>"><%= '--'.repeat(cat.level) + cat.name %></option>
+                    <% })%>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <select class="form-control" name="filter">
+                    <% _.each(hotline_filters, function(one, id){ %>
+                        <option <% if (activefilter==id){ %>selected="selected"<% } %> value="<%= id %>"><%= one['name'] %>|<%= one['prop']%></option>
+                    <% })%>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <button class="btn btn-primary connect" type="button"><% if (catconnected){ %>Развязать<% } else { %>Связать<% } %></button>
+                </div>
+              </div>
+              <div class="row new-good-category">
+                <div class="col-md-12">
+                  <h4>Бренды</h4>
+                </div>
+                <div class="col-md-4">
+                  <select class="form-control" name="brand">
+                    <% _.each(brands, function(brand){ %>
+                        <option <% if (activebrand==brand.id){ %>selected="selected"<% } %>value="<%= brand.id %>"><%= brand.name %></option>
+                    <% })%>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <select class="form-control" name="filterbrand">
+                    <% _.each(hotline_filters, function(one, id){ %>
+                        <option <% if (activefilterbrand==id){ %>selected="selected"<% } %> value="<%= id %>"><%= one['name'] %>|<%= one['prop']%></option>
+                    <% })%>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <button class="btn btn-primary brandconnect" type="button"><% if (brandconnected){ %>Развязать<% } else { %>Связать<% } %></button>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <h4>Название на сайте</h4>
+                  <div class="input-group">
+                    <input type="text" name="newname" class="form-control"  value="<%= hotline_name %>">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h4>Цвет</h4>
+                  <div class="input-group">
+                    <input type="text" name="color" class="form-control"  value="<%= color %>">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h4>Цвет RGB</h4>
+                  <div class="input-group">
+                    <select name="color_id">
+                      <% _.each(colors, function(one){ %>
+                        <option <% if (one.id == color_id){ %>selected="selected"<% } %> value="<%= one.id %>"><%= one.name %></option>
+                      <% }) %>
+                      <option value="addnew">Добавить</option>
+                    </select>
+                    <input type="text" name="colornamenew" class="form-control hidden colorhidden"  value="<%= color %>">
+                    <input type="text" name="colorhexnew" class="form-control hidden colorhidden"  value="" placeholder="Хекс код">
+                  </div>
+                </div>
+              </div>
+
+              <% if (catconnected){ %>
+              <h4>Фильтра товара</h4>
+              <div class="form-horizontal form-new-good-filters">
+              <% _.each(hotline_filters, function(filter, id){ %>
+
+                <div class="form-group form-group-sm" data-id="<%= id %>" style="background:<% if (filter['activefilter'] && filter['activefilteritem']){%>#98FB98;
+                  <% } %>
+                  <% if (filter['activefilter'] && !filter['activefilteritem']){%>#FFFFE0;
+                  <% } %>
+                ">
+                  <label class="col-md-3 control-label">
+                    <%= filter['name'] %>
+                  </label>
+                  <div class="col-md-3">
+                    <div class="form-control-static"><%= filter['prop']%></div>
+                  </div>
+                  <div class="col-md-3">
+                    <select class="form-control filtername" name="filtername_<%= id %>">
+                        <option value="0">Выберите фильтр</option>
+                      <% _.each(connect_filters, function(one){ %>
+                        <option <% if (filter['activefilter']==one.id){ %>selected="selected"<% } %> value="<%= one.id %>"><%= one.name %></option>
+                      <% })%>
+                      </select>
+
+                      <button class="btn btn-primary connectfiltername" type="button"><% if (filter['activefilter']
+                        ){ %>Развязать<% } else { %>Связать<% } %> </button>
+
+                  </div>
+                  <div class="col-md-3">
+                    <select class="form-control filteritem" name="filteritem_<%= id %>">
+                    <% if (filter['activefilter'] && mappedfilters[filter['activefilter']] && mappedfilters[filter['activefilter']]['items']){ %>
+                      <% _.each(mappedfilters[filter['activefilter']]['items'], function(one){ %>
+                          <option <% if (filter['activefilteritem']==one.id){ %>selected="selected"<% } %> value="<%= one.id %>"><%= one.name %></option>
+                        <% })%>
+                        <option value="add">Добавить новый</option>
+                    <% } else { %>
+                      <option value="0">Выберите значение</option>
+                    <% } %>
+                    </select>
+
+                    <input type="text" class="hidden addfilteritem" name="addfilteritem_<%= id %>">
+
+
+                    <button class="btn btn-primary connectfilteritem" type="button"><% if (filter['activefilteritem']
+                        ){ %>Развязать<% } else { %>Связать<% } %></button>
+
+                  </div>
+                </div>
+              <% }) %>
+              </div>
+            </div>
+
+            <h4>Свойства товара</h4>
+            <div class="form-horizontal form-new-good-filters">
+            <% _.each(hotline_filters, function(filter, id){ %>
+
+              <div class="form-group form-group-sm" data-id="<%= id %>" style="background:<% if (filter['activeproperty']){%>#98FB98;<% } %>                ">
+                <label class="col-md-2 control-label">
+                  <%= filter['name'] %>
+                </label>
+                <div class="col-md-3">
+                  <div class="form-control-static"><%= filter['prop']%></div>
+                </div>
+                <div class="col-md-3">
+                  <select class="form-control property" name="propertyid_<%= id %>">
+                      <option value="0">Выберите свойство</option>
+                    <% _.each(connect_properties, function(one){ %>
+                      <option value="<%= one.id %>" <% if (filter['activeproperty']==one.id){ %>selected="selected"<% } %>><%= one.name %></option>
+                    <% }); %>
+                  </select>
+                  <button class="btn btn-primary connectproperty" type="button"><% if (filter['activeproperty']
+                        ){ %>Развязать<% } else { %>Связать<% } %></button>
+
+
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="prop" name="propertyname_<%= id %>" value="<%= filter['prop'] %>">
+                </div>
+              </div>
+            <% }) %>
+            </div>
+            <% } %>
+          </div>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+            <button type="submit" class="btn btn-lg btn-primary">Создать карточку товара</button>
+            <a href="" class="hidden newresult" target="_blank">Открыть в новом</a>
+            <!-- End of Filters -->
+          </form>
+    </script>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/static_cdn/ecommerce/js/bootstrap.min.js"></script>
+    <script src="/static_cdn/ecommerce/js/underscore.js"></script>
+    <script src="/static_cdn/ecommerce/js/price.js"></script>
+  </body>
+</html>

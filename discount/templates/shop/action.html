@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load fishca_tags %}
+{% block canonical %}/search/{% endblock %}
+
+
+{% block content %}
+<div class="goods">
+   <div class="row">
+      <section class="col-sm-12 col-lg-12 goods-l good-l-big">
+       <h1>{{ search|safe }}</h1>
+      
+
+                    {% if items %}
+                    <script>
+                    jQuery(document).ready(function(){
+                        {
+                            var num = {{items.count}};
+                            var str_count = "" +{{items.count}}+ " товар";
+                            var end = "";
+                            if (num < 11 || num > 14)
+                            {
+                                switch (num%10)
+                                {
+                                    case 0: end = "ов"; break;
+                                    case 1: break;
+                                    case 2: end = "а"; break;
+                                    case 3: end = "а"; break;
+                                    case 4: end = "а"; break;
+                                    case 5: end = "ов"; break;
+                                    case 6: end = "ов"; break;
+                                    case 7: end = "ов"; break;
+                                    case 8: end = "ов"; break;
+                                    case 9: end = "ов"; break;
+                                    case 10: end = "ов"; break;
+                                }
+                            $('.search__count').html(str_count + end);
+                            }
+                            else if (num >= 11 || num <=14)
+                            {
+                                end = "ов";
+                            $('.search__count').html(str_count + end);
+                            }
+                        }
+                    })
+                    </script>
+                    {% endif %}
+
+        {% for one in items  %}
+          {% product one items_id type='cat' %}
+        {% endfor %}
+
+      </section>
+      <!-- End of Category Box -->
+
+      {% if items.paginator.num_pages > 1 %}
+      <!-- Pagination -->
+      <nav class="col-sm-12 col-md-offset-2 col-md-10">
+        <ul class="pagination">
+
+          {% if items.has_previous %}
+          <li>
+            <a href="{{ category_url }}{% if items.previous_page_number > 1 %}page-{{ items.previous_page_number }}/{% endif %}{% if get_full_path %}?{{ get_full_path }}{% endif %}" aria-label="Назад">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          {% endif %}
+
+          {% for i in items.paginator.page_range %}
+          <li{% if i == items.number %} class="active"{% endif %}><a href="{{ category_url }}{% if i != 1 %}page-{{ i }}/{% endif %}{% if get_full_path %}?{{ get_full_path }}{%endif%}">{{ i }}</a></li>
+          {% endfor %}
+
+          {% if items.has_next %}
+          <li>
+            <a href="{{ category_url }}page-{{ items.next_page_number }}/{% if get_full_path %}?{{ get_full_path }}{%endif%}" aria-label="Вперед">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+          {% endif %}
+
+        </ul>
+      </nav>
+      <!-- End of Pagination -->
+      {% endif %}
+
+  </div>
+</div>
+
+<script>
+  $('.checkbox-category input').click(function(){
+    var checked = $(this).is(":checked");
+    $(this).closest('.filter-box').find('.checkbox-subcategory input').each(function(){
+      // alert(checked);
+        $(this).prop('checked', checked);
+    });
+    jQuery('#searchFilterForm').submit();
+  });
+</script>
+{% endblock %}

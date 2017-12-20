@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block content %}
+
+<div class="text-center thank-order">
+	<i class="fa fa-check-circle-o fa-5x"></i>
+	<p class="lead">Спасибо за Ваш заказ!</p>
+	<p class="lead">Наши менеджеры свяжутся с Вами в ближайшее время.</p>
+	<p class="lead"><a href="/"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>  Вернуться в магазин</a></p>
+</div>
+
+<script>
+$(document).ready(function(){
+
+	ga('require', 'ecommerce', 'ecommerce.js');
+
+	ga('ecommerce:addTransaction', {
+	  'id': '{{ order.id }}',                     // Transaction ID. Required.
+	  'affiliation': '20k.com.ua',   // Affiliation or store name.
+	  'revenue': '{{ result.allprice }}',               // Grand Total.
+	  // 'shipping': '0',                  // Стоимость доставки.
+	  // 'tax': '0'                     // Сума налога.
+	});
+
+	{% for item in result.items %}
+	ga('ecommerce:addItem', {
+	  'id': '{{ order.id }}',                     // Transaction ID. Required.
+	  'name': '{{ item.name }}',    // Product name. Required.
+	  'sku': '{{ item.idname }}',                 // SKU/code.
+	  'category': '{{ item.category }}',         // Category or variation.
+	  'price': '{{ item.price }}',                 // Unit price.
+	  'quantity': '{{ item.count }}'                   // Quantity.
+	});
+	{% endfor %}
+
+	{% for item in result.complects %}
+	ga('ecommerce:addItem', {
+	  'id': '{{ order.id }}',                     // Transaction ID. Required.
+	  'name': '{{ item.name }}',    // Product name. Required.
+	  'sku': '{{ item.id }}',                 // SKU/code.
+	  'price': '{{ item.price }}',                 // Unit price.
+	  'quantity': '{{ item.count }}'                   // Quantity.
+	});
+	{% endfor %}
+
+	ga('ecommerce:send');
+
+});
+</script>
+{% endblock %}

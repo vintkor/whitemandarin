@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
+<channel>
+    <title>Электроника 20k</title>
+    <link>http://20k.com.ua/</link>
+    <description>Мобильные телефоны, планшеты, бытовая техника по демократичным ценам</description>
+    {% for i in items %}
+        
+        <item>
+            <link>http://20k.com.ua{% url 'product' i.category.slug i.brand.slug i.slug %}</link>
+            <g:id>{{i.id}}</g:id>
+            <g:price>{{i.price}} UHY</g:price>
+            <g:condition>new</g:condition>
+            <g:availability>available for order</g:availability>
+            <g:product_type>{{i.category.name}}</g:product_type>
+            <g:image_link>http://20k.com.ua/media/{{i.image}}</g:image_link>
+            <title>{{i.name}}</title>
+            <description>{{i.description}}</description>
+        </item>
+    {% endfor %}
+    </channel>
+</rss>

@@ -1,0 +1,79 @@
+{% load thumbnail %}
+{% load fishca_tags %}
+<div class="prod_wrap" data-id="{{ item.id }}">
+  <div class="prod_wrap_wrap">
+    <div class="image" style="position:relative;">
+      {% if item.has_gift %}
+      <img class="prod_gift" src="/static_cdn/design/img/giftn.png"/>
+      {% endif %}
+        <a class="catalog_img" href="{{ item.get_url }}">
+            <img src="{% thumbnail  item.image 150x150 sharpen %}" title="{{ item.name }}" alt="{{ item.name }}">
+            {% if item.oldprice %}
+                  <div class="ak_img"></div>
+              {% endif %}
+        </a>
+    </div>
+    <div class="name">
+        <a href="{% url 'product' item.category.slug item.brand.slug item.slug %}">
+            {{ item.name|cut_name }} {{ item.colorname }}
+        </a>
+    </div>
+
+    <label class="to-compare">
+        <input type="checkbox" value="{{item.id}}" data-compare="{% if item.id in items_id %}true{% else %}false{% endif %}"> <span class="to-compare__add">К сравнению</span>
+    </label>
+
+    {% if item.oldprice %}
+        <div class="old_price">{{ item.oldprice|floatformat:"0" }}грн.</div>
+      {% endif %}
+    <div class="price">
+
+        <br>
+        {% if item.price %}
+        {{ item.price|floatformat:"0" }}грн.
+        {% else %}
+        <span class="notnall">Нет в наличии</span>
+        {% endif %}
+    </div>
+    {% if item.price %}
+    <div class="cart">
+        <a href="{{ item.get_url }}"  class="button">Купить</a>
+    </div>
+    {% endif %}
+    <div class="wishlist">
+        <a onclick="addToWishList('{{ item.id }}');">В закладки</a>
+    </div>
+    <div class="compare"><a onclick="addToCompare('{{ item.id }}');">В сравнение</a></div>
+
+     <div class="description">
+
+        {{ item.description|safe }}
+
+    </div>
+
+
+    {% if item.get_colors|length > 0 %}
+      <div class="colors">
+        <ul id="color_prod_{{item.id}}">
+          {% for color in item.get_colors %}
+          <li {% if forloop.counter > 2 %}class="hid"{% endif %}><a href="{% url 'product' item.category.slug item.brand.slug item.slug color.id %}">
+
+              <span class="color-name">{{ color.name }}</span>
+              <br />
+              <img src="{% thumbnail  color.image1 40x40 sharpen %}" alt="{{ product.name }} {{ color.name }}">
+              <br />
+              <span class="color_price">{{ color.price|floatformat:"0" }}</span>
+
+            </a></li>
+
+
+          {% endfor %}
+          {% if item.get_colors|length > 3 %}
+          <li class="show_more" onclick="more('color_prod_{{item.id}}');">+Еще</li>
+          {% endif %}
+        </ul>
+      </div>
+
+    {% endif %}
+</div>
+</div>

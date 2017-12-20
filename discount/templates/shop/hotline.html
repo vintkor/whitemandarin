@@ -1,0 +1,17 @@
+{% for item in items %}
+	{% if item.brand.slug and item.category.slug %}
+		{% if item.price %}
+			{{ item.category.name }};{{ item.brand.name }};{{ item.name }} {{ item.maincolor }};{{ item.idname }};;{{ item.price|floatformat:"0" }};{{ item.waranty }};;http://20k.com.ua{% url 'product' item.category.slug item.brand.slug item.slug %};http://20k.com.ua/media/{{ item.image }}<br/>
+		{% endif %}
+	{% endif %}
+	{% if item.get_colors %}
+		{% for one in item.get_colors %}
+			{% if one.price %}
+				{{ item.category.name }};{{ item.brand.name }};{{ item.name }} {{ one.name }};{{ one.idname }};;{{ one.price|floatformat:"0" }};{{ item.waranty }};;http://20k.com.ua{% url 'product' item.category.slug item.brand.slug item.slug  one.id %};http://20k.com.ua/media/{{ one.image1 }}<br/>
+			{% endif %}
+		{% endfor %}
+
+	{% endif %}
+
+
+{% endfor %}

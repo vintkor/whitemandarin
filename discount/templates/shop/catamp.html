@@ -1,0 +1,175 @@
+{% load thumbnail %}
+<!DOCTYPE html>
+<html amp lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <title>{{ category.title }}</title>
+    <meta name="description" content="{{ category.name }} в интернет-магазине 20K. Доставка по Украине. Звоните и заказывайте (044) 228-29-37 {{ category.metadesc }} Интернет-магазин 20K предлагает вам купить {{ category.name }}. Доставка по Украине. Звоните и заказывайте (044) 228-29-37" />
+    <link itemprop="mainEntityOfPage" rel="canonical" href='https://20k.com.ua{{ category.get_url }}' />
+    <meta name="keywords" content="20К, интернет магазин электроники" />
+    <link rel="canonical" href="https://20k.com.ua{{ category.get_url }}">
+    <link rel="icon" href="https://20k.com.ua/static_cdn/design/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://20k.com.ua/static_cdn/design/img/favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,400&subset=cyrillic,latin' rel='stylesheet' type='text/css'>
+    <!-- AMP JS -->
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+    <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
+    <!-- End of AMP JS -->
+    <!-- AMP Styles -->
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+      <style amp-custom>html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}body{margin:0}footer,header,main,menu,nav,section{display:block}[hidden]{display:none}a{background-color:transparent}a:active,a:hover{outline:0}b,strong{font-weight:700}img{border:0}button{margin:0;font:inherit;color:inherit}button{overflow:visible}button{text-transform:none}button{-webkit-appearance:button;cursor:pointer}button[disabled]{cursor:default}button::-moz-focus-inner{padding:0;border:0}/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */@media print{*,:after,:before{color:#000;text-shadow:none;background:0 0;-webkit-box-shadow:none;box-shadow:none}a,a:visited{text-decoration:underline}a[href]:after{content:" (" attr(href) ")"}a[href^="#"]:after,a[href^="javascript:"]:after{content:""}img{page-break-inside:avoid}img{max-width:100%}.navbar{display:none}}@font-face{font-family:'Glyphicons Halflings';src:url(/static_cdn/design/fonts/glyphicons-halflings-regular.eot);src:url(/static_cdn/design/fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),url(/static_cdn/design/fonts/glyphicons-halflings-regular.woff2) format('woff2'),url(/static_cdn/design/fonts/glyphicons-halflings-regular.woff) format('woff'),url(/static_cdn/design/fonts/glyphicons-halflings-regular.ttf) format('truetype'),url(/static_cdn/design/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg')}.glyphicon{position:relative;top:1px;display:inline-block;font-family:'Glyphicons Halflings';font-style:normal;font-weight:400;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.glyphicon-search:before{content:"\e003"}.glyphicon-user:before{content:"\e008"}.glyphicon-upload:before{content:"\e027"}.glyphicon-list-alt:before{content:"\e032"}.glyphicon-text-height:before{content:"\e050"}.glyphicon-text-width:before{content:"\e051"}.glyphicon-list:before{content:"\e056"}.glyphicon-shopping-cart:before{content:"\e116"}.glyphicon-filter:before{content:"\e138"}.glyphicon-link:before{content:"\e144"}.glyphicon-phone:before{content:"\e145"}.glyphicon-header:before{content:"\e180"}.glyphicon-phone-alt:before{content:"\e183"}.glyphicon-scale:before{content:"\e230"}.glyphicon-menu-hamburger:before{content:"\e236"}.glyphicon-menu-left:before{content:"\e257"}.glyphicon-menu-right:before{content:"\e258"}.glyphicon-menu-down:before{content:"\e259"}*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}:after,:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}html{font-size:10px;-webkit-tap-highlight-color:transparent}body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:14px;line-height:1.42857143;color:#333;background-color:#fff}button{font-family:inherit;font-size:inherit;line-height:inherit}a{color:#337ab7;text-decoration:none}a:focus,a:hover{color:#23527c;text-decoration:underline}a:focus{outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}img{vertical-align:middle}[role=button]{cursor:pointer}.text-left{text-align:left}.text-right{text-align:right}.text-uppercase{text-transform:uppercase}.page-header{padding-bottom:9px;margin:40px 0 20px;border-bottom:1px solid #eee}ul{margin-top:0;margin-bottom:10px}ul ul{margin-bottom:0}.list-unstyled{padding-left:0;list-style:none}.list-inline{padding-left:0;margin-left:-5px;list-style:none}.list-inline>li{display:inline-block;padding-right:5px;padding-left:5px}address{margin-bottom:20px;font-style:normal;line-height:1.42857143}.container{padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}@media (min-width:768px){.container{width:750px}}@media (min-width:992px){.container{width:970px}}@media (min-width:1200px){.container{width:1170px}}.row{margin-right:-15px;margin-left:-15px}.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9{position:relative;min-height:1px;padding-right:15px;padding-left:15px}.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9{float:left}.col-xs-12{width:100%}.col-xs-11{width:91.66666667%}.col-xs-10{width:83.33333333%}.col-xs-9{width:75%}.col-xs-8{width:66.66666667%}.col-xs-7{width:58.33333333%}.col-xs-6{width:50%}.col-xs-5{width:41.66666667%}.col-xs-4{width:33.33333333%}.col-xs-3{width:25%}.col-xs-2{width:16.66666667%}.col-xs-1{width:8.33333333%}.nav{padding-left:0;margin-bottom:0;list-style:none}.nav>li{position:relative;display:block}.nav>li>a{position:relative;display:block;padding:10px 15px}.nav>li>a:focus,.nav>li>a:hover{text-decoration:none;background-color:#eee}.nav>li>a>img{max-width:none}.navbar{position:relative;min-height:50px;margin-bottom:20px;border:1px solid transparent}@media (min-width:768px){.navbar{border-radius:4px}}@media (min-width:768px){.navbar-header{float:left}}.container>.navbar-header{margin-right:-15px;margin-left:-15px}@media (min-width:768px){.container>.navbar-header{margin-right:0;margin-left:0}}.navbar-static-top{z-index:1000;border-width:0 0 1px}@media (min-width:768px){.navbar-static-top{border-radius:0}}.navbar-fixed-top{position:fixed;right:0;left:0;z-index:1030}@media (min-width:768px){.navbar-fixed-top{border-radius:0}}.navbar-fixed-top{top:0;border-width:0 0 1px}.navbar-brand{float:left;height:50px;padding:15px 15px;font-size:18px;line-height:20px}.navbar-brand:focus,.navbar-brand:hover{text-decoration:none}.navbar-brand>img{display:block}@media (min-width:768px){.navbar>.container .navbar-brand{margin-left:-15px}}.navbar-toggle{position:relative;float:right;padding:9px 10px;margin-top:8px;margin-right:15px;margin-bottom:8px;background-color:transparent;background-image:none;border:1px solid transparent;border-radius:4px}.navbar-toggle:focus{outline:0}@media (min-width:768px){.navbar-toggle{display:none}}.navbar-nav{margin:7.5px -15px}.navbar-nav>li>a{padding-top:10px;padding-bottom:10px;line-height:20px}@media (min-width:768px){.navbar-nav{float:left;margin:0}.navbar-nav>li{float:left}.navbar-nav>li>a{padding-top:15px;padding-bottom:15px}}.navbar-text{margin-top:15px;margin-bottom:15px}@media (min-width:768px){.navbar-text{float:left;margin-right:15px;margin-left:15px}}@media (min-width:768px){.navbar-left{float:left}.navbar-right{float:right;margin-right:-15px}.navbar-right~.navbar-right{margin-right:0}}.navbar-default{background-color:#f8f8f8;border-color:#e7e7e7}.navbar-default .navbar-brand{color:#777}.navbar-default .navbar-brand:focus,.navbar-default .navbar-brand:hover{color:#5e5e5e;background-color:transparent}.navbar-default .navbar-text{color:#777}.navbar-default .navbar-nav>li>a{color:#777}.navbar-default .navbar-nav>li>a:focus,.navbar-default .navbar-nav>li>a:hover{color:#333;background-color:transparent}.navbar-default .navbar-toggle{border-color:#ddd}.navbar-default .navbar-toggle:focus,.navbar-default .navbar-toggle:hover{background-color:#ddd}.navbar-default .navbar-link{color:#777}.navbar-default .navbar-link:hover{color:#333}@-webkit-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-o-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}.media{margin-top:15px}.media:first-child{margin-top:0}.media,.media-body{overflow:hidden;zoom:1}.media-body{width:10000px}.media-right{padding-left:10px}.media-left{padding-right:10px}.media-body,.media-left,.media-right{display:table-cell;vertical-align:top}.media-list{padding-left:0;list-style:none}.close{float:right;font-size:21px;font-weight:700;line-height:1;color:#000;text-shadow:0 1px 0 #fff;opacity:.2}.close:focus,.close:hover{color:#000;text-decoration:none;cursor:pointer;opacity:.5}button.close{-webkit-appearance:none;padding:0;cursor:pointer;background:0 0;border:0}.modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;display:none;overflow:hidden;-webkit-overflow-scrolling:touch;outline:0}.modal-content{position:relative;background-color:#fff;-webkit-background-clip:padding-box;background-clip:padding-box;border:1px solid #999;border:1px solid rgba(0,0,0,.2);border-radius:6px;outline:0;-webkit-box-shadow:0 3px 9px rgba(0,0,0,.5);box-shadow:0 3px 9px rgba(0,0,0,.5)}.modal-header{padding:15px;border-bottom:1px solid #e5e5e5}.modal-header .close{margin-top:-2px}.modal-title{margin:0;line-height:1.42857143}.modal-body{position:relative;padding:15px}.modal-footer{padding:15px;text-align:right;border-top:1px solid #e5e5e5}@media (min-width:768px){.modal-content{-webkit-box-shadow:0 5px 15px rgba(0,0,0,.5);box-shadow:0 5px 15px rgba(0,0,0,.5)}}.container:after,.container:before,.modal-footer:after,.modal-footer:before,.modal-header:after,.modal-header:before,.nav:after,.nav:before,.navbar-header:after,.navbar-header:before,.navbar:after,.navbar:before,.row:after,.row:before{display:table;content:" "}.container:after,.modal-footer:after,.modal-header:after,.nav:after,.navbar-header:after,.navbar:after,.row:after{clear:both}.hidden{display:none}.visible-xs{display:none}.visible-xs-inline{display:none}@media (max-width:767px){.visible-xs{display:block}}@media (max-width:767px){.visible-xs-inline{display:inline}}@media (max-width:767px){.hidden-xs{display:none}}@font-face{font-family:FontAwesome;src:url(/static_cdn/design/fonts/fontawesome-webfont.eot?v=4.7.0);src:url(/static_cdn/design/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0) format('embedded-opentype'),url(/static_cdn/design/fonts/fontawesome-webfont.woff2?v=4.7.0) format('woff2'),url(/static_cdn/design/fonts/fontawesome-webfont.woff?v=4.7.0) format('woff'),url(/static_cdn/design/fonts/fontawesome-webfont.ttf?v=4.7.0) format('truetype'),url(/static_cdn/design/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular) format('svg');font-weight:400;font-style:normal}.fa{display:inline-block;font:normal normal normal 14px/1 FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-ul{padding-left:0;margin-left:2.14285714em;list-style-type:none}.fa-ul>li{position:relative}.fa-li{position:absolute;left:-2.14285714em;width:2.14285714em;top:.14285714em;text-align:center}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(359deg);transform:rotate(359deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(359deg);transform:rotate(359deg)}}.fa-search:before{content:"\f002"}.fa-user:before{content:"\f007"}.fa-close:before{content:"\f00d"}.fa-list-alt:before{content:"\f022"}.fa-text-height:before{content:"\f034"}.fa-text-width:before{content:"\f035"}.fa-list:before{content:"\f03a"}.fa-image:before{content:"\f03e"}.fa-shopping-cart:before{content:"\f07a"}.fa-upload:before{content:"\f093"}.fa-phone:before{content:"\f095"}.fa-filter:before{content:"\f0b0"}.fa-link:before{content:"\f0c1"}.fa-list-ul:before{content:"\f0ca"}.fa-angle-left:before{content:"\f104"}.fa-angle-right:before{content:"\f105"}.fa-angle-down:before{content:"\f107"}.fa-mobile-phone:before,.fa-mobile:before{content:"\f10b"}.fa-html5:before{content:"\f13b"}.fa-css3:before{content:"\f13c"}.fa-toggle-down:before{content:"\f150"}.fa-toggle-right:before{content:"\f152"}.fa-toggle-left:before{content:"\f191"}.fa-header:before{content:"\f1dc"}.fa-copyright:before{content:"\f1f9"}.fa-toggle-on:before{content:"\f205"}.fa-edge:before{content:"\f282"}.fa-fa:before{content:"\f2b4"}.fa-user-o:before{content:"\f2c0"}.fa-s15:before{content:"\f2cd"}body{font-family:Roboto,sans-serif}@media (max-width:991px){body{padding-top:60px;background-color:#fffbf6}}.container{width:100%}@media (min-width:1400px){.container{width:1400px}}a{color:#3fa900}a:focus,a:hover{color:#616161}b,strong{font-weight:500}.main-content img{display:block;max-width:100%;height:auto}.main-header{padding-top:10px}.logo{padding-top:20px;text-align:center}.img-logo{margin:0 auto}@media (max-width:767px){.logo{padding-top:5px}}.top-menu-l>li>a{font-size:13px;text-decoration:underline;color:#616161}.top-menu-l>li>a:focus,.top-menu-l>li>a:hover{color:#40a900}@media (max-width:767px){.top-menu{text-align:center}.top-menu-l>li>a{font-size:14px;line-height:1.6}}.top-cart{font-size:13px;line-height:1.2;position:relative;float:right;width:118px;height:42px;padding:5px 10px;text-align:left;border-width:1px;border-style:solid;border-color:#e0e0e0;border-radius:4px;background-color:transparent}@media (min-width:992px) and (max-width:1199px){.top-cart{font-size:13px;width:110px;padding:5px}}.main-header .top-cart{margin-top:60px}.top-cart{margin-right:15px}.top-cart__lnk{position:relative;display:inline-block;width:100%;padding-left:40px;color:#616161}.top-cart__lnk:before{background:url(/static_cdn/design/img/icons/cart-grey.png)}.top-cart__lnk:before{position:absolute}.top-cart__lnk:before{top:0;left:5px;display:block;width:26px;height:26px;content:'';background-size:cover}.top-cart__lnk:focus,.top-cart__lnk:hover{color:#3fa900}.top-cart .qty{position:absolute;z-index:15;top:-10px;right:-5px;display:none;padding:2px 5px;color:#fff;border-radius:50%;background-color:#f54d0c}@media (min-width:992px) and (max-width:1200px){.navbar-nav{margin-right:-15px;margin-left:-15px}}.navbar-toggle span+span{line-height:1.25;vertical-align:top}@media (min-width:992px) and (max-width:1360px){.navbar-nav>li>a{font-size:12px;padding-right:7px;padding-left:7px}}@media (min-width:1400px){.navbar-nav>li>a{font-size:15px;padding-right:13px;padding-left:13px}}.cart-xs{position:fixed;z-index:500;right:20px;bottom:20px;width:50px;height:50px;border-color:#369100;border-radius:6px;background-image:-moz-linear-gradient(46% 0 -90deg,#40aa00 0,#369100 100%);background-image:-webkit-gradient(linear,46% 0,46% 115%,color-stop(0,#40aa00),color-stop(1,#369100));background-image:-webkit-linear-gradient(-90deg,#40aa00 0,#369100 100%);background-image:-o-linear-gradient(-90deg,#40aa00 0,#369100 100%);background-image:-ms-linear-gradient(-90deg,#40aa00 0,#369100 100%);background-image:linear-gradient(180deg,#40aa00 0,#369100 100%);-webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,.4);-moz-box-shadow:0 2px 5px 0 rgba(0,0,0,.4);box-shadow:0 2px 5px 0 rgba(0,0,0,.4)}@media (min-width:768px){#main-menu{float:left;width:12em}}.navbar-default .navbar-brand{text-transform:uppercase}.sidebar-menu-m{display:none}.navbar-m{text-transform:uppercase;color:#fff;border:none;border-radius:0;background-image:-moz-linear-gradient(46% 0 -90deg,#40aa00 0,#369100 100%);background-image:-webkit-gradient(linear,46% 0,46% 115%,color-stop(0,#40aa00),color-stop(1,#369100));background-image:-webkit-linear-gradient(-90deg,#40aa00 0,#369100 100%);background-image:-o-linear-gradient(-90deg,#40aa00 0,#369100 100%);background-image:-ms-linear-gradient(-90deg,#40aa00 0,#369100 100%);background-image:linear-gradient(180deg,#40aa00 0,#369100 100%)}.navbar-m .navbar-nav>li>a,.navbar-m .navbar-nav>li>a:focus,.navbar-m .navbar-nav>li>a:hover{color:#fff}.navbar-m .navbar-nav>li>a{font-size:17px;padding:15px 10px}.navbar-m .navbar-header{position:absolute;left:50%;margin-left:-45px}.navbar-m .navbar-nav,.navbar-m li{float:left}.navbar-m .navbar-nav{margin-top:0;margin-bottom:0}.navbar-m .navbar-right{float:right}.navbar-m .navbar-brand-m{font-size:20px;font-weight:700}.navbar-m .navbar-brand-m,.navbar-m .navbar-brand-m:active,.navbar-m .navbar-brand-m:hover{color:#fff}.navbar-brand--k{position:relative;padding-left:10px}.navbar-brand--20{padding-right:3px}.navbar-brand--k:after{position:absolute;z-index:-1;top:-3px;left:3px;display:block;width:29px;height:28px;content:'';border-radius:6px 6px 6px 0;background-color:#545d65}.navbar-nav-cart-qty{font-size:12px;font-weight:300;position:absolute;top:3px;right:2px;display:inline-block;margin-left:5px;padding:0 3px;color:#000;border-radius:4px;background-color:#ff9800}.modal-search-m .modal-content{border:none;border-radius:0}.filter-box{margin-bottom:15px;padding:7px 15px;border-width:1px;border-style:solid;border-color:#e0e0e0;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;background-color:#fff}.category-left{margin-bottom:15px;padding:7px 15px;border-width:1px;border-style:solid;border-color:#e0e0e0;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;background-color:#fff}.category-left header{margin-bottom:10px}.category-l-l>li{line-height:1.3;margin-bottom:5px}.category-i{line-height:1.3;height:200px;margin-bottom:40px}.category-img{margin-bottom:15px;text-align:center}.category-img img{display:inline-block;margin:0 auto;vertical-align:middle}@media (max-width:991px){.cart-i:last-child{border-bottom:none}}.cart-i{margin-bottom:40px}@media (min-width:992px){.category-i{min-height:230px}.cart-i-name,.cart-i-qty{padding-top:20px}}@media (max-width:768px){.cart-i-qty{margin-top:10px}.cart-i-qty{margin-left:16.66666667%}}.top-user-name{line-height:14px;display:inline-block;overflow:hidden;width:100%;vertical-align:middle;text-overflow:ellipsis}.main-footer{font-size:13px;margin-top:40px;padding-top:20px;border-top:2px solid #e0e0e0}@media (max-width:991px){.main-footer{font-size:16px;margin-top:80px}}.main-footer a{text-decoration:underline;color:#616161}.main-footer a:focus,.main-footer a:hover{color:#40a900}.footer-m-l>li{margin-bottom:3px}.main-footer strong{font-weight:500}.main-footer div[class*=col-]{margin-bottom:30px}.created_relative{position:relative}#created{margin-top:10px;margin-bottom:20px}#created .created_text{font-size:13px}#created .created_logo{font-family:Lato,sans-serif;font-size:18px;font-weight:700;position:relative;z-index:100;display:inline-block;margin-left:3px;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;transition:all .2s ease-in-out;text-decoration:none;color:#000;border:none}#created .created_logo:focus,#created .created_logo:hover{color:#000;border:none}#created .created_logo:before{font-size:30px;font-weight:400;position:absolute;z-index:-1;top:-7px;left:-1px;display:block;content:'D';-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;transition:all .2s ease-in-out;-webkit-transform:rotate3d(0,0,1,-45deg);transform:rotate3d(0,0,1,-45deg);color:#ff0}#created .created_logo>span{color:#00bcd4}#created .created_logo:hover:before{font-size:38px;top:-13px;left:-2px}amp-sidebar{background-color:#fff;width:300px}amp-accordion section[expanded]{background-color:#fafafa}.amp-close-image{margin-top:10px;margin-left:10px}amp-accordion header{padding:10px 10px 10px 20px;color:#545d65;background-color:#fff;border:none;border-top:1px solid #dfdfdf;font-weight:500;font-size:15px}amp-accordion section:last-child header{border-bottom:1px solid #dfdfdf}amp-accordion section[expanded] header{background-color:#fafafa}.amp-accordion-list{padding-bottom:10px;margin-top:-5px}.amp-accordion-list,.amp-sidebar-list{padding-left:20px;padding-right:20px;line-height:1.2}.amp-sidebar-list{padding-bottom:20px;padding-top:10px;border-top:2px solid #dfdfdf}.amp-accordion-list__link,.amp-sidebar-list__link{display:block}.amp-accordion-list__link{color:#545d65;padding-top:5px;padding-bottom:5px}.amp-sidebar-list__link{font-size:15px;padding-top:10px;padding-bottom:10px}.amp-sidebar-list__link .glyphicon{color:#545d65;margin-right:5px}</style>
+    <!-- Ens of AMP Styles -->
+  </head>
+  <body>
+    <!-- AMP Menu -->
+    <amp-sidebar id="sidebar-amp" layout="nodisplay" side="left">
+      <amp-img class="amp-close-image"
+      src="img/ic_close_black_18dp_2x.png"
+      width="20"
+      height="20"
+      alt="close sidebar"
+      on="tap:sidebar-amp.close"
+      role="button"
+      tabindex="0"></amp-img>
+      <div class="amp-sidebar-sale">
+        <amp-img class="amp-close-image"
+        src="https://20k.com.ua/media/upload/43543654.png"
+        width="246"
+        height="30"
+        tabindex="0"></amp-img>
+      </div>
+      <amp-accordion>
+        {% for cat in categorys %}
+        <section>
+          <header> {{ cat.name }} <i class="fa fa-angle-down" aria-hidden="true"></i></header>
+          <ul class="list-unstyled amp-accordion-list">
+            {% for c in cat.get_children %}
+            <li class="amp-accordion-list__item"><a class="amp-accordion-list__link" href="{{ c.get_url }}">{{ c.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endfor %}
+      </amp-accordion>
+      <ul class="list-unstyled amp-sidebar-list">
+        <li class="amp-sidebar-list__item"><a class="amp-sidebar-list__link" href="/page/o-nas/">О магазине</a></li>
+        <li class="amp-sidebar-list__item"><a class="amp-sidebar-list__link" href="/page/informaciya-o-dostavke/">Доставка и оплата</a></li>
+        <li class="amp-sidebar-list__item"><a class="amp-sidebar-list__link" href="/page/garantiya/">Гарантия</a></li>
+        <li class="amp-sidebar-list__item"><a class="amp-sidebar-list__link" href="/page/partnerstvo/">Партнерство</a></li>
+        <li class="amp-sidebar-list__item">Контакты</li>
+        <li class="amp-sidebar-list__item"><a class="amp-sidebar-list__link" href="tel:+380442282937"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> (044) 228-29-37</a></li>
+        <li class="amp-sidebar-list__item"><a class="amp-sidebar-list__link" href="tel:+380667400383"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> (066) 740-03-83</a></li>
+        <li class="amp-sidebar-list__item"><a class="amp-sidebar-list__link" href="tel:+380960777519"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> (096) 077-75-19</a></li>
+        <li class="amp-sidebar-list__item"><a class="amp-sidebar-list__link" href="tel:+380932260139"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> (093) 226-01-39</a></li>
+      </ul>
+    </amp-sidebar>
+    <!-- End of AMP Menu -->
+
+    <div class="container">
+
+      <!-- Mobile Header -->
+      <div class="navbar navbar-default navbar-fixed-top navbar-m" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand text-uppercase navbar-brand-m" href="/"><span class="navbar-brand--20">20</span><span class="navbar-brand--k">k</span></a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href="#" on="tap:sidebar-amp.toggle"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a></li>
+            <li><a href="#" data-toggle="modal" data-target="#ModalSearchMobile" class="getFullSearch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"  data-toggle="modal" data-target="#cartModal" role="button" tabindex="0"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a></li>
+            <li><a href="https://20k.com.ua/#cartModal" class="navbar-nav-cart" data-toggle="modal" data-target="#cartModal"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span><span class="navbar-nav-cart-qty"></span></a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- End of Mobile Header -->
+
+
+      <!-- Category Box -->
+      <section class="category-right">
+        <!--
+        <ul class="list-inline popular-filter-l popular-filter--product">
+          <li class="popular-filter-i">
+            <strong>Популярное:</strong>
+          </li>
+          <li class="popular-filter-i">
+            <a class="popular-filter-lnk" href="/mobilnye-telefony/xiaomi/">Смартфоны Xiaomi</a>
+          </li>
+          <li class="popular-filter-i">
+            <a class="popular-filter-lnk" href="/mobilnye-telefony/samsung/">Смартфоны Samsung</a>
+          </li>
+          <li class="popular-filter-i">
+            <a class="popular-filter-lnk" href="/mobilnye-telefony/meizu/">Смартфоны Meizu</a>
+          </li>
+        </ul>
+        -->
+        <div class="row">
+          {% for i in items %}
+          <div class="col-xs-6 category-i">
+            <div class="category-img"><a href="{{ i.get_url }}"><amp-img width="140" height="140" src="{% thumbnail i.image 140x140 sharpen %}" alt="{{ i.name }}"></amp-img></a></div>
+            <a href="{{ i.get_url }}" class="category-name">{{ i.name }}</a>
+          </div>
+          {% endfor %}
+        </div>
+
+      </section>
+      <!-- End of Category Box -->
+
+      <!-- Footer -->
+      <footer class="main-footer">
+        <div class="row">
+          <div class="col-xs-12 created_relative">
+            <span class="copyright">© Интернет-магазин «20K»<br>2013–2017</span><br><br>
+            <b>Режим работы:</b><br>
+            Пн-Пт <b>9:00-19:00</b><br>
+            Сб,Вс <b>9:00-18:00</b>
+
+            <div id="created" class="created">
+              <span class="created_text">Создание сайта</span>
+              <a class="created_logo" href="http://gowius.com" target="_blank" rel="nofollow"><span>go</span>wius</a>
+            </div>
+          </div>
+          <div class="col-xs-12">
+            <ul class="list-unstyled footer-m-l">
+
+
+
+          <li><a href="/page/o-nas/">О нас</a></li>
+
+          <li><a href="/page/proizvoditeli/">Производители</a></li>
+
+          <li><a href="/usfull/">Как правильно купить товар</a></li>
+
+          <li><a href="/page/vozvrat-tovara/">Возврат товара</a></li>
+
+          <li><a href="/page/garantiya/">Гарантия</a></li>
+
+          <li><a href="/page/politika-bezopasnosti/">Политика Безопасности</a></li>
+
+          <li><a href="/page/informaciya-o-dostavke/">Информация о доставке</a></li>
+
+
+
+
+            </ul>
+          </div>
+          <div class="col-xs-12">
+            <address>
+            Ул. Ушинского, 3<br>Киев, 03058<br>
+            <a href="mailto:20konlinemail@gmail.com">20konlinemail@gmail.com</a><br><br>
+            <strong>(093) 226-01-39</strong><br>
+            <strong>(096) 077-75-19</strong><br>
+            <strong>(066) 740-03-83</strong><br>
+            <strong>(044) 228-29-37</strong><br>
+          </address>
+          </div>
+        </div>
+      </footer>
+        <!-- End of Footer -->
+
+    </div><!-- End of Container -->
+  </body>
+</html>

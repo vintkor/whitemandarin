@@ -1,0 +1,102 @@
+{% load fishca_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="/static_cdn/design/css/bootstrap.css" rel="stylesheet">
+
+  </head>
+  <body ng-app="main">
+
+    <div class="container" ng-controller="MyController">
+      <h1>Обработка категорий с хотлайна</h1>
+      <div class="row">
+      	<div class="col-md-6">Категория на сайта</div>
+      	<div class="col-md-6">Категория в хотлайне</div>
+      </div>
+      <div class="row">
+      	<div class="col-md-6">
+      		<select ng-model="categoryId" ng-change="updateCategory(key)">
+	            <option value="" selected hidden />
+   				<option value="0" selected="selected">--Выберите категорию</option>
+   				{% for item in items %}
+	   				<option value="{{ item.id }}">{{ "--"|multiply:item.level }}{{ item.name }}</option>
+   				{% endfor %}
+	        </select>
+      	</div>
+      	<div class="col-md-6">
+      		<select ng-model="hotlineId" ng-change="updateHotline()">
+	            <option value="" selected hidden />
+   				<option value="0" selected="selected">--Выберите категорию хотлайна</option>
+   				{% for item in hotitems %}
+	   				<option value="{{ item|private:'_id' }}">{{ item.name }}</option>
+   				{% endfor %}
+	        </select>
+        </div>
+      </div>
+
+    {% verbatim %}
+
+    <div class="row">
+      	<div class="col-md-6">
+
+      		<div>
+
+	  			<h2>Фильтры категорий</h2>
+            <div ng-show="hotlineurl">
+            Связка с хотлайном: <br>
+            <input type="text" ng-model="hotlineurl" name="hotlineurl">
+
+            </div>
+	      		<ul ng-show="items.length">
+	      			<li><label><input type="checkbox" ng-model="recheckfilters"> Выделить/Снять выделение</label></li>
+	      			<li ng-repeat="item in items">
+	      				<label><input type="checkbox" ng-model="afilter[item.id]"> {{ item.name }}</label>
+	      			</li>
+	      		</ul>
+	      		<h2>Свойства категорий</h2>
+	      		<ul ng-show="pitems.length">
+	      			<li><label><input type="checkbox" ng-model="recheckproperties"> Выделить/Снять выделение</label></li>
+	      			<li ng-repeat="item in pitems">
+	      				<label><input type="checkbox" ng-model="aproperty[item.id]"> {{ item.name }}</label>
+	      			</li>
+	      		</ul>
+
+	      		<a href="javascript:;" ng-click="deletePropertiesFilters()">Удалить выбранные фильтры и свойства</a>
+      		</div>
+      	</div>
+      	<div class="col-md-6">
+  			<h2>Фильтры c хотлайна</h2>
+      		<a href="javascript:;" ng-click="copyPropertiesFilters()" ng-show="copyOk">Скопировать выбранные фильтры и свойства</a>
+
+      		<ul ng-show="hotfilters.length">
+      			<li><label><input type="checkbox" ng-model="recheckhotfilters"> Выделить/Снять выделение</label></li>
+      			<li ng-repeat="item in hotfilters">
+      				<label><input type="checkbox" ng-model="hotfilter[item._id.$oid]"> {{ item.name }}</label>
+      			</li>
+      		</ul>
+      		<h2>Свойства с хотлайна</h2>
+      		<ul ng-show="hotproperties.length">
+      			<li><label><input type="checkbox" ng-model="recheckhotproperties"> Выделить/Снять выделение</label></li>
+      			<li ng-repeat="item in hotproperties">
+      				<label><input type="checkbox" ng-model="hotproperty[item._id.$oid]"> {{ item.name }}</label>
+      			</li>
+      		</ul>
+
+      		<a href="javascript:;" ng-click="copyPropertiesFilters()" ng-show="copyOk">Скопировать выбранные фильтры и свойства</a>
+      	</div>
+      </div>
+	{% endverbatim %}
+
+  </div>
+
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="/static_cdn/design/js/allfiltershotline.js"></script>
+</html>

@@ -1,0 +1,61 @@
+{% load comments_tags %}
+
+<div class="review">
+{% if show %}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Review",
+  "itemReviewed": {
+    "@type": "Thing",
+    "name": "{{ item_id.catsin }} {{ one.get_name }}"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "{{ one.name }}"
+  },
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "{{ one.vote }}",
+    "bestRating": "5"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Интернет-магазин 20К"
+  }
+}
+</script>
+{% endif %}
+  <header>
+    <span class="review-user"><i class="fa fa-comment-o"></i><strong>{{ one.name }}</strong></span>
+    <span class="review-date">{{ one.date_add }}</span>
+    <span class="review-product">{{ item_id.catsin }} {{ item_id.name }}</span>
+  </header>
+  <div class="review-body">
+
+    {% if one.parent %}
+    <div class="citata">
+        <em>"{{one.parent.text}}"</em>
+    </div>
+    {% endif %}
+
+    {{ one.text }}
+
+  </div>
+  <footer>
+    <span class="review-reply"><a data-toggle="collapse" href="#" onclick="jQuery('{{ com_class }} #ansver_{{ one.id }}').slideToggle();" aria-expanded="false" aria-controls="review-reply1">Ответить</a></span>
+    <span class="review-rate">Отзыв полезен?
+      <span id="reit_comment_{{one.id}}">
+        <span class="review-like"><a href="javascript:void(0);" onclick="send_utility({{one.id}}, 1, '{{ com_class }}');"><i class="fa fa-thumbs-up"></i> Да</a>({{ one.positive }})</span>
+        <span class="review-unlike"><a href="javascript:void(0);" onclick="send_utility({{one.id}}, 0, '{{ com_class }}');"><i class="fa fa-thumbs-down"></i> Нет</a>({{ one.negative }})</span>
+      </span>
+    </span>
+    <div class="collapse" id="ansver_{{ one.id }}">
+      <div class="well">
+
+        {% comment_form one type='answer' %}
+
+      </div>
+    </div>
+  </footer>
+</div>

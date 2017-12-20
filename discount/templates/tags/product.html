@@ -1,0 +1,86 @@
+{% load thumbnail %}
+<div class="prod_wrap {% if type == 'bx' %}good-i good-i-owl{% elif type == 'cat' %}col-xs-6 col-sm-4 col-md-4 col-lg-3 good-i good-i-cat{% endif %}" data-id="{{ one.id }}">
+  <div class="good-i-wr">
+  <div class="good-i-img">
+    {% if one.has_gift %}
+    <div class="good-gift">
+      <img class="good-gift-img" src="/static_cdn/design/img/giftn.png" alt="{{one.catsin }} {{ one.name }} с подарком">
+    </div>
+    {% endif %}
+    <a href="{{ one.get_url }}" {% if nofollow %} rel="nofollow" {% endif %}><img src="{% if one.image2 %}{% thumbnail one.image 200x0 sharpen %}{% else %}/static_cdn/design/img/noimage.png{% endif %}" alt="{{ one.catsin }} {{ one.name }}" title="{{ one.catsin }} {{ one.name }}" class="img-responsive"></a>
+
+    {% if one.get_colors|length > 0 %}
+    <ul class="list-unstyled good-i-colors good-colors">
+
+      {% for color in one.get_colors %}
+      <li class="good-i-color{% if color.rgb_id == 1 %} good-i-color--white{% endif %}">
+        <a href="{% url 'product' one.category.slug one.brand.slug one.slug color.id %}"  {% if nofollow %} rel="nofollow" {% endif %} style="background-color: {{ color.rgb }}" data-toggle="tooltip" data-placement="left" title="{{ color.name }}"></a>
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% endif %}
+
+    <ul class="list-unstyled good-i-badges">
+
+      {% if one.action %}
+      <li class="good-i-badge good-i-badge--offer"><small>Акция</small></li>
+      {% endif %}
+      {% if one.oldprice %}
+      <li class="good-i-badge good-i-badge--sale"><small>Снижение цены</small></li>
+      {% endif %}
+      {% if one.newproduct %}
+      <li class="good-i-badge good-i-badge--new"><small>Новинка</small></li>
+      {% endif %}
+
+    </ul>
+  </div>
+  <div class="good-i-t"><a href="{{ one.get_url }}" {% if nofollow %} rel="nofollow" {% endif %}>{{one.catsin }} {{ one.name }}</a></div>
+  <div class="row">
+    <div class="col-sm-8 pad-r-0 good-i-price-b">
+
+      {% if one.oldprice %}
+      <div class="good-i-price good-i-old-price"><s>{{ one.oldprice|floatformat:"0" }} <small>грн.</small></s></div>
+      {% endif %}
+
+      {% if one.price %}
+        <div class="good-i-price{% if one.oldprice %} good-i-price--new{% endif %}"><small>Цена:</small> <strong>{{ one.price|floatformat:"0" }}</strong> <small>грн.</small></div>
+      {% else %}
+        <span class="notnall">Нет в наличии</span>
+      {% endif %}
+
+    </div>
+    <div class="col-sm-4 hidden-xs good-i-rev-wr pad-l-0">
+      {# <div class="good-i-rate"><img src="/static_cdn/design/img/rates.png" alt=""></div> #}
+      <div class="good-i-rev"><a href="{{ one.get_url }}" class="reviews_num" data-reviews="{{ one.comments_count }}" data-id="{{ one.id }}">{{ one.comments_count}} отзыв<span class="reviews_end" data-id="{{ one.id }}"></span></a></div>
+    </div>
+  </div>
+  <div class="row good-i-hover">
+    <div class="col-sm-6">
+      {% if one.price %}
+        <a class="btn btn-success btn-buy" href="{{ one.get_url }}">Купить</a>
+      {% else %}
+       <div class="notif-avail-b">
+        <a class="notif-avail-lnk" data-toggle="modal" data-target="#notifAvailModal">Сообщите, когда появится</a>
+      </div>
+      {% endif %}
+    </div>
+    <div class="col-sm-6">
+      <div class="good-i-compare hidden-xs hidden-sm">
+        <div class="checkbox">
+            <label class="to-compare">
+              <input type="checkbox" value="{{ one.id }}" data-compare="{% if one.id in items_id %}true{% else %}false{% endif %}"> <span class="to-compare__add">К сравнению</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    <div class="col-xs-12">
+      <div class="good-i-short-i">
+        {{ one.description|safe }}
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+

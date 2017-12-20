@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load fishca_tags %}
+{% load thumbnail %}
+{% block title %}Интернет магазин электроники 20К {% endblock %}
+{% block description %}Выгодно купить мобильный или бытовую технику с доставкой по Украине Вы сможете у Нас{% endblock %}
+{% block keywords %}20К, интернет магазин электроники{% endblock %}
+{% block amp %}
+<link rel="amphtml"  href="https://20k.com.ua/amp/" />
+{% endblock amp %}
+
+{% block main %}
+
+{% top_slide %}
+
+<!-- Offres & Sales -->
+<section class="slider-goods offers">
+  <h2 class="col-md-offset-4 col-lg-offset-0">Акции и скидки <a href="/discount/" class="offers-lnk offers-lnk--sale">Все товары со скидкой ({{ qt_sales }})</a> <a href="/action/" class="offers-lnk offers-lnk--promo">Все товары с Акцией ({{ qt_actions }})</a></h2>
+  <div class="goods-carousel owl-carousel owl-theme">
+
+    {% for one in bests %}
+      {% product one items_id type='bx' %}
+    {% endfor %}
+
+  </div>
+</section>
+<!-- End of Offres & Sales -->
+
+<!-- Welcome -->
+<section class="welcome">
+
+
+  <h1 class="text-center">Интернет-магазин электроники 20К</h1>
+  <div class="welcome-about">
+    <p>Интернет-магазин 20К.com.ua основан в 2011 году. Популярность интернет-магазина постоянно растет за счет качественной продукции, умеренной ценовой политике и высокого уровня сервиса. Основная задача нашего магазина не просто сделать продажу, а сделать для клиента хорошую покупку.</p>
+    <p>В нашем магазине Вы можете получить консультацию по всем интересующим вопросам от наших специалистов.</p>
+    <a href="/page/o-nas/">Читать больше о нас <i class="fa fa-long-arrow-right"></i></a>
+  </div>
+  <div class="container last-overviews">
+    {% last_overviews %}
+  </div>
+
+</section>
+<!-- End of Welcome -->
+
+<!-- New Goods -->
+<section class="slider-goods new-goods">
+  <h2>Новые поступления</h2>
+<div class="goods-carousel owl-carousel owl-theme">
+
+    {% for one in new %}
+      {% product one items_id type='bx' %}
+    {% endfor %}
+
+</div>
+</section>
+<!-- End of New Goods -->
+
+<!-- Popular Goods -->
+<section class="slider-goods popular-goods">
+  <h2>Популярные товары</h2>
+<div class="goods-carousel owl-carousel owl-theme">
+
+    {% for one in popular %}
+      {% product one items_id type='bx' %}
+    {% endfor %}
+
+</div>
+</section>
+<!-- End of Popular Goods -->
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function(){
+      $('.dropdown-menu-cat-dt').addClass('dropdown-menu-cat-mp');
+    });
+
+</script>
+
+{% endblock scripts %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block canonical %}{{ request.get_full_path }}{% endblock %}
+
+{% block rel %}
+<meta name="robots" content="noindex, nofollow, noarchive" />
+{% endblock rel %}
+
+{% block content %}
+
+<div class="text-center empty-cart">
+	<i class="fa fa-meh-o fa-5x"></i>
+	<p class="lead">Ваша корзина пуста(</p>
+	<p class="lead">Пожалуйста, сначала заполните ее.</p>
+</div>
+
+{% endblock %}

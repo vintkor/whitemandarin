@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Ecommerce module</title>
+
+    <!-- Bootstrap -->
+    <link href="/static/ecommerce/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/ecommerce/css/style.css" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  </head>
+  <body>
+    <input type="hidden" name="id">
+<!-- Button trigger modal -->
+    <div class="container-fluid container-ls">
+      <div class="row top-panel-ls">
+        <div class="col-md-2">
+          <div class="ls-btn" data-spy="affix" data-offset-top="5">
+              <button type="button" class="btn btn-primary btn-lg scan-it">
+                Сканировать
+              </button>
+          </div>
+        </div>
+        <div class="col-md-10">
+            <div class="status"></div>
+        </div>
+      </div>
+        <div class="ecommerce">
+          <div class="row">
+            <div class="col-md-3 tree">
+              <div id="tree"></div>
+            </div>
+            <div class="col-md-9 work-area">
+
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <script type="text/template" id="hotline">
+
+              <select name="selectfirm" id="selectfirm">
+                <option value="0">---------</option>
+                <% _.each(firms, function(one){ %>
+                  <option value="<%= one.itemid %>"><%= one.name %></option>
+                <% })%>
+              </select>
+
+              <h3><%= name %>&nbsp&nbsp<small><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <%= data %></small></h3>
+              <form action="#" class="hotline">
+                <table class="table table-hover maintable table-hotline-compare">
+                  <thead>
+                    <tr>
+                      <td>
+                      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                      <br>
+                      <input type="checkbox" class="selectall" id="selectall">
+
+
+                      </td>
+                      <td class="product-name-hl">Название продукта</td>
+                      <td>Мин цена</td>
+                      <td>Макс цена</td>
+                      <td>№</td>
+                      <td>К</td>
+                      <td>Вход цена</td>
+                      <td>Наша цена</td>
+                      <td>РРЦ цена</td>
+                      <td>Маржа</td>
+                      <td>Исправить цену</td>
+                      <td>Ссылка на Хотлайн</td>
+                      <td>Ссылка Y/N</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <% _.each(items, function(item){ %>
+                    <tr data-parent="<%= item.checkid %>">
+                      <td class="check">
+                        <input type="checkbox" name="test">
+                      </td>
+
+                      <td class="product-name-hl">
+                        <span class="name">
+                          <%= item.product_name %>
+                        </span>
+                      <br>
+                      <a href="javascript:;" class="show-concurents" data-id="<%= item.checkid %>"><small><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Показать конкурентов</small></a>
+                      </td>
+                      <td>min<br><%= item.min %></td>
+                      <td>max<br><%= item.max %></td>
+                      <td>№<br><%= item.position %></td>
+                      <td>K<br><%= item.total %></td>
+                      <td class="product-price-in">вход<br><%= item.price_in %><br><%= item.product_get_provider_actual %></td>
+                      <td><strong>наша<br><%= item.price %></strong></td>
+                      <td><strong>РРЦ цена<br><%= item.price_rrc %></strong></td>
+                      <td><strong>Маржа <br><%= item.marga %></strong></td>
+                      <td><% if (item.price_rrc_ok){ %><%= item.price %><% } else { %><input type="text" class="price-hl" name="product_<%= item.product_id %>" value="<%= item.price %>"><% } %></td>
+                      <td>
+                      <textarea name="href_<%= item.product_id %>" id="" style="width:100%" rows="2"><%= item.href %></textarea>
+                      <br>
+                          <a href="http://hotline.ua<%= item.href %>?tab=2" target="_blank"><small><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Открыть</small></a>&nbsp&nbsp
+                          <a href="http://hotline.ua/sr/?q=<%= item.product_name %>" target="_blank"><small><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Найти</small></a><br>
+
+                      </td>
+                      <td><input type="checkbox" name="hrefok_<%= item.product_id %>" value="1" <% if (item.hrefok){ %>checked="checked"<% } %>></td>
+                    </tr>
+                    <tr id="<%= item.checkid %>" class="hidden">
+                      <td colspan="9">
+                        <table style="border-spacing: 3px;">
+                        <% _.each(item.concurents, function(conc){ %>
+                          <tr data-concurent="<%= conc.concurent_id %>" data-price="<%= conc.price%>">
+                            <td><% if (conc.concurent_id == "22242" || conc.concurent_id == "780" || conc.concurent_id == "21994") { %><b><% } %>
+                            <%= conc.name %>
+                            <% if (conc.concurent_id == "22242" || conc.concurent_id == "780" || conc.concurent_id == "21994") { %></b><% } %>
+                            </td>
+                            <td>
+                            <% if (conc.concurent_id == "22242" || conc.concurent_id == "780" || conc.concurent_id == "21994") { %><b><% } %>
+                            <%= conc.price %>
+                            <% if (conc.concurent_id == "22242" || conc.concurent_id == "780" || conc.concurent_id == "21994") { %></b><% } %>
+                            </td>
+                            <td>
+
+                            &nbsp;
+                            <% if (conc.concurent_id == "22242" || conc.concurent_id == "780" || conc.concurent_id == "21994") { %><b><% } %>
+                            <%= conc.position %>
+                            <% if (conc.concurent_id == "22242" || conc.concurent_id == "780" || conc.concurent_id == "21994") { %></b><% } %>
+                            </td>
+                          </tr>
+                        <%  }) %>
+                        </table>
+                      </td>
+                    </tr>
+                  <% }) %>
+                  </tbody>
+                </table>
+              </form>
+
+              <div class="change-price">
+                <select name="checkfirm" id="checkfirm">
+                  <option value="0">Самый минимальная цена</option>
+                  <option value="10000000">Самая максимальная цена</option>
+                  <% _.each(firms, function(one){ %>
+                    <option value="<%= one.itemid %>"><%= one.name %></option>
+                  <% })%>
+                </select>
+
+                <select name="oper" id="oper">
+                  <option value="1">+</option>
+                  <option value="0">-</option>
+                </select>
+                <input type="text" name="priceplus" class="priceplus">
+
+                <button type="button" class="btn btn-primary btn-lg  changeprice">
+                  Изменить цены
+                </button>
+                <button type="button" class="btn btn-primary btn-lg savecat">
+                  Сохранить
+                </button>
+                <button type="button" class="btn btn-primary getprice">
+                  Get Price!
+                </button>
+              </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form method="post" action="." class="importcsv">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <textarea name="csv" id="csv" cols="30" rows="10" style="width:100%"></textarea>
+                <input type="hidden" name="url_id" value="0">
+
+
+            </div>
+            <div class="modal-footer">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    </script>
+
+    <script type="text/template" id="status">
+      <% if (activecat){ %>
+        <p class="bg-info">
+          <strong>Текущая категория:</strong> <%= activecat %>. Обработано: <strong><%= nowitems %></strong> из <strong><%= items %></strong>
+        </p>
+      <% } %>
+
+      <% if (queried){%>
+      <ul class="list-inline">
+        <li><small><strong>Категории в очереди:</strong></small></li>
+        <% _.each(queried, function(item){ %>
+        <li><small><%= item %>&nbsp;</small></li>
+        <% })%>
+      </ul>
+      <% } %>
+    </script>
+    <!-- Modal -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/static/ecommerce/js/bootstrap.min.js"></script>
+    <script src="/static/ecommerce/js/jstree/jstree.js"></script>
+    <script src="/static/ecommerce/js/underscore.js"></script>
+    <script src="/static/ecommerce/js/hotline.js"></script>
+  </body>
+</html>

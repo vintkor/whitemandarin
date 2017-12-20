@@ -1,0 +1,71 @@
+<div class="holder">
+	<ul>
+
+		{% for item in result.complects %}
+
+		<li>
+		    <div class="complect-item complect{{ item.id }}">
+		        <div class="name">{{ item.name }}</div>
+		        <div class="complect_items">
+		        	{% for one in item.items %}
+	        		    <div class="item">
+					        <a href="{{ one.link }}">
+					            <img src="/media/{{ one.image }}">
+					        </a>
+					        <div class="name">
+					            <a href="{{ one.link }}">
+					                  {{ one.name }}
+					            </a> 
+					        </div>
+					        <span class="percent">
+					        {% if one.percent %}
+					        	{{ one.percent }}
+					        {% endif %}
+					        </span>
+					        <span class="oldprice">
+					        {% if one.percent %}
+					        	{{ one.percent }}
+					        {% endif %}
+					        </span>
+					        <span class="price">
+					        {% if one.price %}
+					        	{{ one.price}}
+					        {% endif %}
+					        </span>
+					    </div>
+		        	{% endfor %}
+		        </div>
+		        <div class="count"><span>Стоимость этого комплекта:</span><span class="price"><input name="complect_{{ item.id }}" type="number" min="0" step="1" pattern="\d+" class="input-text" value="{{ item.count }}" maxlength="3"> <span class="count">{{ item.total }}</span></span></div>
+		    </div>
+		</li>
+			
+		{% endfor %}
+		{% for item in result.items %}
+			<li>
+				<div>
+					<div class="image">
+						<a href="{{ item.link }}">
+							<img src="/media/{{ item.image }}" alt="{{ item.name }}">
+						</a>
+					</div>
+					<div class="description">
+						<a href="{{ item.link }}" class="name">{{ item.name }}</a>
+						<span class="count">{{ item.count }} шт.</span>
+						<span class="price">{{ item.price }} грн.</span>
+					</div>
+
+					<div class="clear"></div>
+					
+				</div>
+			</li>				
+		{% endfor %}
+	</ul>
+	<div class="total">
+		<span class="total-name">Итого:</span>
+		<span class="total-count">{{ result.allprice }} </span>
+		<span class="uah"> грн.</span>
+	</div>
+	<div class="edit-order-holder">
+		<a href="javascript:;" class="edit-order">Редактировать заказ</a>
+	</div>
+</div>

@@ -1,0 +1,25 @@
+<link href="/static/styles/jquery.rating.css" rel="stylesheet" type="text/css" /> 
+<script type="text/javascript" src="/static/js/jquery.rating.js"></script>
+<script type="text/javascript">
+
+ jQuery(document).ready(function() {
+
+    if (jQuery('#ratings').length){
+
+        $('#ratings').rating({
+            fx: 'half',
+            image: '/static/images/stars2.png',
+            loader: '/static/images/ajax-loader.gif',
+            width: 16,
+            url: '/reit/{{paket}}/{{model}}/{{id}}/'
+        });
+        
+    }
+
+    })
+</script>
+<div id="ratings">
+                <input type="hidden" class="val" value="{{reit}}"/>
+                <input type="hidden" class="votes" value="{{votes}}"/>
+    </div>
+

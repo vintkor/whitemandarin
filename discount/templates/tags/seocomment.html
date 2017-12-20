@@ -1,0 +1,13 @@
+<h2>Отзывы к {{ category }} {{ brand }}</h2>
+{% for c in comments %}
+  <div class="review">
+    <header>
+      <span class="review-user"><i class="fa fa-comment-o"></i><strong>{{ c.name }}</strong></span>
+      <span class="review-date">{{ c.date_add }}</span>
+      <span class="review-product">{{ c.prod_name }}</span>
+    </header>
+    <div class="review-body">
+      {{ c.text }}
+    </div>
+  </div>
+{% endfor %}

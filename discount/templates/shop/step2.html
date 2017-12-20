@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block rel %}
+<meta name="robots" content="noindex, nofollow, noarchive" />
+{% endblock rel %}
+
+{% block content %}
+<div class="content">
+
+<h1>Оформление заказа</h1>
+
+<div class="left">
+    <div style="display: block;" id="tab-new" class="tab-content">
+
+		<form class="new-user" method="POST">
+			{{ forms.errors }}
+			{{ form.as_ul }}
+			{% include "shop/extendform.html" %}
+
+
+
+			<input type="submit" value="Далее" onclick="ga('send', 'event', 'button', 'click', 'buy');">
+		</form>
+
+
+    </div>
+</div>
+<div class="right">
+
+	{% include "shop/rightorder.html" %}
+
+</div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		$('#tabs a').tabs();
+	})
+</script>
+
+<script type="template" id="one-order-cart">
+
+	<li>
+		<div class="image">
+			<a href="<%= link %>">
+				<img src="/media/<%= image %>" alt="<%= name %>">
+			</a>
+		</div>
+		<div class="description">
+			<a href="<%= link %>" class="name"><%= name %></a>
+			<span class="count"><%= count %> шт.</span>
+			<span class="price"><%= price %> грн.</span>
+		</div>
+	</li>
+
+</script>
+{% endblock %}

@@ -1,0 +1,24 @@
+<div class="extendform">
+	<div class="form-group samovyvoz">
+	  <label class="col-md-12">Наш адрес сейчас: Киев, ул. Ушинского, 3</label>
+	</div>
+	<div class="form-group delivery-address hidden">
+		<label for="delivery-address" class="col-md-3 control-label">Адрес доставки</label>
+	  <div class="col-md-7">
+			<input id="delivery-address" maxlength="250" name="delivery_address" value="{{ request.POST.delivery_address }}" type="text" class="form-control">
+	  </div>
+	</div>
+	<div class="form-group delivery-service hidden">
+		<label class="col-md-3">Город:</label>
+	    <div class="col-md-7">
+	      <select class="form-control cart__r_form_select" name="city"></select>
+	    </div>
+	    <label class="col-md-3">Отделение:</label>
+	    <div class="col-xs-7">
+	      <select class="form-control cart__r_form_select" name="warehouse"></select>
+	    </div>
+		<div class="hidden">
+		    <input id="delivery-service" maxlength="250" name="delivery_service" value="{{ request.POST.delivery_service }}" type="text" class="form-control">
+		</div>
+	</div>
+</div>

@@ -1,0 +1,86 @@
+{% load fishca_tags %}
+<ul class="nav navbar-nav navbar-nav-dt hidden-xs hidden-sm" data-sm-skip="true">
+  <li class="dropdown dropdown-cat-dt">
+    <a href="#" class="dropdown-toggle dropdown-toggle-cat-dt" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars" aria-hidden="true"></i> Каталог <span class="hidden-md">товаров</span></a>
+    <ul class="dropdown-menu dropdown-menu-cat-dt">
+      <li>{% snipet 2 %}</li>
+      {% for item in items %}
+
+      <li class="subnav">
+        <a href="{% url 'category' item.slug %}"><span>{{ item.name }}</span></a>
+        <div class="menu-cat-second">
+          <div class="row">
+            {% if item.childrow.row1 %}
+            <div class="col-sm-4 col-md-3 col-menu-cat-second">
+              <ul class="list-unstyled menu-cat-second-l">
+              {% for p in item.childrow.row1 %}
+                <li class="menu-cat-second-i"><a href="{% url 'category' p.slug %}" class="menu-cat-second-lnk menu-cat-second-lnk--t">{{ p.name}}</a></li>
+                {% for c in p.get_children %}
+                <li class="menu-cat-second-i"><a href="{% url 'category' c.slug %}" class="menu-cat-second-lnk{% if c.main %} menu-cat-second-lnk--pr{% endif %}">{{ c.name }}</a></li>
+                {% endfor %}
+              {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            {% if item.childrow.row2 %}
+            <div class="col-sm-4 col-md-3 col-menu-cat-second">
+              <ul class="list-unstyled menu-cat-second-l">
+              {% for p in item.childrow.row2 %}
+                <li class="menu-cat-second-i"><a href="{% url 'category' p.slug %}" class="menu-cat-second-lnk menu-cat-second-lnk--t">{{ p.name}}</a></li>
+                {% for c in p.get_children %}
+                <li class="menu-cat-second-i"><a href="{% url 'category' c.slug %}" class="menu-cat-second-lnk{% if c.main %} menu-cat-second-lnk--pr{% endif %}">{{ c.name }}</a></li>
+                {% endfor %}
+              {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            {% if item.childrow.row3 %}
+            <div class="col-sm-4 col-md-3 col-menu-cat-second">
+              <ul class="list-unstyled menu-cat-second-l">
+              {% for p in item.childrow.row3 %}
+                <li class="menu-cat-second-i"><a href="{% url 'category' p.slug %}" class="menu-cat-second-lnk menu-cat-second-lnk--t">{{ p.name}}</a></li>
+                {% for c in p.get_children %}
+                <li class="menu-cat-second-i"><a href="{% url 'category' c.slug %}" class="menu-cat-second-lnk{% if c.main %} menu-cat-second-lnk--pr{% endif %}">{{ c.name }}</a></li>
+                {% endfor %}
+              {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            {% if item.childrow.row4 %}
+            <div class="col-sm-4 col-md-3 col-menu-cat-second">
+              <ul class="list-unstyled menu-cat-second-l">
+              {% for p in item.childrow.row4 %}
+                <li class="menu-cat-second-i"><a href="{% url 'category' p.slug %}" class="menu-cat-second-lnk menu-cat-second-lnk--t">{{ p.name}}</a></li>
+                {% for c in p.get_children %}
+                <li class="menu-cat-second-i"><a href="{% url 'category' c.slug %}" class="menu-cat-second-lnk{% if c.main %} menu-cat-second-lnk--pr{% endif %}">{{ c.name }}</a></li>
+                {% endfor %}
+              {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            {% if item.childrow.row5 %}
+            <div class="col-sm-4 col-md-3 col-menu-cat-second">
+              <ul class="list-unstyled menu-cat-second-l">
+              {% for p in item.childrow.row5 %}
+                <li class="menu-cat-second-i"><a href="{% url 'category' p.slug %}" class="menu-cat-second-lnk menu-cat-second-lnk--t">{{ p.name}}</a></li>
+                {% for c in p.get_children %}
+                <li class="menu-cat-second-i"><a href="{% url 'category' c.slug %}" class="menu-cat-second-lnk{% if c.main %} menu-cat-second-lnk--pr{% endif %}">{{ c.name }}</a></li>
+                {% endfor %}
+              {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            {% if item.imagemenu %}
+
+            <div class="menu-cat-img">
+              <img class="img-responsive" src="/media/{{ item.imagemenu }}">
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        </li>
+       {% endfor %}
+    </ul>
+    <div class="catalog-menu-backdrop"></div>
+  </li>
+</ul>

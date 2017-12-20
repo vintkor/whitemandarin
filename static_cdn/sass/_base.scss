@@ -1,0 +1,108 @@
+$dark-color: #584646;
+$grey-color: #818181;
+$light-grey-color: #f4f4f4;
+$red-color: #cf2229;
+$dark-color: #53565e;
+$brand-color: #234d9c;
+$brand-light-color: #3465bf;
+$orange-color: #c55c37;
+$border-color: #e2e2e2;
+$green-color: #4aca39;
+
+$light-brand-color: #67d8ba;
+$border-color: #d2cfcf;
+
+
+
+
+@mixin color ($color) {
+  color: $color; }
+@mixin reset-list-style {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+@mixin background {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+@mixin absolute( $top, $left ) {
+    left: $left;
+    position: absolute;
+    top: $top;
+}
+@mixin absoluteBottom( $bottom, $left ) {
+    left: $left;
+    position: absolute;
+    bottom: $bottom;
+}
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+@mixin transition($time) {
+    -moz-transition: all $time ease-in-out;
+    -webkit-transition: all $time ease-in-out;
+    transition: all $time ease-in-out;
+}
+@mixin transitioneasy($time) {
+    -moz-transition: all $time ease;
+    -webkit-transition: all $time ease;
+    transition: all $time ease;
+}
+@mixin font-bold($size) {
+    font-size: $size;
+    font-weight: bold;
+}
+@mixin ellipsis ($line-height, $lines: 2) {
+    line-height: $line-height;
+    overflow: hidden;
+    max-height: $line-height * $lines;
+    height: $line-height * $lines;
+  
+    // Webkit solution for multiline ellipsis
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $lines;  
+  
+    // Solution for Opera
+    text-overflow: -o-ellipsis-lastline;
+}
+
+@mixin placeholder {
+  ::-webkit-input-placeholder {@content}
+  :-moz-placeholder           {@content}
+  ::-moz-placeholder          {@content}
+  :-ms-input-placeholder      {@content}  
+}
+
+@mixin opacity( $opacity ) {
+    filter: alpha( opacity=$opacity*100 );
+    opacity: $opacity;
+}
+
+@mixin breakpoint($point) {
+  @if $point == lg {
+    @media (max-width: 1199px) {
+      @content;
+    }
+  } @else if $point == md {
+    @media (max-width: 991px) {
+      @content;
+    }
+  } @else if $point == sm {
+    @media (max-width: 767px) {
+      @content;
+    }
+  } @else if $point == xs {
+    @media (max-width: 480px) {
+      @content;
+    }
+  }
+}
+

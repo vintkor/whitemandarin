@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load fishca_tags %}
+
+{% block title %}{{ seofilter.title }}{% endblock %}
+{% block description %}{% if seofilter.metaDesc %}{{ seofilter.metaDesc }}{% else %}{% if page > 1 %}Страница {{ page }} раздела {{ category.name }} {{ seofilter.brand.name }} интернет-магазина 20K. Доставка по Украине. Звоните и заказывайте (044) 228-29-37{% else %}Интернет-магазин 20K предлагает вам купить {{ category.name }} {{ seofilter.brand.name }}. Доставка по Украине. Звоните и заказывайте (044) 228-29-37{% endif %}{% endif %}{% endblock %}
+{% block keywords %}{% if page > 1 %}Страница {{ page }}, раздел {{ category.name }} {{ seofilter.brand.name }}{% else %}купить {{ category.name }} {{ seofilter.brand.name }}, интернет-магазин 20K{% endif %}{% endblock %}
+
+{% block bred %}
+
+<ol class="breadcrumb hidden-xs" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+  <li  property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage"
+        href="http://20k.com.ua/">
+        <span property="name">Магазин электроники</span></a>
+        <meta property="position" content="1">
+  </li>
+
+  {% if category.parent %}
+  <li  property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage"
+        href="http://20k.com.ua{{ category.parent.get_url }}">
+        <span property="name">{{ category.parent.name }}</span></a>
+        <meta property="position" content="2">
+  </li>
+  {% endif %}
+
+
+  <li  property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage"
+        href="http://20k.com.ua{{ category.get_url }}">
+        <span property="name">{{ category.name }}</span></a>
+        <meta property="position" content="{% if category.parent %}3{% else %}2{% endif %}">
+  </li>
+
+  <li  property="itemListElement" typeof="ListItem">
+        <span property="name">{{ seofilter.h1 }}</span>
+        <meta property="position" content="{% if category.parent %}4{% else %}3{% endif %}">
+  </li>
+</ol>
+<!-- End of Breadcrumbs -->
+
+{% endblock %}
+
+
+{% block css %}
+<link rel="stylesheet" href="/static_cdn/design/css/jquery-ui.min.css">
+{% endblock css %}
+
+
+{% block content %}
+
+  {% include 'include/catalog.html' %}
+
+{% endblock %}
+
+
+{% block scripts %}
+  <script src="/static_cdn/design/js/jquery-ui.min.js"></script>
+{% endblock scripts %}

@@ -1,0 +1,25 @@
+{{ name }};{{ url }}<br>
+{{ brand }} {{ name }};{{ url }}<br>
+{% for color in colors %}<br>
+	{{ name }} {{ color.name }};{{ url }}<br>
+	{{ brand }} {{ name }} {{ color.name }};{{ url }}<br>
+{% endfor %}
+
+{% for key in keys %}
+
+	{{ key }} {{ name }};{{ url }}<br>
+	{{ name }} {{ key }};{{ url }}<br>
+	{{ key }} {{ brand }} {{ name }};{{ url }}<br>
+	{{ brand }} {{ name }} {{ key }};{{ url }}<br>
+
+	{% for cat in categories %}
+
+		{{ key }} {{ cat }} {{ name }};{{ url }}<br>
+		{{ cat }} {{ key }} {{ name }};{{ url }}<br>
+		{{ cat }} {{ name }} {{ key }};{{ url }}<br>
+		{{ name }} {{ cat }} {{ key }};{{ url }}<br>
+		{{ key }} {{ cat }} {{ brand }} {{ name }};{{ url }}<br>
+		{{ brand }} {{ cat }} {{ name }} {{ key }};{{ url }}<br>
+
+	{% endfor %}
+{% endfor %}

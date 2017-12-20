@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block rel %}
+<meta name="robots" content="noindex, nofollow, noarchive" />
+{% endblock rel %}
+
+
+{% block header %}
+  {% include 'include/header.html' with type='checkout' %}
+{% endblock %}
+
+
+{% block menu %}
+{% endblock %}
+
+
+{% block content %}
+<!-- Checkout Container -->
+<section class="checkout-container">
+  <h1>Оформление заказа</h1>
+  <div class="row">
+    <div class="col-md-6 checkout-left">
+      <form class="form-horizontal checkout-form" role="form" method="POST">
+        <div class="checkout_steps">
+        <div class="checkout_step step1">
+          <h3 class="checkout_steps_h"><span class="step-num">1</span>Контактные данные <small class="step1_now">(Шаг 1 из 2)</small><small class="step1_completed hidden"><i class="fa fa-check-square-o"></i> <a href="javascript:;" class="checkout_edit-step_lnk">Редактировать</a></small></h3>
+          <div class="checkout_step-one">
+
+            {% if not request.user.is_authenticated %}
+            <!-- Nav tabs -->
+            <ul class="nav nav-pills" role="tablist">
+              <li class="active"><a href="#register" role="tab" data-toggle="tab">Я новый покупатель</a></li>
+              <li><a href="#sign" role="tab" data-toggle="tab">Я постоянный клиент</a></li>
+              <!-- <li><a href="#repair-psw" role="tab" data-toggle="tab">Восстановление пароля</a></li> -->
+            </ul>
+            {% endif %}
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+
+              <div class="tab-pane fade in active" id="register">
+
+                  {{ form.non_field_errors }}
+                  <div class="form-group">
+                    <label for="id_name" class="col-md-3 control-label">Имя</label>
+                    <div class="col-md-7">
+                      {{ form.name }}
+                      {# <input type="email" class="form-control" id="id_name" placeholder="Имя"> #}
+                      {{ form.name.errors }}
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="id_name" class="col-md-3 control-label">Фамилия</label>
+                    <div class="col-md-7">
+                      <input type="text" class="form-control" id="id_lastname" placeholder="Фамилия" value="{{ request.user.last_name }}" name="lastname">
+                      {{ form.lastname.errors }}
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="id_phone" class="col-md-3 control-label">Телефон <span class="text-danger">*</span> </label>
+                    <div class="col-md-7">
+                      {{ form.phone }}
+                      {# <input type="email" class="form-control" id="id_phone" placeholder="Имя"> #}
+                      {{ form.phone.errors }}
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="id_email" class="col-md-3 control-label">Эл. почта</label>
+                    <div class="col-md-7">
+                      {{ form.email }}
+                      {# <input type="email" class="form-control" id="id_email" placeholder="Эл. почта"> #}
+                      {{ form.email.errors }}
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-md-offset-3 col-md-9">
+                      <div class="necessarily"><span class="text-danger">*</span> - обязательно к заполнению</div>
+                      <button type="button" class="btn btn-success btn-buy step1_next">Далее</button>
+                    </div>
+                  </div>
+
+              </div>
+
+              <div class="tab-pane fade" id="sign">
+                    <div class="form-group">
+                      <label for="inputEmail" class="col-md-3 control-label">Эл. почта</label>
+                      <div class="col-md-7">
+                        <input type="email" name="login" class="form-control" id="inputEmail" placeholder="Эл. почта">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPassword" class="col-md-3 control-label">Пароль</label>
+                      <div class="col-md-7">
+                        <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Пароль">
+                      </div>
+                    </div>
+                    <div class="form-group error hidden">
+                      <div class="col-md-offset-3 col-md-8">
+                        Неверный емаил или пароль
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-md-offset-3 col-md-8">
+                        <button type="button" class="btn btn-success btn-buy sign_button">Далее</button>
+                      </div>
+                    </div>
+              </div>
+              <!-- <div class="tab-pane fade" id="repair-psw">
+                <form class="form-horizontal repair-psw-form" role="form">
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-md-3 control-label">Эл. почта</label>
+                    <div class="col-md-7">
+                      <input type="email" class="form-control" id="inputEmail" placeholder="Эл. почта">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-offset-3 col-md-9">
+                      <button type="submit" class="btn btn-default">Восстановить</button>
+                    </div>
+                  </div>
+                </form>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="checkout_step step2 hidden">
+          <h3 class="checkout_steps_h"><span class="step-num">2</span>Доставка и оплата <small>(Шаг 2 из 2)</small></h3>
+          <div class="checkout_step-two">
+
+            <div class="row checkout_step-two_delivery">
+              <div class="col-md-2"><strong>Доставка:</strong></div>
+              <div class="col-md-9">
+
+                {{ form.delivery.errors }}
+                {% for radio in form.delivery %}
+                <div class="radio">
+                    {{ radio }}
+                </div>
+                {% endfor %}
+
+              </div>
+            </div>
+            <div class="row checkout_step-two_pay">
+              <div class="col-md-2"><strong>Оплата:</strong></div>
+              <div class="col-md-9">
+
+                {{ form.payment.errors }}
+                {% for radio in form.payment %}
+                <div class="radio">
+                    {{ radio }}
+                </div>
+                {% endfor %}
+
+              </div>
+            </div>
+
+            {% include "shop/extendform.html" %}
+
+            <!-- <div class="row checkout_step-two_addr">
+              <div class="col-xs-offset-4 col-xs-8">
+                <div class="checkout_step-two_comment">
+                  <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                            Добавить комментарий к заказу
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapseOne" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <textarea class="form-control" rows="4"></textarea>
+                          <small>Укажите комментарий длиной не более 512 символов</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+      </div>
+      </form>
+    </div>
+    <div class="col-md-6 checkout-right">
+      <div class="checkout-order-b">
+        <!-- Checkout Table -->
+        <div class="cart-b">
+          <form class="items"></form>
+          <div class="clearfix">
+            <div class="col-xs-12">
+              <div class="text-right checkout-sum-b"><strong>Итого: <span class="summary"></span> грн</strong></div>
+              <div class="text-right"><a class="btn btn-success btn-buy bnt-lg checkout_order-buy hidden" href="javascript:;" onclick="ga('send', 'event', 'button', 'click', 'buy');">Заказ подтверждаю</a></div>
+            </div>
+          </div>
+        </div>
+        <!-- End Checkout Table -->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End of Checkout Container -->
+{% endblock %}
+
+
+{% block base_modal %}
+{% endblock base_modal %}
+
+
+{% block scripts %}
+
+{% endblock scripts %}

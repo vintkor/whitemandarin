@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load cache %}
+{% load action_tags %}
+
+{% block title %}{{ item.title }}{% endblock title %}
+
+{% block description %}{{ item.metaDesc }}{% endblock description %}
+
+{% block content %}
+        <ol class="breadcrumb">
+            <li><a href="/">Главная</a></li>
+            <li class="active">Мой профиль</li>
+        </ol>
+
+        <h1 class="profile-title">Мой профиль</h1>
+        <div class="row profile-list">
+            <div class="col-xs-6 col-sm-4 col-md-2 text-center profile-list-i"><a class="profile-list-lnk" href="/profile/settings/"><span class="glyphicon glyphicon-user profile-list-ico" aria-hidden="true"></span><span class="profile-list-t">Мои настройки</span></a></div>
+            <div class="col-xs-6 col-sm-4 col-md-2 text-center profile-list-i"><a class="profile-list-lnk" href="/profile/orders/"><span class="glyphicon glyphicon-shopping-cart profile-list-ico" aria-hidden="true"></span><span class="profile-list-t">Мои заказы</span></a></div>
+            <!-- <div class="col-xs-6 col-sm-4 col-md-2 text-center profile-list-i"><a class="profile-list-lnk" href="/profile/whishlist/"><span class="glyphicon glyphicon-heart profile-list-ico" aria-hidden="true"></span><span class="profile-list-t">Список желаний</span></a></div> -->
+        </div>
+{% endblock content %}

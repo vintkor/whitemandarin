@@ -1,0 +1,8 @@
+Целевой URL <br>
+{% for item in items %}
+	{% if item.category and item.brand %}
+
+		{{ item.get_url }} <br>
+
+	{% endif %}
+{% endfor %}

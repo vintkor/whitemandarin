@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load fishca_tags %}
+{% load comments_tags %}
+
+
+{% load thumbnail %}
+{% block title %}{{ page.title }}{% endblock %}
+{% block description %}{{ page.metaDesc }}{% endblock %}
+{% block keywords %}{{ page.metaKey }}{% endblock %}
+{% block canonical %}{{ page.get_url }}{% endblock %}
+
+{% block bred %}
+
+<!-- Breadcrumbs -->
+<ol class="breadcrumb hidden-xs" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+  <li  property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage"
+        href="http://20k.com.ua/">
+        <span property="name">Магазин электроники</span></a>
+        <meta property="position" content="1">
+  </li>
+
+  <li  property="itemListElement" typeof="ListItem">
+        <span property="name">Обзоры</span>
+        <meta property="position" content="2">
+  </li>
+</ol>
+<!-- End of Breadcrumbs -->
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<h1>Обзоры новинок.</h1>
+
+<div class="row">
+  <section class="col-md-12 main-content" role="main">
+  {% for item in items %}
+    <h3><a href="/overviews/{{ item.slug }}/">{{ item.name }}</a></h3>
+    <div class="overview">
+      {{ item.short_text|safe}}
+    </div>
+  {% endfor %}
+  </section>
+</div>
+
+
+{% endblock %}

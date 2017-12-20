@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load fishca_tags %}
+{% load comments_tags %}
+
+
+{% load thumbnail %}
+{% block title %}{{ page.title }}{% endblock %}
+{% block description %}{{ page.metaDesc }}{% endblock %}
+{% block keywords %}{{ page.metaKey }}{% endblock %}
+
+{% block bred %}
+
+<div class="breadcrumb" itemscope="" itemtype="http://schema.org/WebPage">
+        <span temprop="breadcrumb" itemscope="" itemtype="http://schema.org/Breadcrumb"><a href="/" itemprop="url">
+            Магазин электроники
+            </a>
+             ›
+        </span>
+
+
+        <span temprop="breadcrumb" itemscope="" itemtype="http://schema.org/Breadcrumb">
+
+            {{ page.name }}
+
+
+        </span>
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+
+<div id="content" ><!-- breadcrumbs old place -->
+  <h1>{{ page.name }}</h1>
+  {{page.full_text|safe}}
+
+</div>
+{% endblock %}

@@ -1,0 +1,4 @@
+*.pyc
+discount/media
+discount/static_cdn/CACHE
+discount/loc.py

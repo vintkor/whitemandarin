@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load cache %}
+{% load action_tags %}
+
+{% block title %}Список желаний{% endblock title %}
+{% block description %}Список желаний{% endblock description %}
+
+{% block content %}
+
+<div class="layout-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="breadcrumbs">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/profile/">Мой профиль</a></li>
+                    <li class="active">Мой список желаний</li>
+                </ul>
+            </div>
+        </div>
+    <div class="morePost row featuredPostContainer style2 globalPaddingTop marginB ">
+        <h2 class="title style2 text-center"><span>{{ name }}</span></h2>
+            <div class="container">
+                <div class="row xsResponse">
+                    <div class="col-xs-12 grid-view">
+                        {% for item in items %}
+                            {% product request item True %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!--/.container-->
+        </div>
+        <!--/.featuredPostContainer-->
+    </div>
+</div>
+<!-- /main container -->
+
+{% endblock content %}

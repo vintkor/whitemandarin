@@ -1,0 +1,641 @@
+{% load thumbnail %}
+{% load fishca_tags %}
+{% load comments_tags %}
+<!DOCTYPE html>
+<html amp lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <title>{{ product.catsin }} {{ product.name }} купить в Киеве. Цены на {{ product.catsin }} {{ product.name }} в Украине</title>
+    <meta name="description" content="Интернет-магазин 20K предлагает вам купить {{ product.catsin|lower }} {{ product.name|clearskobki }}. Доставка по Украине. Звоните и заказывайте (044) 228-29-37" />
+    <meta name="keywords" content="20К, интернет магазин электроники" />
+    <link rel="canonical" href="https://20k.com.ua">
+    <link rel="icon" href="https://20k.com.ua/static_cdn/design/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://20k.com.ua/static_cdn/design/img/favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,400&subset=cyrillic,latin' rel='stylesheet' type='text/css'>
+    <!-- AMP JS -->
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
+    <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.1.js"></script>
+    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+    <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+    <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
+    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+    <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
+    <!-- End of AMP JS -->
+    <!-- AMP Styles -->
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+      <style amp-custom>*,:after,:before,input[type=checkbox],input[type=radio]{-webkit-box-sizing:border-box;-moz-box-sizing:border-box}.list-inline,.list-unstyled{padding-left:0;list-style:none}.form-control[disabled],input[type=checkbox][disabled],input[type=radio][disabled]{cursor:not-allowed}.btn,.btn-default.active,.btn-default:active,.btn-info.active,.btn-info:active,.btn-success.active,.btn-success:active,.form-control,.navbar-toggle{background-image:none}.badge,.btn{white-space:nowrap;vertical-align:middle}.fa,.glyphicon{-moz-osx-font-smoothing:grayscale}.list-inline,.list-unstyled,.media-list,.nav{list-style:none}html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}footer,header,main,menu,nav,section{display:block}[hidden]{display:none}a{background-color:transparent;text-decoration:none}.form-control,body{background-color:#fff}a:active,a:hover{outline:0}h1{margin:.67em 0}img{border:0;vertical-align:middle}button,input,select{font:inherit;margin:0;color:inherit}.glyphicon,address{font-style:normal}button{overflow:visible}button,select{text-transform:none}.btn-buy,.btn-good,.navbar-m,.text-uppercase{text-transform:uppercase}button,html input[type=button],input[type=reset],input[type=submit]{cursor:pointer;-webkit-appearance:button}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */@font-face{font-family:'Glyphicons Halflings';src:url(/static_cdn/design/fonts/glyphicons-halflings-regular.eot);src:url(/static_cdn/design/fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),url(/static_cdn/design/fonts/glyphicons-halflings-regular.woff2) format('woff2'),url(/static_cdn/design/fonts/glyphicons-halflings-regular.woff) format('woff'),url(/static_cdn/design/fonts/glyphicons-halflings-regular.ttf) format('truetype'),url(/static_cdn/design/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg')}.glyphicon{font-family:'Glyphicons Halflings';font-weight:400;line-height:1;position:relative;top:1px;display:inline-block;-webkit-font-smoothing:antialiased}.glyphicon-plus:before{content:'\002b'}.glyphicon-search:before{content:'\e003'}.glyphicon-star:before{content:'\e006'}.glyphicon-user:before{content:'\e008'}.glyphicon-upload:before{content:'\e027'}.glyphicon-list-alt:before{content:'\e032'}.glyphicon-text-height:before{content:'\e050'}.glyphicon-text-width:before{content:'\e051'}.glyphicon-align-left:before{content:'\e052'}.glyphicon-align-center:before{content:'\e053'}.glyphicon-align-right:before{content:'\e054'}.glyphicon-list:before{content:'\e056'}.glyphicon-gift:before{content:'\e102'}.glyphicon-comment:before{content:'\e111'}.glyphicon-shopping-cart:before{content:'\e116'}.glyphicon-filter:before{content:'\e138'}.glyphicon-link:before{content:'\e144'}.glyphicon-phone:before{content:'\e145'}.glyphicon-header:before{content:'\e180'}.glyphicon-phone-alt:before{content:'\e183'}.glyphicon-scale:before{content:'\e230'}.glyphicon-option-horizontal:before{content:'\e234'}.glyphicon-menu-hamburger:before{content:'\e236'}.glyphicon-text-color:before{content:'\e242'}.glyphicon-menu-left:before{content:'\e257'}.glyphicon-menu-right:before{content:'\e258'}.glyphicon-menu-down:before{content:'\e259'}*,:after,:before{box-sizing:border-box}html{font-size:10px;-webkit-tap-highlight-color:transparent}body{margin:0;font-size:14px;line-height:1.42857143;color:#333}button,input,select{font-family:inherit;font-size:inherit;line-height:inherit}a:focus,a:hover{text-decoration:underline}a:focus{outline:-webkit-focus-ring-color auto 5px;outline-offset:-2px}.img-responsive{display:block;max-width:100%;height:auto}[role=button]{cursor:pointer}.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{font-family:inherit;font-weight:500;line-height:1.1;color:inherit}.h1 .small,.h1 small,.h2 .small,.h2 small,.h3 .small,.h3 small,.h4 .small,.h4 small,.h5 .small,.h5 small,.h6 .small,.h6 small,h1 .small,h1 small,h2 .small,h2 small,h3 .small,h3 small,h4 .small,h4 small,h5 .small,h5 small,h6 .small,h6 small{font-weight:400;line-height:1;color:#777}address,dd,dt{line-height:1.42857143}.h1,.h2,.h3,h1,h2,h3{margin-top:20px;margin-bottom:10px}.h1 .small,.h1 small,.h2 .small,.h2 small,.h3 .small,.h3 small,h1 .small,h1 small,h2 .small,h2 small,h3 .small,h3 small{font-size:65%}.h4,.h5,.h6,h4,h5,h6{margin-top:10px;margin-bottom:10px}.h4 .small,.h4 small,.h5 .small,.h5 small,.h6 .small,.h6 small,h4 .small,h4 small,h5 .small,h5 small,h6 .small,h6 small{font-size:75%}.h1,h1{font-size:36px}.h2,h2{font-size:30px}.h3,h3{font-size:24px}.h4,h4{font-size:18px}.h5,h5{font-size:14px}.h6,h6{font-size:12px}p{margin:0 0 10px}.small,small{font-size:85%}.text-left{text-align:left}.text-right{text-align:right}.badge,.btn,.text-center{text-align:center}.text-success{color:#3c763d}a.text-success:focus,a.text-success:hover{color:#2b542c}.text-info{color:#31708f}a.text-info:focus,a.text-info:hover{color:#245269}.page-header{margin:40px 0 20px;padding-bottom:9px;border-bottom:1px solid #eee}dl,ul{margin-top:0}address,dl{margin-bottom:20px}ul{margin-bottom:10px}ul ul{margin-bottom:0}.list-inline{margin-left:-5px}.list-inline>li{display:inline-block;padding-right:5px;padding-left:5px}.form-control,input[type=file]{display:block}dt{font-weight:700}.btn,.btn-link{font-weight:400}dd{margin-left:0}.container{margin-right:auto;margin-left:auto;padding-right:15px;padding-left:15px}.row{margin-right:-15px;margin-left:-15px}.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9{position:relative;min-height:1px;padding-right:15px;padding-left:15px}.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9{float:left}.col-xs-12{width:100%}.col-xs-11{width:91.66666667%}.col-xs-10{width:83.33333333%}.col-xs-9{width:75%}.col-xs-8{width:66.66666667%}.col-xs-7{width:58.33333333%}.col-xs-6{width:50%}.col-xs-5{width:41.66666667%}.col-xs-4{width:33.33333333%}.col-xs-3{width:25%}.col-xs-2{width:16.66666667%}.col-xs-1{width:8.33333333%}.btn-block,.form-control,input[type=button].btn-block,input[type=reset].btn-block,input[type=submit].btn-block{width:100%}.col-xs-offset-12{margin-left:100%}.col-xs-offset-11{margin-left:91.66666667%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-0{margin-left:0}input[type=search]{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-appearance:none}input[type=checkbox],input[type=radio]{line-height:normal;margin:4px 0 0}.btn,.nav{margin-bottom:0}input[type=range]{display:block;width:100%}select[multiple],select[size]{height:auto}input[type=checkbox]:focus,input[type=file]:focus,input[type=radio]:focus{outline:-webkit-focus-ring-color auto 5px;outline-offset:-2px}.form-control{font-size:14px;line-height:1.42857143;height:34px;padding:6px 12px;-webkit-transition:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;-o-transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;color:#555;border:1px solid #ccc;border-radius:4px;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075);box-shadow:inset 0 1px 1px rgba(0,0,0,.075)}.form-control:focus{outline:0;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)}.form-control::-moz-placeholder{opacity:1;color:#999}.form-control:-ms-input-placeholder{color:#999}.form-control::-webkit-input-placeholder{color:#999}.form-control::-ms-expand{border:0;background-color:transparent}.form-control[disabled],.form-control[readonly]{opacity:1;background-color:#eee}@media screen and (-webkit-min-device-pixel-ratio:0){input[type=date].form-control,input[type=datetime-local].form-control,input[type=month].form-control,input[type=time].form-control{line-height:34px}input[type=date].input-sm,input[type=datetime-local].input-sm,input[type=month].input-sm,input[type=time].input-sm{line-height:30px}input[type=date].input-lg,input[type=datetime-local].input-lg,input[type=month].input-lg,input[type=time].input-lg{line-height:46px}}.form-control-static{min-height:34px;margin-bottom:0;padding-top:7px;padding-bottom:7px}.form-control-static.input-lg,.form-control-static.input-sm{padding-right:0;padding-left:0}.input-sm{font-size:12px;line-height:1.5;height:30px;padding:5px 10px;border-radius:3px}select.input-sm{line-height:30px;height:30px}select[multiple].input-sm{height:auto}.input-lg{font-size:18px;line-height:1.3333333;height:46px;padding:10px 16px;border-radius:6px}select.input-lg{line-height:46px;height:46px}select[multiple].input-lg{height:auto}.btn{font-size:14px;line-height:1.42857143;display:inline-block;padding:6px 12px;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;border:1px solid transparent;border-radius:4px;-ms-touch-action:manipulation;touch-action:manipulation}.btn-block,.nav>li,.nav>li>a,.navbar-brand>img,.tab-content>.active{display:block}.btn.active:focus,.btn:active:focus,.btn:focus{outline:-webkit-focus-ring-color auto 5px;outline-offset:-2px}.btn:focus,.btn:hover{text-decoration:none;color:#333}.btn.active,.btn:active{outline:0;background-image:none;-webkit-box-shadow:inset 0 3px 5px rgba(0,0,0,.125);box-shadow:inset 0 3px 5px rgba(0,0,0,.125)}.btn[disabled]{cursor:not-allowed;opacity:.65;-webkit-box-shadow:none;box-shadow:none}.btn-default{color:#333;border-color:#ccc;background-color:#fff}.btn-default:focus{color:#333;border-color:#8c8c8c;background-color:#e6e6e6}.btn-default.active,.btn-default:active,.btn-default:hover{color:#333;border-color:#adadad;background-color:#e6e6e6}.btn-default.active:focus,.btn-default.active:hover,.btn-default:active:focus,.btn-default:active:hover{color:#333;border-color:#8c8c8c;background-color:#d4d4d4}.btn-default[disabled]:focus,.btn-default[disabled]:hover{border-color:#ccc;background-color:#fff}.btn-default .badge{color:#fff;background-color:#333}.btn-success{color:#fff;border-color:#4cae4c;background-color:#5cb85c}.btn-success:focus{color:#fff;border-color:#255625;background-color:#449d44}.btn-success.active,.btn-success:active,.btn-success:hover{color:#fff;border-color:#398439;background-color:#449d44}.btn-success.active:focus,.btn-success.active:hover,.btn-success:active:focus,.btn-success:active:hover{color:#fff;border-color:#255625;background-color:#398439}.btn-success[disabled]:focus,.btn-success[disabled]:hover{border-color:#4cae4c;background-color:#5cb85c}.btn-success .badge{color:#5cb85c;background-color:#fff}.btn-info{color:#fff;border-color:#46b8da;background-color:#5bc0de}.btn-info:focus{color:#fff;border-color:#1b6d85;background-color:#31b0d5}.btn-info.active,.btn-info:active,.btn-info:hover{color:#fff;border-color:#269abc;background-color:#31b0d5}.btn-info.active:focus,.btn-info.active:hover,.btn-info:active:focus,.btn-info:active:hover{color:#fff;border-color:#1b6d85;background-color:#269abc}.btn-info[disabled]:focus,.btn-info[disabled]:hover{border-color:#46b8da;background-color:#5bc0de}.btn-info .badge{color:#5bc0de;background-color:#fff}.btn-link{color:#337ab7;border-radius:0}.btn-link,.btn-link.active,.btn-link:active,.btn-link[disabled]{background-color:transparent;-webkit-box-shadow:none;box-shadow:none}.btn-link,.btn-link:active,.btn-link:focus,.btn-link:hover{border-color:transparent}.btn-link:focus,.btn-link:hover{text-decoration:underline;color:#23527c;background-color:transparent}.btn-link[disabled]:focus,.btn-link[disabled]:hover{text-decoration:none;color:#777}.btn-lg{font-size:18px;line-height:1.3333333;padding:10px 16px;border-radius:6px}.btn-sm,.btn-xs{font-size:12px;line-height:1.5;border-radius:3px}.btn-sm{padding:5px 10px}.btn-xs{padding:1px 5px}.btn-block+.btn-block{margin-top:5px}[data-toggle=buttons]>.btn input[type=checkbox],[data-toggle=buttons]>.btn input[type=radio]{position:absolute;clip:rect(0,0,0,0);pointer-events:none}.nav>li,.nav>li>a,.navbar{position:relative}.nav{padding-left:0}.nav>li>a{padding:10px 15px}.nav>li>a:focus,.nav>li>a:hover{text-decoration:none;background-color:#eee}.nav>li>a>img{max-width:none}.nav-tabs{border-bottom:1px solid #ddd}.nav-tabs>li{float:left;margin-bottom:-1px}.nav-tabs>li>a{line-height:1.42857143;margin-right:2px;border:1px solid transparent;border-radius:4px 4px 0 0}.nav-tabs>li>a:hover{border-color:#eee #eee #ddd}.nav-tabs>li.active>a,.nav-tabs>li.active>a:focus,.nav-tabs>li.active>a:hover{cursor:default;color:#555;border:1px solid #ddd;border-bottom-color:transparent;background-color:#fff}.navbar{min-height:50px;margin-bottom:20px;border:1px solid transparent}.container>.navbar-header{margin-right:-15px;margin-left:-15px}.navbar-static-top{z-index:1000;border-width:0 0 1px}.navbar-fixed-top{position:fixed;z-index:1030;right:0;left:0;top:0;border-width:0 0 1px}.navbar-brand{font-size:18px;line-height:20px;float:left;height:50px;padding:15px}.navbar-brand:focus,.navbar-brand:hover{text-decoration:none}.navbar-toggle{position:relative;float:right;margin-top:8px;margin-right:15px;margin-bottom:8px;padding:9px 10px;border:1px solid transparent;border-radius:4px;background-color:transparent}.navbar-toggle:focus{outline:0}.navbar-nav{margin:7.5px -15px}.navbar-nav>li>a{line-height:20px;padding-top:10px;padding-bottom:10px}.badge,.close{font-weight:700;line-height:1}.navbar-form{padding:10px 15px;border-top:1px solid transparent;border-bottom:1px solid transparent;-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 1px 0 rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 1px 0 rgba(255,255,255,.1);margin:8px -15px}.navbar-btn{margin-top:8px;margin-bottom:8px}.navbar-btn.btn-sm{margin-top:10px;margin-bottom:10px}.navbar-btn.btn-xs{margin-top:14px;margin-bottom:14px}.media,.navbar-text{margin-top:15px}.navbar-text{margin-bottom:15px}.navbar-default{border-color:#e7e7e7;background-color:#f8f8f8}.navbar-default .navbar-brand{color:#777;text-transform:uppercase}.navbar-default .navbar-brand:focus,.navbar-default .navbar-brand:hover{color:#5e5e5e;background-color:transparent}.navbar-default .navbar-nav>li>a,.navbar-default .navbar-text{color:#777}.navbar-default .navbar-nav>li>a:focus,.navbar-default .navbar-nav>li>a:hover{color:#333;background-color:transparent}.navbar-default .navbar-nav>.active>a,.navbar-default .navbar-nav>.active>a:focus,.navbar-default .navbar-nav>.active>a:hover{color:#555;background-color:#e7e7e7}.navbar-default .navbar-toggle{border-color:#ddd}.navbar-default .navbar-toggle:focus,.navbar-default .navbar-toggle:hover{background-color:#ddd}.navbar-default .navbar-form{border-color:#e7e7e7}.navbar-default .navbar-link{color:#777}.navbar-default .navbar-link:hover{color:#333}.navbar-default .btn-link{color:#777}.navbar-default .btn-link:focus,.navbar-default .btn-link:hover{color:#333}.navbar-default .btn-link[disabled]:focus,.navbar-default .btn-link[disabled]:hover{color:#ccc}.badge{font-size:12px;display:inline-block;min-width:10px;padding:3px 7px;color:#fff;border-radius:10px;background-color:#777}.badge:empty{display:none}.btn .badge{position:relative;top:-1px}.btn-xs .badge{top:0;padding:1px 5px}a.badge:focus,a.badge:hover{cursor:pointer;text-decoration:none;color:#fff}@-webkit-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-o-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}.media:first-child{margin-top:0}.media,.media-body{overflow:hidden;zoom:1}.media-body{width:10000px}.media-right{padding-left:10px}.media-left{padding-right:10px}.media-body,.media-left,.media-right{display:table-cell;vertical-align:top}.media-list{padding-left:0}.close{font-size:21px;float:right;opacity:.2;color:#000;text-shadow:0 1px 0 #fff}.close:focus,.close:hover{cursor:pointer;text-decoration:none;opacity:.5;color:#000}button.close{padding:0;cursor:pointer;border:0;background:0 0;-webkit-appearance:none}.modal{position:fixed;z-index:1050;top:0;right:0;bottom:0;left:0;display:none;overflow:hidden;outline:0;-webkit-overflow-scrolling:touch}.carousel,.modal-body,.modal-content{position:relative}.modal-content{border:1px solid #999;border:1px solid rgba(0,0,0,.2);border-radius:6px;outline:0;background-color:#fff;-webkit-background-clip:padding-box;background-clip:padding-box;-webkit-box-shadow:0 3px 9px rgba(0,0,0,.5);box-shadow:0 3px 9px rgba(0,0,0,.5)}.modal-header{padding:15px;border-bottom:1px solid #e5e5e5}.modal-header .close{margin-top:-2px}.modal-title{line-height:1.42857143;margin:0}.modal-body{padding:15px}.modal-footer{padding:15px;text-align:right;border-top:1px solid #e5e5e5}.fa-ul,.pad-l-0{padding-left:0}.carousel-control,.fa-li,.logo{text-align:center}.modal-footer .btn+.btn{margin-bottom:0;margin-left:5px}.modal-footer .btn-block+.btn-block{margin-left:0}.carousel-control{font-size:20px;position:absolute;top:0;bottom:0;left:0;width:15%;opacity:.5;color:#fff;background-color:rgba(0,0,0,0);text-shadow:0 1px 2px rgba(0,0,0,.6)}.carousel-control.left{background-image:-webkit-linear-gradient(left,rgba(0,0,0,.5) 0,rgba(0,0,0,.0001) 100%);background-image:-o-linear-gradient(left,rgba(0,0,0,.5) 0,rgba(0,0,0,.0001) 100%);background-image:-webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.5)),to(rgba(0,0,0,.0001)));background-image:linear-gradient(to right,rgba(0,0,0,.5) 0,rgba(0,0,0,.0001) 100%);background-repeat:repeat-x}.carousel-control.right{right:0;left:auto;background-image:-webkit-linear-gradient(left,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);background-image:-o-linear-gradient(left,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);background-image:-webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.0001)),to(rgba(0,0,0,.5)));background-image:linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);background-repeat:repeat-x}.carousel-control:focus,.carousel-control:hover{text-decoration:none;opacity:.9;color:#fff;outline:0}.container:after,.container:before,.dl-horizontal dd:after,.dl-horizontal dd:before,.modal-footer:after,.modal-footer:before,.modal-header:after,.modal-header:before,.nav:after,.nav:before,.navbar-header:after,.navbar-header:before,.navbar:after,.navbar:before,.row:after,.row:before{display:table;content:' '}.container:after,.dl-horizontal dd:after,.modal-footer:after,.modal-header:after,.nav:after,.navbar-header:after,.navbar:after,.row:after{clear:both}.center-block{display:block;margin-right:auto;margin-left:auto}@font-face{font-family:FontAwesome;font-weight:400;font-style:normal;src:url(/static_cdn/design/fonts/fontawesome-webfont.eot?v=4.7.0);src:url(/static_cdn/design/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0) format('embedded-opentype'),url(/static_cdn/design/fonts/fontawesome-webfont.woff2?v=4.7.0) format('woff2'),url(/static_cdn/design/fonts/fontawesome-webfont.woff?v=4.7.0) format('woff'),url(/static_cdn/design/fonts/fontawesome-webfont.ttf?v=4.7.0) format('truetype'),url(/static_cdn/design/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular) format('svg')}.fa{font:normal normal normal 14px/1 FontAwesome;font-size:inherit;display:inline-block;text-rendering:auto;-webkit-font-smoothing:antialiased}.fa-lg{font-size:1.33333333em;line-height:.75em;vertical-align:-15%}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-ul{margin-left:2.14285714em;list-style-type:none}.fa-ul>li{position:relative}.fa-li{position:absolute;top:.14285714em;left:-2.14285714em;width:2.14285714em}.fa-li.fa-lg{left:-1.85714286em}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(359deg);transform:rotate(359deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(359deg);transform:rotate(359deg)}}.fa-search:before{content:'\f002'}.fa-star:before{content:'\f005'}.fa-star-o:before{content:'\f006'}.fa-user:before{content:'\f007'}.fa-close:before{content:'\f00d'}.fa-search-plus:before{content:'\f00e'}.fa-list-alt:before{content:'\f022'}.fa-text-height:before{content:'\f034'}.fa-text-width:before{content:'\f035'}.fa-align-left:before{content:'\f036'}.fa-align-center:before{content:'\f037'}.fa-align-right:before{content:'\f038'}.fa-list:before{content:'\f03a'}.fa-image:before{content:'\f03e'}.fa-plus:before{content:'\f067'}.fa-gift:before{content:'\f06b'}.fa-comment:before{content:'\f075'}.fa-shopping-cart:before{content:'\f07a'}.fa-upload:before{content:'\f093'}.fa-phone:before{content:'\f095'}.fa-filter:before{content:'\f0b0'}.fa-link:before{content:'\f0c1'}.fa-list-ul:before{content:'\f0ca'}.fa-comment-o:before{content:'\f0e5'}.fa-user-md:before{content:'\f0f0'}.fa-angle-left:before{content:'\f104'}.fa-angle-right:before{content:'\f105'}.fa-angle-down:before{content:'\f107'}.fa-mobile-phone:before,.fa-mobile:before{content:'\f10b'}.fa-info:before{content:'\f129'}.fa-html5:before{content:'\f13b'}.fa-css3:before{content:'\f13c'}.fa-toggle-down:before{content:'\f150'}.fa-toggle-right:before{content:'\f152'}.fa-youtube:before{content:'\f167'}.fa-android:before{content:'\f17b'}.fa-toggle-left:before{content:'\f191'}.fa-bank:before{content:'\f19c'}.fa-header:before{content:'\f1dc'}.fa-copyright:before{content:'\f1f9'}.fa-toggle-on:before{content:'\f205'}.fa-cart-plus:before{content:'\f217'}.fa-user-plus:before{content:'\f234'}.fa-edge:before{content:'\f282'}.fa-usb:before{content:'\f287'}.fa-bluetooth:before{content:'\f293'}.fa-bluetooth-b:before{content:'\f294'}.fa-fa:before{content:'\f2b4'}.fa-user-o:before{content:'\f2c0'}.fa-id-badge:before{content:'\f2c1'}.fa-s15:before{content:'\f2cd'}.good-delivery-i:before,.navbar-brand--k:after,.top-cart__lnk:before{content:''}body{font-family:Roboto,sans-serif}@media (max-width:991px){body{padding-top:60px;background-color:#fffbf6}}.container{width:100%}a{color:#3fa900}a:focus,a:hover{color:#616161}b,strong{font-weight:500}h2{font-size:26px;font-weight:400}.pad-r-0{padding-right:0}.form-control:focus{border-color:#40a900;box-shadow:none}.main-content img{display:block;max-width:100%;height:auto}.main-header{padding-top:10px}.logo{padding-top:20px}.img-logo{margin:0 auto}.top-cart,.user-b-sm{float:right;margin-right:15px}@media (max-width:767px){h1{font-size:24px;padding-right:40px}h2{font-size:22px}.logo{padding-top:5px}}.top-menu-l>li>a{font-size:13px;text-decoration:underline;color:#616161}.top-menu-l>li>a:focus,.top-menu-l>li>a:hover{color:#40a900}@media (max-width:767px){.top-menu{text-align:center}.top-menu-l>li>a{font-size:14px;line-height:1.6}}.form-top-search{position:relative;margin-top:10px}.form-top-search .form-control{border:2px solid #e0e0e0}.form-top-search .form-control:focus,.form-top-search .form-control:hover{border-color:#40a900}.form-top-search .button-search{z-index:2;color:#fff;border:1px solid #545d65;background-color:#545d65;-webkit-box-shadow:0 1px 4px 0 rgba(0,0,0,.5);-moz-box-shadow:0 1px 4px 0 rgba(0,0,0,.5);box-shadow:0 1px 4px 0 rgba(0,0,0,.5)}.form-top-search .button-search:active,.form-top-search .button-search:focus,.form-top-search .button-search:hover{border-color:#30363b;background-color:#30363b}.top-cart{font-size:13px;line-height:1.2;position:relative;width:118px;height:42px;padding:5px 10px;text-align:left;border-width:1px;border-style:solid;border-color:#e0e0e0;border-radius:4px;background-color:transparent}.main-header .top-cart{margin-top:60px}.top-cart__lnk{position:relative;display:inline-block;width:100%;padding-left:40px;color:#616161}.top-cart__lnk:before{background:url(/static_cdn/design/img/icons/cart-grey.png);position:absolute;top:0;left:5px;display:block;width:26px;height:26px;background-size:cover}.top-cart__lnk:focus,.top-cart__lnk:hover{color:#3fa900}.top-cart .qty{position:absolute;z-index:15;top:-10px;right:-5px;display:none;padding:2px 5px;color:#fff;border-radius:50%;background-color:#f54d0c}.cart-lnk-sm,.top-cart.active .qty{display:inline-block}.top-cart.active .top-cart__lnk:before{background:url(/static_cdn/design/img/icons/cart-orange.png);background-size:cover}.main-header-dt{padding-top:15px}@media (max-width:767px){.top-menu-dt{padding-top:10px}}.navbar-toggle span+span{line-height:1.25;vertical-align:top}.user-b-sm{position:relative}.cart-lnk-sm{position:relative;height:26px;margin-top:15px;margin-left:15px;width:26px;background:url(/static_cdn/design/img/icons/cart-white.png);background-size:contain}.user-lnk-sm span{font-size:12px;position:absolute;top:-8px;right:-8px;display:none;padding-right:5px;padding-left:5px;color:#fff;border-radius:50%;background-color:#f54d0c}.user-lnk-sm.active span{display:inline-block}.cart-xs{position:fixed;z-index:500;right:20px;bottom:20px;width:50px;height:50px;border-color:#369100;border-radius:6px;background-image:-moz-linear-gradient(46% 0 -90deg,#40aa00 0,#369100 100%);background-image:-webkit-gradient(linear,46% 0,46% 115%,color-stop(0,#40aa00),color-stop(1,#369100));background-image:-webkit-linear-gradient(-90deg,#40aa00 0,#369100 100%);background-image:-o-linear-gradient(-90deg,#40aa00 0,#369100 100%);background-image:-ms-linear-gradient(-90deg,#40aa00 0,#369100 100%);background-image:linear-gradient(180deg,#40aa00 0,#369100 100%);-webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,.4);-moz-box-shadow:0 2px 5px 0 rgba(0,0,0,.4);box-shadow:0 2px 5px 0 rgba(0,0,0,.4)}.cart-xs .cart-lnk-sm{margin:10px 0 0 10px}.nav-dt{margin-bottom:15px}.navbar-nav-dt{margin-right:0;margin-left:0}.navbar-nav-dt>li>a:focus,.navbar-nav-dt>li>a:hover{color:#fff;border-color:#369100}.input-search-dt>.form-control{height:42px;padding:8px 16px}.user-dt{text-align:right}.btn-search{color:#fff;border:1px solid #545d65;background-color:#545d65}.btn-search:active,.btn-search:focus,.btn-search:hover{color:#fff;border-color:#30363b;background-color:#30363b}.sidebar-menu-m{display:none}.navbar-m{color:#fff;border:none;border-radius:0;background-image:-moz-linear-gradient(46% 0 -90deg,#40aa00 0,#369100 100%);background-image:-webkit-gradient(linear,46% 0,46% 115%,color-stop(0,#40aa00),color-stop(1,#369100));background-image:-webkit-linear-gradient(-90deg,#40aa00 0,#369100 100%);background-image:-o-linear-gradient(-90deg,#40aa00 0,#369100 100%);background-image:-ms-linear-gradient(-90deg,#40aa00 0,#369100 100%);background-image:linear-gradient(180deg,#40aa00 0,#369100 100%)}.navbar-m .navbar-nav>li>a,.navbar-m .navbar-nav>li>a:focus,.navbar-m .navbar-nav>li>a:hover{color:#fff}.navbar-m .navbar-nav>li>a{font-size:17px;padding:15px 10px}.navbar-m .navbar-header{position:absolute;left:50%;margin-left:-45px}.navbar-m .navbar-nav,.navbar-m li{float:left}.navbar-m .navbar-nav{margin-top:0;margin-bottom:0}.navbar-m .navbar-right{float:right}.navbar-m .navbar-brand-m{font-size:20px;font-weight:700}.navbar-m .navbar-brand-m,.navbar-m .navbar-brand-m:active,.navbar-m .navbar-brand-m:hover{color:#fff}.navbar-brand--k{position:relative;padding-left:10px}.navbar-brand--20{padding-right:3px}.navbar-brand--k:after{position:absolute;z-index:-1;top:-3px;left:3px;display:block;width:29px;height:28px;border-radius:6px 6px 6px 0;background-color:#545d65}.navbar-nav-cart-qty{font-size:12px;font-weight:300;position:absolute;top:3px;right:2px;display:inline-block;margin-left:5px;padding:0 3px;color:#000;border-radius:4px;background-color:#ff9800}.modal-search-m .modal-content{border:none;border-radius:0}.new-goods h2,.popular-goods h2{position:relative;margin-top:5px;margin-bottom:15px;padding-left:35px}.popular-goods{margin-top:30px}.popular-goods h2:before{background:url(/static_cdn/design/img/icons/star.png)}.new-goods h2:before{background:url(/static_cdn/design/img/icons/new.png)}.new-goods h2:before,.popular-goods h2:before{position:absolute;top:-2px;left:0;display:block;width:30px;height:30px;content:'';background-size:cover}.goods-l h1{margin-top:0}.recommended-goods{border-top:2px solid #e0e0e0}.good{margin-bottom:30px;padding-bottom:30px;border-bottom:2px solid #e0e0e0}.good h1{font-size:30px;font-weight:400;margin-top:10px}.good-art{font-size:14px;font-weight:300;color:red}.good-colors{margin-top:-5px}@media (max-width:991px){.good-colors{margin-top:20px;margin-bottom:20px}.good h1{font-size:24px}}.good-colors>li{vertical-align:middle}.good-colors>.good-color{width:24px;height:24px;padding:2px;border:1px solid transparent;border-radius:50%}.good-colors>.good-color.active{border-color:#bdbdbd}.good-color>a{display:block;width:100%;height:100%;border:1px solid transparent;border-radius:50%}.good-price-b{padding-top:20px;padding-bottom:30px;border-radius:6px;background-color:#f9fbe7;margin-bottom:10px}.good-price-old{font-size:26px;font-weight:300;color:#bdbdbd}.good-price{font-size:30px;margin-bottom:10px}.btn-good{font-size:26px;font-weight:500;zoom:1;text-shadow:0 1px 0 #286c00}.good-short-descr{font-size:13px;margin-top:10px}.good-short-descr img{display:block;max-width:100%;height:auto}.good-gift-wrap{position:relative;margin-top:10px;padding:20px 25px;border:2px solid #eb3976;border-radius:6px}.good-gift-ico-wr{position:absolute;z-index:5;top:-40px;left:0;margin-left:-30px}.good-gift-ico-wr img{width:80px;height:auto}.good-gift-lnk{font-size:16px;line-height:1.3}.good-services{padding:10px 0 0;border:1px solid transparent;border-radius:4px}.good-related-i,.good-related-img img{border-radius:6px}.good-service{line-height:.9;margin-bottom:10px;text-align:left}.good-service-name{line-height:1.1}.good-service-price{font-size:13px;padding-top:10px}.good-related h6{margin-top:0;margin-bottom:13px}.good-related-i{line-height:1.2;margin-bottom:10px;padding-top:5px;padding-bottom:5px;background-color:#e0e0e0}.good-related-lnk,.good-related-price{line-height:1.1}.btn-good-related{margin-top:3px}@media (max-width:991px){.good-service .good-service-name small{font-weight:500}.good-related{margin-top:10px}.good-service-i,.good-service-name{margin-bottom:5px}.good-service{text-align:center;margin-bottom:20px}.good-service:last-child{margin-bottom:10px}}.good-i{position:relative;height:325px;margin-bottom:20px}.good-i-wr{position:absolute;top:0;right:15px;left:15px;overflow:hidden;height:calc(100% - 15px);-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;transition:all .2s ease-in-out;border:2px solid transparent;border-radius:6px;background-color:#fff;box-shadow:0 6px 15px rgba(36,37,38,.08)}.good-gift,.good-i-colors{right:0;position:absolute}.good-i-short-i{display:none}.good-i-short-i img{display:block;max-width:100%;height:auto}.good-i-img{line-height:170px;position:relative;overflow:hidden;height:170px;text-align:center}.good-i-img a img{max-width:100%;max-height:170px;margin:0 auto 10px;vertical-align:middle}.good-i-badges{line-height:1.4;position:absolute;z-index:100;bottom:0;left:0;text-align:left}.good-i-badge{margin-top:5px}.good-i-badge small{padding:2px 5px;color:#fff;border-radius:4px}.good-i-badge--offer small{color:#000;background-color:#ffc107}.good-i-badge--sale small{background-color:#e91e63}.good-i-badge--new small{background-color:#40a900}.good-i-colors{top:10px;padding:3px;border-radius:4px;background-color:rgba(255,255,255,.8)}.good-i-color{z-index:3;width:20px;height:20px;margin-bottom:3px;padding:2px;border:1px solid transparent;border-radius:50%}.good-i-color.active{border-color:#bdbdbd}.good-i-color>a{display:block;width:100%;height:100%;border:1px solid transparent;border-radius:50%;background-color:transparent}.good-i-color--white>a{border-color:#bdbdbd;background-color:#fff}.good-i-color--gold>a{background-color:#efc358}.good-colors li.White a{background:#fff}.good-colors li.Black a{background:#000}.good-colors li.Gold a{background:#efc358}.good-colors li.Grey a{background:grey}.good-colors li.silver a{background:silver}.good-i-old-price{color:#535d65}.good-i-price{font-size:15px}.good-i-price--new{font-size:16px;color:#e91e63}@media (max-width:767px){.good-i-price{font-size:13px;margin-right:-15px}}.good-i-t{margin-bottom:5px}.good-i-t>a{display:-webkit-box;overflow:hidden;height:38px;text-overflow:ellipsis;color:#000;-webkit-box-orient:vertical;-webkit-line-clamp:2}.good-i-t>a:focus,.good-i-t>a:hover{color:#3fa900}.good-i-hover{margin-top:10px}.btn-buy{padding-right:20px;padding-left:20px;border-color:#369100;background-image:-moz-linear-gradient(46% 0 -90deg,#40aa00 0,#369100 100%);background-image:-webkit-gradient(linear,46% 0,46% 115%,color-stop(0,#40aa00),color-stop(1,#369100));background-image:-webkit-linear-gradient(-90deg,#40aa00 0,#369100 100%);background-image:-o-linear-gradient(-90deg,#40aa00 0,#369100 100%);background-image:-ms-linear-gradient(-90deg,#40aa00 0,#369100 100%);background-image:linear-gradient(180deg,#40aa00 0,#369100 100%)}.btn-buy:active,.btn-buy:focus,.btn-buy:hover{background-image:-moz-linear-gradient(49% 0 -90deg,#3c9f00 0,#328400 100%);background-image:-webkit-gradient(linear,49% 0,49% 106%,color-stop(0,#3c9f00),color-stop(1,#328400));background-image:-webkit-linear-gradient(-90deg,#3c9f00 0,#328400 100%);background-image:-o-linear-gradient(-90deg,#3c9f00 0,#328400 100%);background-image:-ms-linear-gradient(-90deg,#3c9f00 0,#328400 100%);background-image:linear-gradient(180deg,#3c9f00 0,#328400 100%);-webkit-box-shadow:0 1px 4px 0 rgba(0,0,0,.5);-moz-box-shadow:0 1px 4px 0 rgba(0,0,0,.5);box-shadow:0 1px 4px 0 rgba(0,0,0,.5)}.good-i-short-i{font-size:12px;padding-top:10px;color:#fff}.good-delivery,.owl-item .btn-buy,.owl-item .good-i-t>a{font-size:13px}.good-gift{z-index:50;top:-10px;width:50px;height:50px;border-radius:4px}.good-gift-img{margin-top:-10px;margin-left:-10px;vertical-align:top}.good-i-img .good-gift{top:4px;right:auto;left:2px;overflow:hidden;background-color:rgba(255,255,255,.9)}.good-i-owl{margin-bottom:0}.good-i-owl .good-i-wr{right:0;left:0}.owl-item .good-i-price-b{width:95%}@media (max-width:767px){.good-i{margin-bottom:5px}.goods-l .row .good-i:nth-child(odd){padding-right:0}.goods-l .row .good-i:nth-child(even){padding-left:5px}.good-i-wr{right:10px;left:10px;padding-right:10px;padding-left:10px}.goods-l .row .good-i:nth-child(odd) .good-i-wr{right:5px}.goods-l .row .good-i:nth-child(even) .good-i-wr{left:5px}}.good-delivery{color:#303339}.good-delivery-i{position:relative;margin-bottom:20px;padding-left:60px}.good-delivery-i:before{position:absolute;top:0;left:10px;display:block;width:30px;height:30px}.good--pay:before{background:url(/static_cdn/design/img/icons/pay-grey.png) center center no-repeat;background-size:contain}.good--change:before{background:url(/static_cdn/design/img/icons/change-grey.png) center center no-repeat;background-size:contain}.good-packages{margin-top:20px;margin-bottom:15px;padding:20px 15px 15px;border:1px solid #f54d0c;border-radius:10px}.good-packages .owl-nav{margin-top:15px}.good-packages header{font-size:16px;font-weight:500;line-height:1.3;margin-bottom:20px;text-align:center;color:#f54d0c}.good-package-i img{max-width:100%;margin:0 auto 5px}.good-package-i-name{font-size:13px;line-height:1.3}.good-package-i-name strong{display:block}.good-package-i-name a{display:inline-block;margin-bottom:5px}.good-package-i-current span{display:block}.good-package-i-np{font-size:16px;color:#e91e63}.good-package-i-pl{font-size:16px;position:absolute;top:30%;right:-1%}.good-package>.row>.good-package-i:last-child .good-package-i-pl{display:none}.good-package-i-sale{display:inline-block;margin-top:2px;padding:3px 5px;color:#fff;border-radius:4px;background-color:#e91e63}.good-package-i-total span{font-size:24px;font-weight:500;display:block;margin-bottom:10px;padding-top:15px;color:#e91e63}.good-package-cart{padding:15px;border:2px solid #f54d0c;border-radius:10px;margin-bottom:40px}.good-package-cart .name{font-size:16px;font-weight:500;margin-bottom:5px;margin-left:15px;color:#f54d0c;float:left}.good-package-qty .form-control{border:2px solid #e0e0e0}.good-tabs{margin-top:15px}@media (max-width:991px){.good-tabs .nav-tabs>li.active>a,.good-tabs .nav-tabs>li.active>a:focus,.good-tabs .nav-tabs>li.active>a:hover{border-bottom-color:#ddd;border-radius:4px}.nav-tabs{border-bottom:1px solid transparent}}.good-tabs .owl-item{width:140px}.btn-new-review{margin-bottom:10px;color:#fff;background-color:#545d65}.review{font-size:13px;margin-bottom:15px;padding:10px;border-width:1px;border-style:solid;border-color:#e0e0e0;-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px}.review footer span,.review>header{font-size:12px}.review>header{margin-bottom:5px}.review-user{margin-right:10px}.review-user .fa-comment-o{margin-right:5px}.review-date{font-weight:300;color:#535d65}.review footer{margin-top:5px;color:#616161}.review footer a{border-bottom:1px dotted #3fa900}.review footer a:focus,.review footer a:hover{text-decoration:none;color:#2196f3;border-bottom:1px dotted #2196f3}.filter-btn-m{position:fixed;z-index:100;top:60px;right:10px}.filter-btn-m,.filter-btn-m:focus,.filter-btn-m:hover{color:#fff;border-color:#f4590b;background-color:#f4590b}@media (max-width:991px){.cart-i:last-child{border-bottom:none}}.cart-i{margin-bottom:40px}.cart-i-art{font-size:13px;display:block;margin-top:5px;margin-bottom:5px;color:#9e9e9e}.cart-i-price{font-size:16px;display:block}.cart-i-qty .form-control{border:2px solid #e0e0e0}.cart-i-qty .form-control:focus,.cart-i-qty .form-control:hover{border-color:#40a900}@media (max-width:768px){.cart-i-qty{margin-top:10px;margin-left:16.66666667%}}.top-user-name{line-height:14px;display:inline-block;overflow:hidden;width:100%;vertical-align:middle;text-overflow:ellipsis}.main-footer{font-size:13px;margin-top:40px;padding-top:20px;border-top:2px solid #e0e0e0}@media (max-width:991px){.main-footer{font-size:16px;margin-top:80px}}.main-footer a{text-decoration:underline;color:#616161}.main-footer a:focus,.main-footer a:hover{color:#40a900}#created .created_logo,#created .created_logo:focus,#created .created_logo:hover{color:#000;border:none}.footer-m-l>li{margin-bottom:3px}.main-footer strong{font-weight:500}.main-footer div[class*=col-]{margin-bottom:30px}.created_relative{position:relative}#created{margin-top:10px;margin-bottom:20px}#created .created_text{font-size:13px}#created .created_logo{font-family:Lato,sans-serif;font-size:18px;font-weight:700;position:relative;z-index:100;display:inline-block;margin-left:3px;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;transition:all .2s ease-in-out;text-decoration:none}#created .created_logo:before{font-size:30px;font-weight:400;position:absolute;z-index:-1;top:-7px;left:-1px;display:block;content:'D';-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;transition:all .2s ease-in-out;-webkit-transform:rotate3d(0,0,1,-45deg);transform:rotate3d(0,0,1,-45deg);color:#ff0}#created .created_logo>span{color:#00bcd4}#created .created_logo:hover:before{font-size:38px;top:-13px;left:-2px}amp-sidebar{width:300px;background-color:#fff}amp-accordion section[expanded]{background-color:#fafafa}.amp-close-image{margin-top:10px;margin-left:10px}.amp-accordion-list{margin-top:-5px;padding-bottom:10px}.amp-accordion-list,.amp-sidebar-list{line-height:1.2;padding-right:20px;padding-left:20px}.amp-sidebar-list{padding-top:10px;padding-bottom:20px;border-top:2px solid #dfdfdf}.amp-accordion-list__link,.amp-sidebar-list__link{display:block}.amp-accordion-list__link{padding-top:5px;padding-bottom:5px;color:#545d65}.amp-sidebar-list__link{font-size:15px;padding-top:10px;padding-bottom:10px}.amp-sidebar-list__link .glyphicon{margin-right:5px;color:#545d65}.row-amp .good-i:nth-child(odd) .good-i-wr{right:5px}.row-amp .good-i:nth-child(even) .good-i-wr{left:5px}#ampGoodImages amp-img{transition:opacity 1s ease-in-out}.carousel-preview{display:flex;align-items:center;justify-content:center}.carousel-preview button{width:65px;min-width:65px;height:65px;margin:4px;padding:0}.carousel-preview button:active{opacity:.5}.good-related-img amp-img{border-radius:6px}.good-tabs .ampTabContainer{display:flex;flex-wrap:wrap}.good-tabs .tabButton[selected]{color:#555;border:1px solid #ddd;outline:0;background-color:#fff}.good-tabs .tabButton{padding:10px 15px;list-style:none;cursor:pointer;text-align:center;color:#3fa900;border:1px solid transparent;border-radius:4px;flex-grow:1}.good-tabs .tabContent{display:none;width:100%;order:1}.good-tabs .tabButton[selected]+.tabContent{display:block}.good-packages-amp{padding-bottom:0}.good-tabs{margin-bottom:20px}.good-block__rating{line-height:12px;margin-bottom:20px}.good-block__rating .rating{margin-right:10px;direction:rtl;unicode-bidi:bidi-override}.good-block__rating .rating span.star{font-family:FontAwesome;font-weight:400;font-style:normal;display:inline-block}.good-block__rating .rating span.star.active:before{content:'\f005';color:#ffd200}.good-block__rating .rating span.star:before{padding-right:0;content:'\f006';color:#ffd200}.good-gift-ico-wr amp-img{width:80px;height:auto}</style>
+    <!-- Ens of AMP Styles -->
+  </head>
+  <body>
+  <!-- AMP Menu -->
+  <amp-sidebar id="sidebar-amp" layout="nodisplay" side="left">
+    <amp-img class="amp-close-image" src="img/ic_close_black_18dp_2x.png" width="20" height="20" alt="close sidebar" on="tap:sidebar-amp.close" role="button" tabindex="0"></amp-img>
+    <div class="amp-sidebar-sale">
+      <amp-img class="amp-close-image" src="https://20k.com.ua/media/upload/43543654.png" width="246" height="30" tabindex="0"></amp-img>
+    </div>
+    <amp-accordion>
+        {% for cat in categorys %}
+        <section>
+          <header> {{ cat.name }} <i class="fa fa-angle-down" aria-hidden="true"></i></header>
+          <ul class="list-unstyled amp-accordion-list">
+            {% for c in cat.get_children %}
+            <li class="amp-accordion-list__item"><a class="amp-accordion-list__link" href="{{ c.get_url }}">{{ c.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endfor %}
+    </amp-accordion>
+      <ul class="list-unstyled amp-sidebar-list">
+        <li class="amp-sidebar-list__item"><a class="amp-sidebar-list__link" href="/page/o-nas/">О магазине</a></li>
+        <li class="amp-sidebar-list__item"><a class="amp-sidebar-list__link" href="/page/informaciya-o-dostavke/">Доставка и оплата</a></li>
+        <li class="amp-sidebar-list__item"><a class="amp-sidebar-list__link" href="/page/garantiya/">Гарантия</a></li>
+        <li class="amp-sidebar-list__item"><a class="amp-sidebar-list__link" href="/page/partnerstvo/">Партнерство</a></li>
+        <li class="amp-sidebar-list__item">Контакты</li>
+        <li class="amp-sidebar-list__item"><a class="amp-sidebar-list__link" href="tel:+380442282937"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> (044) 228-29-37</a></li>
+        <li class="amp-sidebar-list__item"><a class="amp-sidebar-list__link" href="tel:+380667400383"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> (066) 740-03-83</a></li>
+        <li class="amp-sidebar-list__item"><a class="amp-sidebar-list__link" href="tel:+380960777519"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> (096) 077-75-19</a></li>
+        <li class="amp-sidebar-list__item"><a class="amp-sidebar-list__link" href="tel:+380932260139"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> (093) 226-01-39</a></li>
+      </ul>
+  </amp-sidebar>
+  <!-- End of AMP Menu -->
+  <div class="container">
+    <!-- Mobile Header -->
+    <div class="navbar navbar-default navbar-fixed-top navbar-m" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand text-uppercase navbar-brand-m" href="/"><span class="navbar-brand--20">20</span><span class="navbar-brand--k">k</span></a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="#" on="tap:sidebar-amp.toggle"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a></li>
+          <li><a href="#" data-toggle="modal" data-target="#ModalSearchMobile" class="getFullSearch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" data-toggle="modal" data-target="#cartModal" role="button" tabindex="0"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a></li>
+          <li><a href="https://20k.com.ua/#cartModal" class="navbar-nav-cart" data-toggle="modal" data-target="#cartModal"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span><span class="navbar-nav-cart-qty"></span></a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End of Mobile Header -->
+    <!-- Good -->
+    <section class="good product-info" data-id="102132">
+      <h1>{{ product.name }}</h1>
+      <small class="good-art">Код: {{request.session.user_id}}-{{ product.idname }}</small>
+      <div class="row">
+        <!-- Good Gallery -->
+        <div class="col-xs-12">
+          <div class="good-imgs">
+            <amp-carousel id="ampGoodImages" width="400" height="400" layout="responsive" type="slides">
+              <amp-img src="{% if product.image2 %}{% thumbnail product.image 400x400 sharpen %}{% else %}/static_cdn/design/img/noimage.png{% endif %}" width="400" height="400" layout="responsive" alt="{{ product.name }}">
+              </amp-img>
+              {% for photo in photos %}
+                {% if photo.image %}
+                <amp-img src="{% thumbnail photo.image 400x400 sharpen %}" width="400" height="400" layout="responsive" alt="{{ product.catsin }} {{ product.name }}">
+                </amp-img>
+                {% endif %}
+              {% endfor %}
+            </amp-carousel>
+            <div class="carousel-preview">
+              <button on="tap:ampGoodImages.goToSlide(index=0)">
+                <amp-img src="{% if product.image2 %}{% thumbnail product.image 65x65 sharpen %}{% else %}/static_cdn/design/img/noimage.png{% endif %}" width="65" height="65" layout="responsive" alt="{{ product.catsin }} {{ product.name }}">
+                </amp-img>
+              </button>
+              {% for photo in photos %}
+                {% if photo.image %}
+                <button on="tap:ampGoodImages.goToSlide(index=1)">
+                  <amp-img src="{% thumbnail photo.image 65x65 sharpen %}" width="65" height="65" layout="responsive" alt="{{ product.catsin }} {{ product.name }}">
+                  </amp-img>
+                </button>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <!-- End of Good Gallery -->
+        <div class="col-xs-12">
+          <div class="row">
+            <!-- Good Buy -->
+            <div class="col-xs-12">
+              <div class="row">
+                <div class="col-xs-12">
+                  <!-- Good Colors -->
+                  <ul class="list-inline text-center good-colors">
+                    <li>Цвета:</li>
+                    <li class="good-color active">
+                      <a href="{{ product.get_url }}"></a>
+                    </li>
+                    {% for color in product.get_colors %}
+                    <li class="good-color">
+                      <a href="{% url 'product' product.category.slug product.brand.slug product.slug color.id %}"></a>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                  <!-- End of Good Colors -->
+                  <!-- Good Price -->
+                  <div class="text-center good-price-b">
+                    {% if product.oldprice %}
+                    <div class="good-price-old">
+                      <s>{{ product.oldprice }}&nbsp;<small>грн.</small></s>
+                    </div>
+                    {% endif %}
+                    <div class="good-price">
+                      <amp-list height="24"
+                            layout="fixed-height"
+                            src="https://20k.com.ua/real_time_price/{{ product.maincolor_id }}/"
+                            class="m1">
+                            {% verbatim %}
+                              <template type="amp-mustache">
+                                  <small>Цена: </small><strong>{{price}}</strong><small> грн.</small>
+                              </template>
+                            {% endverbatim %}
+                    </amp-list>
+                    </div>
+                    <a class="btn btn-success btn-buy btn-lg btn-good" href="/add_to_cart_one/{{ product.id }}/">Купить</a>
+                  </div>
+                  <!-- End of Good Price -->
+                </div>
+                <div class="col-xs-12">
+                  <!-- Good Related Products -->
+                  {% if product.recomendproduct.all %}
+                  <div class="good-related">
+                    <h6 class="text-center"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Рекомендуем к данному товару:</h6>          
+                    {% for rec in product.recomendproduct.all %}
+                    <div class="good-related-i">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <div class="col-xs-4">
+                            <div class="good-related-img">
+                              <a href="{% url 'product' rec.category.slug rec.brand.slug rec.slug %}"><amp-img src="{% if rec.image2 %}{% thumbnail rec.image 70x70 sharpen %}{% else %}/static_cdn/design/img/noimage.png{% endif %}" alt="{{ rec.name }}" title="{{ rec.name }}" width="70" height="70" layout="responsive"></amp-img></a>
+                            </div>
+                          </div>
+                          <div class="col-xs-8 pad-l-0">
+                            <a href="/chehly/ipaky/ipaky-hybrid-series-xiaomi-redmi-note-4x-grey/" class="good-related-lnk"><small>{{ rec.name }}</small></a> <strong class="good-related-price"><small>за {{ rec.price }} грн.</small></strong>
+                            <a class="btn btn-default btn-good-related btn-sm" href="/add_to_cart_one/{{ rec.id }}/">Добавить в корзину</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                     {% endfor %}
+                  </div>
+                  {% endif %}
+                  <!-- End of Good Related Products -->
+                </div>
+              </div>
+              <!-- Good Service -->
+              <div class="good-services">
+                {% for cat in product.dopcategory.all %}
+                <div class="good-service">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="col-sm-3 col-md-12 col-lg-3 good-service-name"><small>{{ cat.name }}</small></div>
+                      <div class="col-sm-5 col-md-12 col-lg-5 good-service-i">
+                        <select class="form-control input-sm dop">
+                        {% for dop in cat.get_products %}
+                          <option value="{{ dop.id }}" data-price="{{ dop.price|floatformat:"0"}}">{{ dop.name }}</option>
+                        {% endfor %}
+                        </select>
+                      </div>
+                      <div class="col-sm-4 col-md-12 col-lg-4 good-service-buy"><a class="btn btn-success btn-buy btn-block btn-good-service btn-sm adddop" href="/add_to_cart_one/{{ dop.id }}/">Купить за <span>{{ cat.get_products.0.price|floatformat:"0" }}</span> <small>грн.</small></a></div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              <!-- End of Good Service -->
+              <!-- Good Gift -->
+              {% if gifts %}
+              <div class="good-gift-wrap">
+                {% for one in gifts %}
+                <div align="good-gift-i">
+                  <div class="good-gift-ico-wr">
+                    <amp-img class="good-gift-ico" src="https://20k.com.ua/static_cdn/design/img/giftn.png" width="70" height="70" layout="responsive"></amp-img>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-4 col-sm-2 good-gift-pic">
+                      <a href="{% url 'product' one.category.slug one.brand.slug one.slug %}"><amp-img src="{% if one.image2 %}{% thumbnail one.image 70x70 sharpen %}{% else %}/static_cdn/design/img/noimage.png{% endif %}" alt="{{ one.name }}" title="{{ one.name }}" width="70" height="70" layout="responsive"></amp-img></a>
+                    </div>
+                    <div class="col-xs-8 col-sm-10 good-gift-lnk">
+                      <strong>В подарок</strong> <a href="{% url 'product' one.category.slug one.brand.slug one.slug %}">{{ one.name }}</a>
+                    </div>
+                  </div>
+                </div>
+               {% endfor %}
+              </div>
+              {% endif %}
+              <!-- End of Good Gift -->
+            </div>
+            <!-- End of Good Buy -->
+
+            <!-- Good Delivery -->
+            <div class="col-md-6 col-lg-5">
+              <p class="good-delivery"><strong>Доставка</strong></p>
+              <ul>
+                <li>Доставка мелкой техники - от 50.00 грн.*</li>
+                <li>Доставка крупной техники от 100.00 грн.*</li>
+                <li>Самовывоз - БЕСПЛАТНО!</li>
+                <li>Доставка Новой Почтой (за счет клиента)*</li>
+              </ul>
+              <p class="good-delivery-i good--pay"><strong>Оплата</strong></p>
+              <p>Наличными, Приват 24</p>
+              <p class="good-delivery-i good--change"><strong>Обмен</strong></p>
+              <p>14 ДНЕЙ НА ОБМЕН
+                <br>без лишних вопросов. Почитайте условия возврата</p>
+            </div>
+            <!-- End of Good Delivery -->
+
+            <!-- Good Short Description -->
+            <div class="col-xs-12 ">
+              <div class="good-short-descr ">
+                <p>{{ product.description|safe }}</p>
+              </div>
+            </div>
+            <!-- End of Good Short Description -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Good Packages -->
+      <!--
+      <div class="good-packages good-packages-amp">
+        <amp-carousel height="370" layout="fixed-height" type="slides">
+          <div class="good-package ">
+            <div class="row ">
+              <div class="col-xs-6 col-sm-6 col-md-offset-2 col-md-3 good-package-i ">
+                <div class="good-package-i-pl "><i class="fa fa-plus "></i></div>
+                <div class="row ">
+                  <div class="col-md-5 text-right good-package-img">
+                    <a href="/mobilnye-telefony/xiaomi/xiaomi-redmi-note-4x-3-32gb-gold/47228/ ">
+                        <amp-img src="https://20k.com.ua//media/img/997_6174_4805_7305_6914.jpg.101x96_q85_sharpen.jpg " alt="Смартфон Xiaomi Redmi Note 4x 3/32GB Gold " width="100" height="100" layout="responsive"></amp-img>
+                      </a>
+                  </div>
+                  <div class="col-md-7 good-package-i-name good-package-i-current ">
+                    <strong>Ваш товар</strong>
+                    <span>Xiaomi Redmi Note 4x 3/32GB Gold</span>
+                    <strong>4090 <small>грн</small></strong>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-3 good-package-i ">
+                <div class="row ">
+                  <div class="col-md-5 text-right good-package-img ">
+                    <a href="/vneshnie-akkumulyatornye-batarei/xiaomi/xiaomi-power-bank-5000/7209/ ">
+                        <amp-img src="https://20k.com.ua//media/img/6115_1538_6462_1902_1462.jpg.101x96_q85_sharpen.jpg " alt="Смартфон (NDY-02-AM) Silver "  width="100" height="100" layout="responsive"></amp-img>
+                      </a>
+                  </div>
+                  <div class="col-md-7 good-package-i-name ">
+                    <a href="/vneshnie-akkumulyatornye-batarei/xiaomi/xiaomi-power-bank-5000/7209/ ">Xiaomi Power Bank 5000mAh  (NDY-02-AM) Silver</a>
+                    <div class="good-package-i-op ">
+                      <s>275 <small>грн</small></s>
+                    </div>
+                    <strong class="good-package-i-np ">267 <small>грн</small></strong>
+                    <span class="good-package-i-sale ">-3%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-2 text-center good-package-i-total ">
+                <span>4357 <small>грн</small></span>
+                <a class="btn btn-success btn-buy btn-block " href="#">Купить комплект</a>
+              </div>
+            </div>
+          </div>
+          <div class="good-package ">
+            <div class="row ">
+              <div class="col-xs-6 col-sm-6 col-md-offset-2 col-md-3 good-package-i ">
+                <div class="good-package-i-pl "><i class="fa fa-plus "></i></div>
+                <div class="row ">
+                  <div class="col-md-5 text-right good-package-img">
+                    <a href="/mobilnye-telefony/xiaomi/xiaomi-redmi-note-4x-3-32gb-gold/47228/ ">
+                        <amp-img src="https://20k.com.ua//media/img/997_6174_4805_7305_6914.jpg.101x96_q85_sharpen.jpg " alt="Смартфон Xiaomi Redmi Note 4x 3/32GB Gold " width="100" height="100" layout="responsive"></amp-img>
+                      </a>
+                  </div>
+                  <div class="col-md-7 good-package-i-name good-package-i-current ">
+                    <strong>Ваш товар</strong>
+                    <span>Xiaomi Redmi Note 4x 3/32GB Gold</span>
+                    <strong>4090 <small>грн</small></strong>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-3 good-package-i ">
+                <div class="row ">
+                  <div class="col-md-5 text-right good-package-img ">
+                    <a href="/vneshnie-akkumulyatornye-batarei/xiaomi/xiaomi-power-bank-5000/7209/ ">
+                        <amp-img src="https://20k.com.ua//media/img/6115_1538_6462_1902_1462.jpg.101x96_q85_sharpen.jpg " alt="Смартфон (NDY-02-AM) Silver "  width="100" height="100" layout="responsive"></amp-img>
+                      </a>
+                  </div>
+                  <div class="col-md-7 good-package-i-name ">
+                    <a href="/vneshnie-akkumulyatornye-batarei/xiaomi/xiaomi-power-bank-5000/7209/ ">Xiaomi Power Bank 5000mAh  (NDY-02-AM) Silver</a>
+                    <div class="good-package-i-op ">
+                      <s>275 <small>грн</small></s>
+                    </div>
+                    <strong class="good-package-i-np ">267 <small>грн</small></strong>
+                    <span class="good-package-i-sale ">-3%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-2 text-center good-package-i-total ">
+                <span>4357 <small>грн</small></span>
+                <a class="btn btn-success btn-buy btn-block " href="#">Купить комплект</a>
+              </div>
+            </div>
+          </div>
+          <div class="good-package ">
+            <div class="row ">
+              <div class="col-xs-6 col-sm-6 col-md-offset-2 col-md-3 good-package-i ">
+                <div class="good-package-i-pl "><i class="fa fa-plus "></i></div>
+                <div class="row ">
+                  <div class="col-md-5 text-right good-package-img">
+                    <a href="/mobilnye-telefony/xiaomi/xiaomi-redmi-note-4x-3-32gb-gold/47228/ ">
+                        <amp-img src="https://20k.com.ua//media/img/997_6174_4805_7305_6914.jpg.101x96_q85_sharpen.jpg " alt="Смартфон Xiaomi Redmi Note 4x 3/32GB Gold " width="100" height="100" layout="responsive"></amp-img>
+                      </a>
+                  </div>
+                  <div class="col-md-7 good-package-i-name good-package-i-current ">
+                    <strong>Ваш товар</strong>
+                    <span>Xiaomi Redmi Note 4x 3/32GB Gold</span>
+                    <strong>4090 <small>грн</small></strong>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-3 good-package-i ">
+                <div class="row ">
+                  <div class="col-md-5 text-right good-package-img ">
+                    <a href="/vneshnie-akkumulyatornye-batarei/xiaomi/xiaomi-power-bank-5000/7209/ ">
+                        <amp-img src="https://20k.com.ua//media/img/6115_1538_6462_1902_1462.jpg.101x96_q85_sharpen.jpg " alt="Смартфон (NDY-02-AM) Silver "  width="100" height="100" layout="responsive"></amp-img>
+                      </a>
+                  </div>
+                  <div class="col-md-7 good-package-i-name ">
+                    <a href="/vneshnie-akkumulyatornye-batarei/xiaomi/xiaomi-power-bank-5000/7209/ ">Xiaomi Power Bank 5000mAh  (NDY-02-AM) Silver</a>
+                    <div class="good-package-i-op ">
+                      <s>275 <small>грн</small></s>
+                    </div>
+                    <strong class="good-package-i-np ">267 <small>грн</small></strong>
+                    <span class="good-package-i-sale ">-3%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-2 text-center good-package-i-total ">
+                <span>4357 <small>грн</small></span>
+                <a class="btn btn-success btn-buy btn-block " href="#">Купить комплект</a>
+              </div>
+            </div>
+          </div>
+        </amp-carousel>
+      </div>
+  -->
+      <!-- End of Good Packages -->
+
+      <!-- Good Tabs -->
+      <div class="good-tabs ">
+
+        <amp-selector role="tablist" layout="container" class="ampTabContainer">
+          <div role="tab" class="tabButton" selected option="a">Описание</div>
+          <div role="tabpanel" class="tabContent">
+            <h2>Описание {{ product.catsin }} {{ product.name }}</h2>
+            {% if product.full_text %}
+              {{ product.full_text|safe }}
+            {% else %}
+              У нас вы можете купить {{ product.catsin|lower }} {{ product.name }} в Киеве с доставкой по всем регионам Украины - Харьков, Львов, Одесса, Днепропетровск и т. д. Интернет-магазин 20K предлагает {{ product.catsin|lower }} {{ product.name }} по лучшим ценам. Заказывайте у нас!
+            {% endif %}
+          </div>
+          <div role="tab" class="tabButton" option="b">Характеристики</div>
+          <div role="tabpanel" class="tabContent">
+            <h2>Характеристики {{ product.catsin }} {{ product.name }}</h2>
+            {% if  product.properties %}
+              <dl class="dl-horizontal">
+                {% for prop in product.properties %}
+                <dt>{{ prop.1 }}</dt>
+                <dd>{{ prop.2 }}</dd>
+                {% endfor %}
+
+              </dl>
+             {% endif %}
+          </div>
+          <div role="tab" class="tabButton" option="c">Отзывы {{ product.comments_count }}</div>
+          <div role="tabpanel" class="tabContent">
+            <h3>Отзывы покупателей о {{ product.catsin }} {{ product.name }}<small>({{ product.comments_count }})</small></h3>
+            <div class="good-block__rating"><span class="rating"><span class="star"></span> <span class="star"></span> <span class="star active"></span> <span class="star active"></span> <span class="star active"></span></span></div>
+            <div class="reviews all-reviews ">
+              <div class="review ">
+              {% for one in product.last_comments %}
+                {% comment one com_class='.last-reviews' item_id=product %}
+              {% endfor %}
+            </div>
+          </div>
+        <div role="tab" class="tabButton" option="d">Похожие товары</div>
+        <div role="tabpanel" class="tabContent">
+            <h2>Похожие товары на {{ product.catsin }} {{ product.name }}</h2>
+            <amp-carousel height="330" layout="fixed-height" type="slides">
+              {% for z in sim %}
+              <div class="row row-amp">
+                {% for p in z %}
+                            <div class="prod_wrap good-i good-i-owl col-xs-6">
+              <div class="good-i-wr">
+              <div class="good-i-img">
+                <a href="{{ p.get_url }}" ><amp-img src="{% if p.image2 %}{% thumbnail p.image 200x200 sharpen %}{% else %}/static_cdn/design/img/noimage.png{% endif %}" alt="{{ p.name }}" title="{{ p.name }}" width="200" height="200"></amp-img></a>
+                <ul class="list-unstyled good-i-badges">
+                  {% if p.action %}
+                  <li class="good-i-badge good-i-badge--offer"><small>Акция</small></li>
+                  {% endif %}
+                  {% if p.oldprice %}
+                  <li class="good-i-badge good-i-badge--sale"><small>Снижение цены</small></li>
+                  {% endif %}
+                  {% if p.newproduct %}
+                  <li class="good-i-badge good-i-badge--new"><small>Новинка</small></li>
+                  {% endif %}
+                </ul>
+              </div>
+              <div class="good-i-t"><a href="{{ p.get_url }}" >{{ p.name }}</a></div>
+              <div class="row">
+                <div class="col-sm-8 pad-r-0 good-i-price-b">
+                  {% if p.oldprice %}
+                  <div class="good-i-price good-i-old-price"><s>{{ p.oldprice }} <small>грн.</small></s></div>
+                  {% endif %}
+                  <div class="good-i-price good-i-price--new">
+                    <amp-list height="24"
+                            layout="fixed-height"
+                            src="https://20k.com.ua/real_time_price/{{ p.maincolor_id }}/"
+                            class="m1">
+                            {% verbatim %}
+                              <template type="amp-mustache">
+                                  <small>Цена: </small><strong>{{price}}</strong><small> грн.</small>
+                              </template>
+                            {% endverbatim %}
+                    </amp-list></div>
+                </div>
+              </div>
+              <div class="row good-i-hover">
+                <div class="col-sm-6">
+                  <a class="btn btn-success btn-buy" href="/add_to_cart_one/{{ p.id }}/">Купить</a>
+                </div>
+              </div>
+              </div>
+            </div>
+                {% endfor %}
+              </div>
+              {% endfor %}
+            </amp-carousel>
+          </div>
+        </amp-selector>
+      </div>
+      <!-- End of Good Tabs -->
+
+      <!-- Popular -->
+      <!--
+      <ul class="list-inline popular-filter-l popular-filter--product">
+        <li class="popular-filter-i">
+          <strong>Популярное:</strong>
+        </li>
+        {% for a in ancor %}
+        <li class="popular-filter-i">
+          <a class="popular-filter-lnk" href="{{ a.url }}">{ a.ancor }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+  -->
+      <!-- End of Popular -->
+
+    </section>
+    <!-- End of Good -->
+    <!-- Recommended Goods -->
+    <!--
+    {% if product.recomendproduct.all %}
+    <section class="slider-goods">
+      <h2>Рекомендуемые товары</h2>
+      <amp-carousel height="330" layout="fixed-height" type="slides">
+        {% for rec in product.recomendproduct.all %}
+        <div class="row row-amp">
+          <div class="prod_wrap good-i good-i-owl col-xs-6" data-id="105244">
+            <div class="good-i-wr">
+              <div class="good-i-img">
+                <a href="/gejmpady-dzhojstiki-ruli/microsoft/microsoft-xbox-360-wireless-controller-nsf-00003/">
+                  <amp-img src="https://20k.com.ua/media/img/4941_2961_7514_2344_5327.jpg.200x0_q85_sharpen.jpg" alt="Геймпад Microsoft Xbox 360 Wireless Controller (NSF-00003)" title="Геймпад Microsoft Xbox 360 Wireless Controller (NSF-00003)" width="200" height="200"></amp-img>
+                </a>
+                <ul class="list-unstyled good-i-badges">
+                  <li class="good-i-badge good-i-badge--sale"><small>Снижение цены</small></li>
+                </ul>
+              </div>
+              <div class="good-i-t"><a href="/gejmpady-dzhojstiki-ruli/microsoft/microsoft-xbox-360-wireless-controller-nsf-00003/">Геймпад Microsoft Xbox 360 Wireless Controller (NSF-00003)</a></div>
+              <div class="row">
+                <div class="col-sm-8 pad-r-0 good-i-price-b">
+                  <div class="good-i-price good-i-old-price">
+                    <s>1399 <small>грн.</small></s>
+                  </div>
+                  <div class="good-i-price good-i-price--new"><small>Цена:</small> <strong>899</strong> <small>грн.</small></div>
+                </div>
+              </div>
+              <div class="row good-i-hover">
+                <div class="col-sm-6">
+                  <a class="btn btn-success btn-buy" href="/gejmpady-dzhojstiki-ruli/microsoft/microsoft-xbox-360-wireless-controller-nsf-00003/">Купить</a>
+                </div>
+                <div class="col-xs-12">
+                  <div class="good-i-short-i">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="prod_wrap good-i good-i-owl col-xs-6" data-id="82378">
+            <div class="good-i-wr">
+              <div class="good-i-img">
+                <a href="/mobilnye-telefony/samsung/samsung-g935f-galaxy-s7-edge-32gb/">
+                  <amp-img src="https://20k.com.ua/media/img/5874_8492_4199_5947_2820.jpg.200x0_q85_sharpen.jpg" alt="Смартфон Samsung G935F Galaxy S7 Edge 32GB" title="Смартфон Samsung G935F Galaxy S7 Edge 32GB" width="200" height="200"></amp-img>
+                </a>
+                <ul class="list-unstyled good-i-colors good-colors">
+                  <li class="good-i-color">
+                    <a href="/mobilnye-telefony/samsung/samsung-g935f-galaxy-s7-edge-32gb/25369/"></a>
+                  </li>
+                  <li class="good-i-color good-i-color--white">
+                    <a href="/mobilnye-telefony/samsung/samsung-g935f-galaxy-s7-edge-32gb/25368/"></a>
+                  </li>
+                  <li class="good-i-color">
+                    <a href="/mobilnye-telefony/samsung/samsung-g935f-galaxy-s7-edge-32gb/25367/"></a>
+                  </li>
+                  <li class="good-i-color">
+                    <a href="/mobilnye-telefony/samsung/samsung-g935f-galaxy-s7-edge-32gb/42329/"></a>
+                  </li>
+                  <li class="good-i-color">
+                    <a href="/mobilnye-telefony/samsung/samsung-g935f-galaxy-s7-edge-32gb/47459/"></a>
+                  </li>
+                </ul>
+                <ul class="list-unstyled good-i-badges">
+                  <li class="good-i-badge good-i-badge--offer"><small>Акция</small></li>
+                  <li class="good-i-badge good-i-badge--new"><small>Новинка</small></li>
+                </ul>
+              </div>
+              <div class="good-i-t"><a href="/mobilnye-telefony/samsung/samsung-g935f-galaxy-s7-edge-32gb/">Смартфон Samsung G935F Galaxy S7 Edge 32GB</a></div>
+              <div class="row">
+                <div class="col-sm-8 pad-r-0 good-i-price-b">
+                  <div class="good-i-price"><small>Цена:</small> <strong>13999</strong> <small>грн.</small></div>
+                </div>
+              </div>
+              <div class="row good-i-hover">
+                <div class="col-sm-6">
+                  <a class="btn btn-success btn-buy" href="/mobilnye-telefony/samsung/samsung-g935f-galaxy-s7-edge-32gb/">Купить</a>
+                </div>
+                <div class="col-xs-12">
+                  <div class="good-i-short-i">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </amp-carousel>
+    </section>
+    {% endif %}
+-->
+    <!-- End of Recommended Goods -->
+    <!-- Footer -->
+    <footer class="main-footer">
+      <div class="row">
+        <div class="col-xs-12 created_relative">
+          <span class="copyright">© Интернет-магазин «20K»<br>2013–2017</span>
+          <br>
+          <br>
+          <b>Режим работы:</b>
+          <br> Пн-Пт <b>9:00-19:00</b>
+          <br> Сб,Вс <b>9:00-18:00</b>
+          <div id="created" class="created">
+            <span class="created_text">Создание сайта</span>
+            <a class="created_logo" href="http://gowius.com" target="_blank" rel="nofollow"><span>go</span>wius</a>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <ul class="list-unstyled footer-m-l">
+            <li><a href="/page/o-nas/">О нас</a></li>
+            <li><a href="/page/proizvoditeli/">Производители</a></li>
+            <li><a href="/usfull/">Как правильно купить товар</a></li>
+            <li><a href="/page/vozvrat-tovara/">Возврат товара</a></li>
+            <li><a href="/page/garantiya/">Гарантия</a></li>
+            <li><a href="/page/politika-bezopasnosti/">Политика Безопасности</a></li>
+            <li><a href="/page/informaciya-o-dostavke/">Информация о доставке</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-12">
+          <address>
+            Ул. Ушинского, 3
+            <br>Киев, 03058
+            <br>
+            <a href="mailto:20konlinemail@gmail.com">20konlinemail@gmail.com</a>
+            <br>
+            <br>
+            <strong>(093) 226-01-39</strong>
+            <br>
+            <strong>(096) 077-75-19</strong>
+            <br>
+            <strong>(066) 740-03-83</strong>
+            <br>
+            <strong>(044) 228-29-37</strong>
+            <br>
+          </address>
+        </div>
+      </div>
+    </footer>
+    <!-- End of Footer -->
+  </div>
+  <!-- End of Container -->
+
+</body>
+</html>

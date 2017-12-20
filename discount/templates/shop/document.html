@@ -1,0 +1,34 @@
+Level 0;Level 1;Level 2;Level 3;Level 4;Level 5;Level 6;<br>
+20k интернет магазин;http://20k.com.ua;;;;;;<br>
+{% for item in items %}
+	;{{ item.name}};http://{{ item.get_url }};;;;;<br>
+	{% if item.is_child %}
+		{% for citem in item.get_childs %}
+
+			;;{{ citem.name }};http://20k.com.ua{{ citem.get_url}};;;;;<br>
+
+			{% if citem.is_child %}
+
+				{% for ccitem in citem.get_childs %}
+
+					;;;{{ ccitem.name }};http://20k.com.ua{{ ccitem.get_url}};;;;<br>
+
+					{% for fitem in ccitem.getseofilters %}
+						;;;;{{ fitem.h1}};http://20k.com.ua/{{ ccitem.slug }}/{{ fitem.slug}}/<br>
+					{% endfor %}
+				{% endfor %}
+			{% else %}
+				{% for fitem in citem.getseofilters %}
+					;;;{{ fitem.h1}};http://20k.com.ua/{{ citem.slug }}/{{ fitem.slug}}/<br>
+				{% endfor %}
+			{% endif %}
+
+		{% endfor %}
+	{% else %}
+		{% for fitem in item.getseofilters %}
+			;;{{ fitem.h1}};http://20k.com.ua/{{ item.slug }}/{{ fitem.slug}}/<br>
+		{% endfor %}
+	{# {{ item.getseofilters }} #}
+
+	{% endif %}
+{% endfor %}

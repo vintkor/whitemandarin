@@ -1,0 +1,164 @@
+{% load fishca_tags %}
+
+<div class="goods">
+  <div class="row">
+    <!-- Filters -->
+      <aside class="hidden-xs hidden-sm col-md-3 col-lg-2 aside-column">
+
+        <script>
+
+          var max_price = {{ max_price }},
+              min_price = {{ min_price }},
+              max_now = {{ max_now }},
+              min_now = {{ min_now }},
+              category_id = {{ category.id}};
+
+        </script>
+
+        {% include 'include/filter.html' %}
+
+      </aside>
+      <!-- End of Filters -->
+
+      <!-- Category Box -->
+      <section class="col-md-9 col-lg-10 goods-l">
+        <header>
+          <div class="hidden-xs hidden-sm form-group form-group-sm goods-sort">
+            <select class="form-control input-sm" onchange="location = this.value;">
+              <option value="{% if get_full_path %}?{{ get_full_path }}&{% else %}?{%endif%}order_by=-id" {% if order_by == '-id' %}selected="selected"{% endif %}>Сортировать по умолчанию</option>
+              <option value="{% if get_full_path %}?{{ get_full_path }}&{% else %}?{%endif%}order_by=name"  {% if order_by == 'name' %}selected="selected"{% endif %}>Наименование (А -&gt; Я)</option>
+              <option value="{% if get_full_path %}?{{ get_full_path }}&{% else %}?{%endif%}order_by=-name"  {% if order_by == '-name' %}selected="selected"{% endif %}>Наименование (Я -&gt; А)</option>
+              <option value="{% if get_full_path %}?{{ get_full_path }}&{% else %}?{%endif%}order_by=price"  {% if order_by == 'price' %}selected="selected"{% endif %}>Цена (по возрастанию)</option>
+              <option value="{% if get_full_path %}?{{ get_full_path }}&{% else %}?{%endif%}order_by=-price"  {% if order_by == '-price' %}selected="selected"{% endif %}>Цена (по убыванию)</option>
+              <option value="{% if get_full_path %}?{{ get_full_path }}&{% else %}?{%endif%}order_by=count_views"  {% if order_by == 'count_views' %}selected="selected"{% endif %}>Рейтинг (по убыванию)</option>
+              <option value="{% if get_full_path %}?{{ get_full_path }}&{% else %}?{%endif%}order_by=-count_views"  {% if order_by == '-count_views' %}selected="selected"{% endif %}>Рейтинг (по возрастанию)</option>
+            </select>
+          </div>
+
+          <div class="hidden-xs hidden-sm form-group form-group-sm goods-sort goods-per_page">
+            <select class="form-control input-sm" onchange="location = this.value;">
+
+              {% for one in per_page_tuple %}
+                <option value="{% if get_full_path %}?{{ get_full_path }}&{% else %}?{%endif%}per_page={{ one }}" {% if one == per_page %}selected="selected"{% endif %}>{{ one }}</option>
+              {% endfor %}
+
+            </select>
+          </div>
+          {% include 'include/mobilefilter.html' %}
+
+          <h1>
+            {% if seofilter %}
+              {{ seofilter.h1}}
+            {% else %}
+              {{ category.name }}{% if category_brand %} - {{ category_brand.name }}{% endif %}
+            {% endif %}
+          </h1>
+          <ul class="list-inline popular-filter-l popular-filter--product">
+            <li class="popular-filter-i">
+              <strong>Популярное:</strong>
+            </li>
+            {% for a in ancor %}
+            <li class="popular-filter-i">
+              <a class="popular-filter-lnk" href="{{ a.url }}">{{ a.ancor }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        <!-- Selected Filters -->
+        <!-- <div class="filters-activ">
+          <ul class="list-inline filters-activ-l">
+            <li class="filter-activ"><a href="#">Все телефоны <i class="fa fa-times-circle"></i></a></li>
+            <li class="filter-activ"><a href="#">Nokia <i class="fa fa-times-circle"></i></a></li>
+            <li class="filter-activ"><a href="#">2 SIM карты <i class="fa fa-times-circle"></i></a></li>
+            <li class="filter-activ-reset"><a href="#">Сбросить все фильтры <i class="fa fa-refresh"></i></a></li>
+            <li class="filter-activ-info">Подобрано 2 товарa из 284</li>
+          </ul>
+        </div> -->
+        <!-- End of Selected Filters -->
+        {% if active_brands or active_filters %}
+              <ul class="list-inline visible-xs goods-filters__current-l">
+                {% for ab in active_brands %}
+                  {% abf category active_brands active_filters ab False %}
+                {% endfor %}
+                {% for af in active_filters  %}
+
+                  {% abf category active_brands active_filters False af %}
+          
+
+                {% endfor %}
+                <li class="goods-filters__current-i goods-filters__current-h"><a href="{% url 'category' category.slug %}" class="label label-default">Сбросить все параметры <i class="fa fa-times" aria-hidden="true"></i></a></li>
+              </ul>
+        {% endif %}
+        {% if not_items %}
+        <h3>К сожалению, товара в этой категории на данный момент нет. Предлагаем вам ознакомится с похожими товарами других категорий.</h3>
+        {% endif %}
+
+        </header>
+
+        <div class="row">
+      
+          
+          {% for one in items  %}
+              {% product one items_id type='cat' %}
+          {% endfor %}
+        </div>
+
+
+        {% if items.paginator.num_pages > 1 %}
+        <!-- Pagination -->
+          <ul class="pagination">
+
+            {% if items.has_previous %}
+            <li>
+              <a href="{{ category.get_url }}{% if items.previous_page_number > 1 %}page-{{ items.previous_page_number }}/{% endif %}{% if get_full_path %}?{{ get_full_path }}{% endif %}" aria-label="Назад">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            {% endif %}
+
+            {% for i in items.paginator.page_range %}
+            <li{% if i == items.number %} class="active"{% endif %}><a href="{{ category.get_url }}{% if i != 1 %}page-{{ i }}/{% endif %}{% if get_full_path %}?{{ get_full_path }}{%endif%}">{{ i }}</a></li>
+            {% endfor %}
+
+            {% if items.has_next %}
+            <li>
+              <a href="{{ category.get_url }}page-{{ items.next_page_number }}/{% if get_full_path %}?{{ get_full_path }}{%endif%}" aria-label="Вперед">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+            {% endif %}
+
+          </ul>
+        <!-- End of Pagination -->
+        {% endif %}
+        {% if seofilter.brand  %}
+          {% seocomment category seofilter.brand %}
+        {% else %}
+          {% seocomment category brand %}
+        {% endif %}
+        <!-- Seo Text -->
+        {% if show_text %}
+          {% if category.text %}
+
+          <h2>{{ category.name }}</h2>
+
+          {% endif %}
+          <div class="text">
+            {{ category.text|safe }}
+          </div>
+        {% endif %}
+
+        {% if seofilter.text %}
+          <h2>{{ seofilter.h1 }}</h2>
+          <div class="text">
+            {{ seofilter.text|safe }}
+          </div>
+        {% endif %}
+        <!-- End of Seo Text -->
+        
+      </section>
+      <!-- End of Category Box -->
+
+  </div>
+</div>
+
+{% top_prod category %}

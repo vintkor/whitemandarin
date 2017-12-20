@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<price>
+    <date>{{t}}</date>
+    <firmId>20k.com.ua</firmId>
+    <categories>
+        {% for c in categorys%}
+        {% if not c.parent %}
+        <category>
+            <id>{{c.id}}</id>
+            <name>{{c.name}}</name>
+
+        </category>
+        {% endif %}
+        {% endfor %}
+        {% for c in categorys%}
+        {% if c.parent %}
+        <category>
+            <id>{{c.id}}</id>
+            <parentId>{{c.parent.id}}</parentId>
+            <name>{{c.name}}</name>
+
+        </category>
+        {% endif %}
+        {% endfor %}
+
+    </categories>
+    <items>
+        {% for item in items %}
+    {% if item.brand.slug and item.category.slug %}
+        {% if item.price %}
+        <item>
+            <id>p{{item.id}}</id>
+            <categoryId>{{item.category.id}}</categoryId>
+            <code>{{item.idname}}</code>
+            <vendor>{{item.brand.name}}</vendor>
+            <name>{{ item.name }} {{ item.maincolor }}</name>
+            <description>{{item.description}}</description>
+            <url>http://20k.com.ua{% url 'product' item.category.slug item.brand.slug item.slug %}</url>
+            <image>http://20k.com.ua/media/{{ item.image }}</image>
+            <priceRUAH>{{ item.price }}</priceRUAH>
+            <stock>На складе</stock>
+            <guarantee>{{ item.waranty }}</guarantee>
+        </item>
+
+        {% endif %}
+    {% endif %}
+    {% if item.get_colors %}
+        {% for one in item.get_colors %}
+            {% if one.price %}
+            <item>
+            <id>c{{one.id}}</id>
+            <categoryId>{{item.category.id}}</categoryId>
+            <code>{{one.idname}}</code>
+            <vendor>{{item.brand.name}}</vendor>
+            <name>{{ item.name }} {{ one.name }}</name>
+            <description>{{item.description}}</description>
+            <url>http://20k.com.ua{% url 'product' item.category.slug item.brand.slug item.slug one.id %}</url>
+            <image>http://20k.com.ua/media/{{ one.image1 }}</image>
+            <priceRUAH>{{ one.price }}</priceRUAH>
+            <stock>На складе</stock>
+            <guarantee>{{ item.waranty }}</guarantee>
+        </item>
+
+
+
+
+
+
+            {% endif %}
+        {% endfor %}
+
+    {% endif %}
+
+
+{% endfor %}
+    </items>
+</price>

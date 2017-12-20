@@ -1,0 +1,97 @@
+{% load fishca_tags %}
+<!-- Mobile Menu -->
+<div class="navbar navbar-default navbar-fixed-top navbar-m hidden-md hidden-lg" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand text-uppercase navbar-brand-m" href="/"><span class="navbar-brand--20">20</span><span class="navbar-brand--k">k</span></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#sidebarMenu"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a></li>
+      <li><a href="javascript:;" data-toggle="modal" data-target="#ModalSearchMobile" class="getFullSearch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="javascript:;" data-toggle="modal" data-target="#ModalLogin"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a></li>
+      <li><a href="" class="navbar-nav-cart" data-toggle="modal" data-target="#cartModal"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span><span class="navbar-nav-cart-qty"></span></a></li>
+    </ul>
+  </div>
+</div>
+<nav id="sidebarMenu" class="sidebar-menu-m hidden-md hidden-lg">
+  <ul class="sidebar-mm">
+    <li class="sidebar-mm-i sidebar-mm-catalog"><span>Каталог товаров</span>
+      <ul>
+      <li class="sidebar-mm-i--top">{% snipet 2 %}</li>
+      {% for item in items %}
+      <li><a href="{% url 'category' item.slug %}">{{ item.name}}{% if item.get_children %}{% endif %}</a>{% if item.get_children %}
+      <ul>
+          {% for p in item.childrow.row1 %}
+          <li><a href="{% url 'category' p.slug %}">{{ p.name }} {% if p.get_children %}
+          {% endif %}</a> {% if p.get_children %}
+              <ul>
+                {% for p2 in p.get_children %}
+                   <li><a href="{% url 'category' p2.slug %}">{{ p2.name }}</a></li>
+                {% endfor %}
+                </ul>
+          {% endif %}</li>
+          {% endfor %}
+          {% for p in item.childrow.row2 %}
+          <li><a href="{% url 'category' p.slug %}">{{ p.name }} {% if p.get_children %}
+          {% endif %}</a> {% if p.get_children %}
+              <ul>
+                {% for p2 in p.get_children %}
+                   <li><a href="{% url 'category' p2.slug %}">{{ p2.name }}</a></li>
+                {% endfor %}
+                </ul>
+          {% endif %}</li>
+          {% endfor %}
+          {% for p in item.childrow.row3 %}
+          <li><a href="{% url 'category' p.slug %}">{{ p.name }} {% if p.get_children %}
+          {% endif %}</a> {% if p.get_children %}
+              <ul>
+                {% for p2 in p.get_children %}
+                   <li><a href="{% url 'category' p2.slug %}">{{ p2.name }}</a></li>
+                {% endfor %}
+                </ul>
+          {% endif %}</li>
+          {% endfor %}
+          {% for p in item.childrow.row4 %}
+          <li><a href="{% url 'category' p.slug %}">{{ p.name }} {% if p.get_children %}
+          {% endif %}</a> {% if p.get_children %}
+              <ul>
+                {% for p2 in p.get_children %}
+                   <li><a href="{% url 'category' p2.slug %}">{{ p2.name }}</a></li>
+                {% endfor %}
+                </ul>
+          {% endif %}</li>
+          {% endfor %}
+          {% for p in item.childrow.row5 %}
+          <li><a href="{% url 'category' p.slug %}">{{ p.name }} {% if p.get_children %}
+          {% endif %}</a> {% if p.get_children %}
+              <ul>
+                {% for p2 in p.get_children %}
+                   <li><a href="{% url 'category' p2.slug %}">{{ p2.name }}</a></li>
+                {% endfor %}
+                </ul>
+          {% endif %}</li>
+          {% endfor %}
+        </ul>
+
+      {% endif %}
+
+      </li>
+      {% endfor %}
+      </li>
+      </ul>
+    </li>
+    <li class="sidebar-mm-i"><a href="/page/o-nas/">О магазине</a></li>
+    <li class="sidebar-mm-i"><a href="/page/informaciya-o-dostavke/">Доставка и оплата</a></li>
+    <li class="sidebar-mm-i"><a href="/page/garantiya/">Гарантия</a></li>
+    <li class="sidebar-mm-i"><a href="/page/partnerstvo/">Партнерство</a></li>
+    <li class="sidebar-mm-i"><a href="/page/o-nas/">Контакты</a></li>
+    <li class="sidebar-mm-i sidebar-mm-ph"><a href="tel:+380442282937"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> (044) 228-29-37</a></li>
+    <li class="sidebar-mm-i sidebar-mm-ph"><a href="tel:+380667400383"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> (066) 740-03-83</a></li>
+    <li class="sidebar-mm-i sidebar-mm-ph"><a href="tel:+380960777519"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> (096) 077-75-19</a></li>
+    <li class="sidebar-mm-i sidebar-mm-ph"><a href="tel:+380932260139"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> (093) 226-01-39</a></li>
+  </ul>
+</nav>
+<!-- End of Mobile Menu -->
+

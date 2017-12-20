@@ -1,0 +1,27 @@
+{% load thumbnail %}
+<!-- Main Page Banners -->
+<div class="banners-mp">
+  <div class="row">
+    <div class="col-sm-12 col-md-offset-4 col-md-5 col-lg-offset-3 col-lg-6">
+      <div class="slider-mp-wr">
+        <div class="slider-mp owl-carousel owl-theme">
+
+          {% for i in items %}
+          <div class="slide"><a href="{{ i.link }}"><img src="{% thumbnail i.image 665x350 crop %}" alt="{{ i.name }}" class="img-responsive"></a></div>
+          {% endfor %}
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 hidden-xs hidden-sm">
+      <div class="banner-mp-st">
+
+        {% if static_item %}
+        <a href="{{ static_item.link }}"><img src="{% thumbnail static_item.image 0x350 crop %}" alt="{{ static_item.name }}" class="img-responsive"></a>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of Main Page Banners -->

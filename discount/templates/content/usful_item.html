@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load fishca_tags %}
+{% load comments_tags %}
+
+
+{% load thumbnail %}
+{% block title %}{{ page.title }}{% endblock %}
+{% block description %}{{ page.metaDesc }}{% endblock %}
+{% block keywords %}{{ page.metaKey }}{% endblock %}
+{% block canonical %}{{ page.get_url }}{% endblock %}
+
+{% block bred %}
+
+<div class="breadcrumb" itemscope="" itemtype="http://schema.org/WebPage">
+        <span temprop="breadcrumb" itemscope="" itemtype="http://schema.org/Breadcrumb"><a href="/" itemprop="url">
+            Магазин электроники
+            </a>
+             ›
+        </span>
+
+
+        <span temprop="breadcrumb" itemscope="" itemtype="http://schema.org/Breadcrumb">
+          <a href="/usfull/" itemprop="url">
+            Полезные статьи
+            </a>
+             ›
+        </span>
+        <span temprop="breadcrumb" itemscope="" itemtype="http://schema.org/Breadcrumb">
+
+            {{page.name}}
+
+        </span>
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+
+<div id="content" ><!-- breadcrumbs old place -->
+  <h1 >{{ page.name }}</h1>
+   <img class="usfull_thumb" style="margin:5px;" align="left" alt="{{page.name}}" src="{% thumbnail  page.image 200x150 sharpen %}"/>
+  {{page.full_text|safe}}
+
+</div>
+{% endblock %}

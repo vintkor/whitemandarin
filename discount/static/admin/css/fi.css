@@ -1,0 +1,14 @@
+.y-items .col-2 {
+	float: left;
+	width: 200px;
+	height: 400px;
+	margin: 0 10px;
+}
+
+.y-items .col-2 img{
+	width: 100%;
+}
+
+.y-items .col-2 img.active{
+	border: 5px solid red;
+}

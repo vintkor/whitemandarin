@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+{% load fishca_tags %}
+<!DOCTYPE yml_catalog SYSTEM "shops.dtd">
+<yml_catalog date="{{ now.year }}-{{ now.month }}-{{ now.day }} {{ now.hour }}:{{ now.minute }}">
+    <shop>
+        <name>20k</name>
+        <company>20k</company>
+        <url>http://20k.com.ua/</url>
+
+        <currencies>
+            <currency id="UAH" rate="1" plus="0"/>
+        </currencies>
+
+        <categories>
+
+        {% for item in categories %}
+            <category id="{{ item.id }}" {% if item.parent %}parentId="{{ item.parent.id }}"{% endif %}>{{ item.name }}</category>
+        {% endfor %}
+        </categories>
+
+        <local_delivery_cost>40</local_delivery_cost>
+
+        <items>
+        {% for item in items %}
+            <item id="{{ item.id }}" bid="{{ item.category.id }}" available="{% if item.price %}true{% else %}false{% endif %}">
+                <offer id="{{ item.id }}" bid="{{ item.category.id }}" available="{% if item.price %}true{% else %}false{% endif %}"/>
+                <name>{{ item.name }}</name>
+                <url>http://20k.com.ua{{ item.get_url}}</url>
+                <price>{{ item.price }}</price>
+                <currencyId>UAH</currencyId>
+                <categoryId>{{item.category.id}}</categoryId>
+                <image>http://20k.com.ua/media/{{ item.image }}</image>
+                <delivery>true</delivery>
+                <local_delivery_cost>35</local_delivery_cost>
+                <typePrefix>{{ item.category }}</typePrefix>
+                <vendor>{{ item.brand.name }}</vendor>
+                <model>{{ item.name }}</model>
+                <description>{{ item.description|striptags|removenbsp }}</description>
+                <manufacturer_warranty>true</manufacturer_warranty>
+                <country_of_origin>Китай</country_of_origin>
+            </item>
+        {% endfor %}
+        </items>
+
+    </shop>
+</yml_catalog>

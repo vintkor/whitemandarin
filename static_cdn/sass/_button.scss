@@ -1,0 +1,78 @@
+@import "base";
+
+.orange-btn {
+    @include border-radius(20px);
+	background: $orange-color;
+	color: #fff;
+	&:hover {
+		background: lighten($orange-color, 4%);
+		color: #fff;
+	}
+	&:focus {
+		color: #fff;
+	}
+}
+.brand-btn {
+    @include border-radius(20px);
+	background: $brand-color;
+	color: #fff;
+    display: inline-block;
+    min-width: 150px;
+    text-align: center;
+	padding: 7px 15px;
+	&:hover {
+		background: lighten($brand-color, 4%);
+		color: #fff;
+	}
+	&:focus {
+		color: #fff;
+	}
+}
+.grey-btn {
+    @include border-radius(20px);
+	background: #e7e7e7;
+    display: inline-block;
+    min-width: 150px;
+    text-align: center;
+	padding: 7px 15px;
+	&:hover {
+		background: darken(#e7e7e7, 4%);
+	}
+}
+.add-to-bag {
+	@include border-radius(20px);
+	background: #eeeeee;
+    display: inline-block;
+    font-size: 14px;
+    min-width: 150px;
+    text-align: center;
+	padding: 10px 15px;
+	&:hover {
+		background: darken(#eeeeee, 4%);
+	}
+	img,
+	span {
+		display: inline-block;
+		vertical-align: middle;
+	}
+	img {
+		margin-right: 10px;
+	}
+}
+
+.slider-btn {
+	@include border-radius(20px);
+	background: $green-color;
+	color: #fff;
+    display: inline-block;
+    min-width: 200px;
+    text-align: center;
+	padding: 7px 15px;
+	&:hover {
+		background: lighten($green-color, 4%);
+		color: #fff;
+	}
+	&:focus {
+		color: #fff;
+	}
+}

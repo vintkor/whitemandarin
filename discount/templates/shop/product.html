@@ -1,0 +1,682 @@
+{% extends "base.html" %}
+{% load fishca_tags %}
+{% load comments_tags %}
+{% load thumbnail %}
+
+
+{% block title %}{{ product.catsin }} {{ product.name|clearskobki }} купить в Киеве. Цены на {{ product.catsin }} {{ product.name|clearskobki }} в Украине{% endblock %}
+{% block description %}Интернет-магазин 20K предлагает вам купить {{ product.catsin|lower }} {{ product.name|clearskobki }}. Доставка по Украине. Звоните и заказывайте (044) 228-29-37{% endblock %}
+{% block keywords %}купить {{ product.catsin }}  {{ product.name|clearskobki }}, интернет-магазин 20K{% endblock %}
+
+{% block canonical %}
+  {% if color_slug %}
+    <link rel="canonical" href="https://20k.com.ua{{ product.get_url }}" />
+  {% endif %}
+{% endblock %}
+
+
+
+{% block css %}
+<link rel="stylesheet" href="/static_cdn/design/css/fotorama.css">
+{% endblock css %}
+
+{% block analytics %}
+
+ga('require', 'displayfeatures');
+
+ga('set','dimension1','{{ product.idname }}');
+
+ga('set','dimension2','Product');
+
+ga('set','dimension3','{{ product.price|floatformat:"0" }}');
+
+{% endblock analytics %}]
+
+{% block bred %}
+<!-- Breadcrumbs -->
+<ol class="breadcrumb hidden-xs" vocab="https://schema.org/" typeof="BreadcrumbList">
+
+  <li  property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage"
+        href="https://20k.com.ua/">
+        <span property="name">Магазин электроники</span></a>
+        <meta property="position" content="1">
+  </li>
+
+  {% if category.parent %}
+  <li  property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage"
+        href="https://20k.com.ua{{ category.parent.get_url }}">
+        <span property="name">{{ category.parent.name }}</span></a>
+        <meta property="position" content="2">
+  </li>
+  {% endif %}
+
+
+  <li  property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage"
+        href="https://20k.com.ua{{ category.get_url }}">
+        <span property="name">{{ category.name }}</span></a>
+        <meta property="position" content="{% if category.parent %}3{% else %}2{% endif %}">
+  </li>
+
+  <li  property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage"
+        href="https://20k.com.ua{% url 'brandcategory' category.slug product.brand.slug %}">
+        <span property="name">{% if product.category.id == 1 and product.brand.id == 2 %}Смартфоны {% endif %}{{ product.brand.name }}</span></a>
+        <meta property="position" content="{% if category.parent %}4{% else %}3{% endif %}">
+  </li>
+
+  <li property="itemListElement" typeof="ListItem">
+        <span property="name">{{ product.catsin }} {{ product.name }}</span>
+        <meta property="position" content="{% if category.parent %}5{% else %}4{% endif %}">
+  </li>
+</ol>
+<!-- End of Breadcrumbs -->
+
+{% endblock %}
+
+
+{% block content %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "{{ product.catsin }} {{ product.name }}",
+  "image": "{% thumbnail product.image 400x400 sharpen %}",
+
+  "description": "{{ product.description|striptags }}",
+  "mpn": "{{ product.idname }}",
+  "brand": {
+    "@type": "Thing",
+    "name": "{{ product.brand.name }}"
+  }
+  {% if product.count_votes %}
+  ,
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ product.reit }}",
+    "reviewCount": "{{ product.count_votes}}"
+  }
+  {% endif %}
+  {% if product.price and product.published %}
+  ,
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "UAH",
+    "price": "{{ product.price|floatformat:"0" }}",
+    "priceValidUntil": "2020-11-05",
+    "itemCondition": "https://schema.org/UsedCondition",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": "Интернет-магазин 20К"
+    }
+  }
+  {% endif %}
+}
+</script>
+<!-- Good -->
+<section class="good product-info" data-id="{{ product.id }}">
+<h1>{{ product.catsin }} {{ product.name }}</h1>
+<small class="good-art">Код: {{request.session.user_id}}-{{ product.idname }}</small>
+<div class="row">
+  <!-- Good Gallery -->
+  <div class="col-md-4">
+    <div class="good-imgs">
+      <div class="fotorama" data-nav="thumbs" data-loop="true" data-allowfullscreen="native" data-max-width="100%">
+        <a href="{% if product.image2 %}{% thumbnail product.image 400x400 sharpen %}{% else %}/static_cdn/design/img/noimage.png{% endif %}"  title="{{ product.catsin }} {{ product.name }}"><img src="{% if product.image2 %}{% thumbnail product.image 400x400 sharpen %}{% else %}/static_cdn/design/img/noimage.png{% endif %}" alt="{{ product.catsin }} {{ product.name }}"  title="{{ product.catsin }} {{ product.name }}"></a>
+
+        {% for photo in photos %}
+          {% if photo.image %}
+          <a href="{% thumbnail photo.image 400x400 sharpen %}"  title="{{ product.catsin }} {{ product.name }}"><img src="{% thumbnail photo.image 400x400 sharpen %}" alt="{{ product.catsin }} {{ product.name }}"  title="{{ product.catsin }} {{ product.name }}"></a>
+          {% endif %}
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+  <!-- End of Good Gallery -->
+
+  <div class="col-md-8">
+    <div class="row">
+      <!-- Good Buy -->
+      <div class="col-md-5 col-lg-7">
+        <div class="row">
+          <div class="{% if product.recomendproduct.all %}col-sm-6 col-md-12 col-lg-6{% else %}col-lg-12 good-price-wide text-center{% endif %}">
+            <!-- Good Colors -->
+            <ul class="list-inline text-center good-colors">
+              <li>Цвета:</li>
+
+              <li class="good-color{% if product.rgb.rgb == '#fff' %} good-i-color--white{% endif %}{% if not product.is_color %} active{% endif %}">
+                <a href="{{ product.get_url }}" data-toggle="tooltip" data-placement="top" title="{{ product.maincolor }}" style="background-color: {{ product.rgb.rgb }}"></a>
+              </li>
+
+              {% for color in product.get_colors %}
+              <li class="good-color{% if color.rgb == '#fff' %} good-i-color--white{% endif %}{% if color.id == product.color_id %} active{% endif %}">
+                <a href="{% url 'product' product.category.slug product.brand.slug product.slug color.id %}" data-toggle="tooltip" data-placement="top" title="{{ color.name }}" style="background-color: {{ color.rgb }}"></a>
+              </li>
+              {% endfor %}
+            </ul>
+            <!-- End of Good Colors -->
+
+            <!-- Good Price -->
+            <div class="text-center good-price-b">
+              {% if product.oldprice %}
+              <div class="good-price-old"><s>{{ product.oldprice|floatformat:"0" }}&nbsp;<small>грн.</small></s></div>
+              {% endif %}
+
+              {% if product.price %}
+                <div class="good-price">
+                {% if product.recomendproduct.all %}<small>Цена:</small><br>{% else %}<small>Цена:</small>{% endif %}<strong>{{ product.price|floatformat:"0" }}&nbsp;</strong><small>грн.</small>
+                </div>
+                <a class="btn btn-success btn-buy btn-lg btn-good" href="javascript:;" data-toggle="modal" data-target="#cartModal" onclick="addToCart('{{ product.id }}',{% if product.is_color %}'{{ product.color_id }}'{% else %}'0'{% endif %},'{{product.name}}','{{product.category}}','{{product.idname}}','{{product.price|floatformat:"0"}}')">Купить</a>
+                <div class="one-click-wrap">
+                  <a class="btn btn-info btn-one-click" href="#" data-toggle="modal" data-target="#oneclickModal">Купить в 1 клик</a>
+                </div>
+              {% else %}
+                <span class="notnall">Нет в наличии</span>
+                <div class="clearfix"></div>
+                <div class="notif-avail-b">
+                  <i class="fa fa-bell"></i> <a class="notif-avail-lnk" data-toggle="modal" data-target="#notifAvailModal">Сообщите, когда появится</a>
+                </div>
+              {% endif %}
+              <!-- Good Compare -->
+              <div class="text-center good-i-compare hidden-xs hidden-sm">
+                <div class="checkbox">
+                    <label class="to-compare">
+                      <input type="checkbox" value="{{ product.id }}" data-compare="{% if product.id in items_id %}true{% else %}false{% endif %}"> <span class="to-compare__add">К сравнению</span>
+                    </label>
+                  </div>
+              </div>
+              <!-- End of Good Compare -->
+            </div>
+            <!-- End of Good Price -->
+            <!-- Good Rate -->
+            <!-- <div class="good-rate">
+              good Rate
+            </div> -->
+            <!-- End of Good Rate -->
+          </div>
+        {% if product.recomendproduct.all %}
+          <div class="col-sm-6 col-md-12 col-lg-6">
+            <!-- Good Related Products -->
+            <div class="good-related">
+              <h6 class="text-center"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Рекомендуем к данному товару:</h6>
+              {% for rec in product.recomendproduct.all %}
+              <div class="good-related-i">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="col-xs-4">
+                      <div class="good-related-img">
+                        <a href="{% url 'product' rec.category.slug rec.brand.slug rec.slug %}"><img src="{% if rec.image2 %}{% thumbnail rec.image 70x70 sharpen %}{% else %}/static_cdn/design/img/noimage.png{% endif %}" alt="{{ rec.name }}" title="{{ rec.name }}" class="img-responsive"></a>
+                      </div>
+                    </div>
+                    <div class="col-xs-8 pad-l-0">
+                      <a href="{% url 'product' rec.category.slug rec.brand.slug rec.slug %}" class="good-related-lnk"><small>{{ rec.name }}</small></a> <strong class="good-related-price"><small>за {{ rec.price|floatformat:"0"}} грн.</small></strong>
+                      <!--<small class="good-related-saving"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span> Экономия <strong>35грн.</strong></small>
+                      -->
+                      <a class="btn btn-default btn-good-related btn-sm" href="javascript:;" onclick="addToCart('{{ rec.id }}')" data-toggle="modal" data-target="#cartModal">Добавить в корзину</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <!-- End of Good Related Products -->
+          
+          </div>
+        {% endif %}
+
+        </div>
+
+        {% if product.dopcategory.all %}
+
+          <!-- Good Service -->
+          <div class="good-services">
+
+            {% for cat in product.dopcategory.all %}
+              <div class="good-service">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="col-sm-3 col-md-12 col-lg-3 good-service-name"><small>{{ cat.name }}</small></div>
+                    <div class="col-sm-5 col-md-12 col-lg-5 good-service-i">
+                      <select class="form-control input-sm dop">
+                      {% for dop in cat.get_products %}
+                        <option value="{{ dop.id }}" data-price="{{ dop.price|floatformat:"0"}}">{{ dop.name }}</option>
+                      {% endfor %}
+                      </select>
+                    </div>
+                    <div class="col-sm-4 col-md-12 col-lg-4 good-service-buy"><a class="btn btn-success btn-buy btn-block btn-good-service btn-sm adddop" href="javascript:;"  data-toggle="modal" data-target="#cartModal">Купить за <span>{{ cat.get_products.0.price|floatformat:"0" }}</span> <small>грн.</small></a></div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <!-- End of Good Service -->
+        {% endif %}
+
+        <!-- Good Gift -->
+        {% if gifts %}
+          <div class="good-gift-wrap">
+
+            {% for one in gifts %}
+            <div align="good-gift-i">
+              <div class="good-gift-ico-wr">
+                <img class="good-gift-ico" src="/static_cdn/design/img/giftn.png"/> 
+              </div>
+              <div class="row">
+                <div class="col-xs-4 col-sm-2 good-gift-pic">
+                  <a href="{% url 'product' one.category.slug one.brand.slug one.slug %}"><img src="{% if one.image2 %}{% thumbnail one.image 70x70 sharpen %}{% else %}/static_cdn/design/img/noimage.png{% endif %}" alt="{{ one.name }}" title="{{ one.name }}" class="img-responsive"></a>
+                </div>
+                <div class="col-xs-8 col-sm-10 good-gift-lnk">
+                  <strong>В подарок</strong> <a href="{% url 'product' one.category.slug one.brand.slug one.slug %}">{{ one.name }}</a></a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+          </div>
+        {% endif %}
+        <!-- End of Good Gift -->
+
+        <!-- Good Social -->
+        <!--<div class="text-center good-social">
+          <small>Поделись {{ product.catsin }} {{ product.name }}:</small>
+          <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script><div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir"></div>
+        </div> 
+
+      -->
+        <!-- End of Good Social -->
+
+
+      </div>
+       <!-- End of Good Buy -->
+
+      <!-- Good Delivery -->
+      <div class="col-md-6 col-lg-5">
+                  {% if product.action %}
+                <div class="product-action-count">
+                  {% if product.action_name %}
+                  <h3 class="action-name">
+                    {% if product.action_page %}
+                      <a href="{% url 'page' product.action_page.slug %}">
+                    {% endif %}
+                    {{ product.action_name }}
+                    {% if product.action_page %}
+                        </a>
+                    {% endif %}
+                  </h3>
+                  {% endif %}
+
+                  <script type="text/template" id="productActionCountdown">
+                  <div class="time <%= label %>">
+                    <span class="count curr top"><%= curr %></span>
+                    <span class="count next top"><%= next %></span>
+                    <span class="count next bottom"><%= next %></span>
+                    <span class="count curr bottom"><%= curr %></span>
+                    <span class="label"><%= label.length < 6 ? label : label.substr(0, 3)  %></span>
+                  </div>
+                  </script>
+
+                  <div class="countdown-container">
+                    <span>До окончания акции осталось:</span>
+                  </div>
+
+                </div>
+                {% endif %}
+          {% snipet 1 %}
+
+      </div>
+      <!-- End of Good Delivery -->
+
+        <!-- Good Short Description -->
+        <div class="col-xs-12">
+        <div class="good-short-descr">
+
+          {{ product.description|safe }}
+
+        </div>
+      </div>
+        <!-- End of Good Short Description -->
+    </div>
+  </div>
+</div>
+
+  {% if product.price and color_complects %}
+  <!-- Good Packages -->
+  <div class="good-packages owl-carousel owl-theme">
+    <!-- <header><i class="fa fa-tags"></i> {{ complect.name }}</header> -->
+
+      {% for complect in color_complects %}
+        {% if complect.active %}
+        <div class="good-package">
+          <div class="row">
+
+            {% for one in complect.items %}
+            <div class="col-xs-6 col-sm-6{% if forloop.counter == 1 %} col-md-offset-{% if complect.items|length > 2 %}1{% else %}2{% endif %}{% endif %} col-md-3 good-package-i">
+
+              {% if forloop.counter != complect.items|length %}
+              <div class="good-package-i-pl"><i class="fa fa-plus"></i></div>
+              {% endif %}
+
+              <div class="row">
+                <div class="col-md-5 text-right good-package-img">
+                  <a href="{{ one.product.get_url }}">
+
+                    {% if one.product.product.id == product.id %}
+                    <img src="{% if product.image2 %}{% thumbnail product.image 101x96 sharpen %}{% else %}/static_cdn/design/img/noimage.png{% endif %}" alt="{{ product.catsin }} {{ product.name }}" class="img-responsive">
+                    {% else %}
+                    <img src="{% if one.product.image10 %}{% thumbnail one.product.image1 101x96 sharpen %}{% else %}/static_cdn/design/img/noimage.png{% endif %}" alt="{{ product.catsin }} {{ one.product.name }}" class="img-responsive">
+                    {% endif %}
+
+                  </a>
+                </div>
+                <div class="col-md-7 good-package-i-name{% if forloop.counter == 1 %} good-package-i-current{% endif %}">
+
+                  {% if one.product.product.id == product.id %}
+                    <strong>Ваш товар</strong>
+                    <span>{{ one.product.get_name }}</span>
+                  {% else %}
+                    <a href="{{ one.product.get_url }}">{{ one.product.get_name }}</a>
+                  {% endif %}
+
+                  {% if one.percent %}
+                    <div class="good-package-i-op"><s>{{ one.product.price|floatformat:"0"}} <small>грн</small></s></div class="">
+                    <strong class="good-package-i-np">{{ one.price|floatformat:"0" }} <small>грн</small></strong>
+                    <span class="good-package-i-sale">-{{ one.percent }}%</span>
+
+                  {% else %}
+                    <strong>{{ one.product.price|floatformat:"0" }} <small>грн</small></strong>
+                  {% endif %}
+
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+            <div class="col-xs-12 col-md-2 text-center good-package-i-total">
+              <span>{{ complect.price|floatformat:"0" }} <small>грн</small></span>
+              <a class="btn btn-success btn-buy btn-block" href="javascript:;" onClick="addComplect({{ complect.id }}{% if product.color_id %},{{ product.color_id }}{% endif %})" data-toggle="modal" data-target="#cartModal">Купить комплект</a>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+
+  </div>
+  <!-- End of Good Packages -->
+  {% endif %}
+
+  <!-- Good Tabs -->
+  <div class="good-tabs">
+    <div role="tabpanel">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#good-all-tab" aria-controls="good-all-tab" role="tab" data-toggle="tab">Описание</a></li>
+      <li role="presentation"><a href="#good-spec-tab" aria-controls="good-spec-tab" role="tab" data-toggle="tab">Характеристики</a></li>
+      <li role="presentation"><a id="to_good-rev-tab" href="#good-rev-tab" aria-controls="good-rev-tab" role="tab" data-toggle="tab">Отзывы ({{ product.comments_count }})</a></li>
+      <li role="presentation"><a href="#good-similar-tab" aria-controls="good-similar-tab" role="tab" data-toggle="tab">Похожие товары</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane tab-pane-good active" id="good-all-tab">
+        <div class="row">
+          <div class="col-md-7">
+            <h2>Описание {{ product.catsin }} {{ product.name }}</h2>
+
+            {% if product.full_text %}
+              {{ product.full_text|safe }}
+            {% else %}
+              У нас вы можете купить {{ product.catsin|lower }} {{ product.name }} в Киеве с доставкой по всем регионам Украины - Харьков, Львов, Одесса, Днепропетровск и т. д. Интернет-магазин 20K предлагает {{ product.catsin|lower }} {{ product.name }} по лучшим ценам. Заказывайте у нас!
+            {% endif %}
+
+          </div>
+          <div class="col-md-5">
+            <div class="last-reviews reviews">
+              <header>
+              <h3>Отзывы покупателей о {{ product.catsin }} {{ product.name }}<small>({{ product.comments_count }})</small></h3>
+                <a href="javascript:;" onclick="open_reviews();" class="btn btn-default btn-new-review"><i class="fa fa-pencil"></i> Написать отзыв</a>
+              </header>
+
+              {% for one in product.last_comments %}
+                {% comment one com_class='.last-reviews' item_id=product %}
+              {% endfor %}
+
+              <a href="javascript:;" class="all-reviews-lnk" onclick="open_reviews();"><i class="fa fa-comments"></i> Читать все отзывы</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div role="tabpanel" class="tab-pane tab-pane-good" id="good-spec-tab">
+        <h2>Характеристики {{ product.catsin }} {{ product.name }}</h2>
+
+        {% if  product.properties %}
+          <dl class="dl-horizontal">
+            {% for prop in product.properties %}
+            <dt>{{ prop.1 }}</dt>
+            <dd>{{ prop.2 }}</dd>
+            {% endfor %}
+
+          </dl>
+        {% endif %}
+      </div>
+
+      <div role="tabpanel" class="tab-pane tab-pane-good" id="good-rev-tab">
+
+        {% comments 'shop' 'Product' product  %}
+
+      </div>
+      <div role="tabpanel" class="tab-pane tab-pane-good" id="good-similar-tab">
+        <h2>Похожие товары на {{ product.catsin }} {{ product.name }}</h2>
+        {% similar_prod category %}
+
+      </div>
+    </div>
+
+  </div>
+  </div>
+  <!-- End of Good Tabs -->
+  <ul class="list-inline popular-filter-l popular-filter--product">
+    <li class="popular-filter-i">
+      <strong>Популярное:</strong>
+    </li>
+    {% for a in ancor %}
+    <li class="popular-filter-i">
+      <a class="popular-filter-lnk" href="{{ a.url }}">{{ a.ancor }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+<!-- End of Good -->
+
+{% top_prod category type='prod' %}
+
+{% endblock %}
+
+
+{% block modal %}
+<!-- One Click Modal -->.
+<div class="modal fade" id="oneclickModal" tabindex="-1" role="dialog" aria-labelledby="oneclickModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="product_id hidden">{{ product.id }}</div>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" id="oneclickModalLabel">Заказать в один клик</h4>
+    </div>
+    <form class="oneclick">
+    <div class="modal-body">
+      <p>Укажите свой номер телефона без заполнения дополнительных форм и наш менеджер свяжется с вами для оформления мгновенного заказа.</p>
+      <input id="exampleInputPhone" type="text" class="form-control" name="phone" placeholder="+38(0XX)XXX-XX-XX">
+      <input type="hidden" name="product_id" value="{{ product.id }}">
+    </div>
+    <div class="alert alert-success success-form thank-form" role="alert">Спасибо, мы свяжемся с Вами в ближайшее время</div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-info">Заказать звонок</button>
+    </div>
+    </form>
+
+  </div>
+</div>
+</div>
+<!-- End of One Click Modal -->
+
+    <!-- Notification of Availability Modal -->.
+    <div class="modal fade" id="notifAvailModal" tabindex="-1" role="dialog" aria-labelledby="notifAvailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="product_id hidden">{{ product.id }}</div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="notifAvailModalLabel">Уведомить о наличии товара</h4>
+        </div>
+        <form class="form-notification notify-modal">
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label for="notifName">Ваше имя:</label>
+            <input type="text" class="form-control" id="notifName" value="{{ request.user.first_name }}" name="name">
+          </div>
+          <div class="form-group">
+            <label for="notifEmail">На email:</label>
+            <input type="email" class="form-control" id="notifEmail" value="{{ request.user.email }}" name="email">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPhone">И по телефону SMS *</label>
+            <input type="tel" class="form-control"  id="exampleInputPhone"  placeholder="+38(0XX)XXX-XX-XX" value="{{ request.user.phone }}" name="phone">
+          </div>
+
+          <input type="hidden" name="product_id" value="{{ product.id }}">
+
+          <p><small>* - не обязательно</small> </p>
+
+
+        </div>
+        <div class="alert alert-success success-form thank-form" role="alert">Спасибо, мы сообщим Вам, когда товар появится в наличии.</div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success btn-buy">Ок</button>
+        </div>
+        </form>
+
+      </div>
+    </div>
+    </div>
+    <!-- End of Notification of Availability Modal -->
+{% endblock modal %}
+
+
+{% block remarketing %}
+
+<script type="text/javascript">
+  var google_tag_params = {
+  ecomm_prodid: '{{product.id}}',
+  ecomm_pagetype: 'product',
+  ecomm_totalvalue: '{{product.price}}'
+  };
+  </script>
+  <script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 963882198;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/963882198/?value=0&guid=ON&script=0"/>
+</div>
+</noscript>
+{% endblock %}
+
+
+{% block scripts %}
+  <script type="text/javascript" src="/static_cdn/design/js/jquery.countdown.min.js"></script>
+  <script src="/static_cdn/design/js/fotorama.js"></script>
+  <script src="/static_cdn/design/js/scrollto.min.js"></script>
+  <script src="/static_cdn/design/js/comments.js"></script>
+
+
+  <script type="text/javascript">
+    $(window).on('load', function() {
+
+      if ($('#productActionCountdown').length){
+      var labels = ['недель', 'дней', 'часов', 'минут', 'секунд'],
+        nextYear = '{{ product.action_time|date:'Y/m/d H:i:s'}}',
+        template = _.template($('#productActionCountdown').html()),
+        currDate = '00:00:00:00:00',
+        nextDate = '00:00:00:00:00',
+        parser = /([0-9]{2})/gi,
+        $example = $('.countdown-container');
+
+        console.log(nextYear);
+
+        if (new Date(nextYear) > new Date){
+
+      // Parse countdown string to an object
+      function strfobj(str) {
+        var parsed = str.match(parser),
+          obj = {};
+        labels.forEach(function(label, i) {
+          obj[label] = parsed[i]
+        });
+        return obj;
+      }
+      // Return the time components that diffs
+      function diff(obj1, obj2) {
+        var diff = [];
+        labels.forEach(function(key) {
+          if (obj1[key] !== obj2[key]) {
+            diff.push(key);
+          }
+        });
+        return diff;
+      }
+      // Build the layout
+      var initData = strfobj(currDate);
+      labels.forEach(function(label, i) {
+        $example.append(template({
+          curr: initData[label],
+          next: initData[label],
+          label: label
+        }));
+      });
+      // Starts the countdown
+      $example.countdown(nextYear, function(event) {
+        var newDate = event.strftime('%w:%d:%H:%M:%S'),
+          data;
+        if (newDate !== nextDate) {
+          currDate = nextDate;
+          nextDate = newDate;
+          // Setup the data
+          data = {
+            'curr': strfobj(currDate),
+            'next': strfobj(nextDate)
+          };
+          // Apply the new values to each node that changed
+          diff(data.curr, data.next).forEach(function(label) {
+            var selector = '.%s'.replace(/%s/, label),
+                $node = $example.find(selector);
+            // Update the node
+            $node.removeClass('flip');
+            $node.find('.curr').text(data.curr[label]);
+            $node.find('.next').text(data.next[label]);
+            // Wait for a repaint to then flip
+            _.delay(function($node) {
+              $node.addClass('flip');
+            }, 5, $node);
+          });
+        }
+      });
+
+    }
+    }});
+  </script>
+
+
+{% endblock scripts %}

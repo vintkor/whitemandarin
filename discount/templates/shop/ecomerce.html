@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<link href="/static_cdn/design/css/jquery.treetable.css" rel="stylesheet">
+		<link href="/static_cdn/design/css/jquery.treetable.theme.default.css" rel="stylesheet">
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	    <script src="/static_cdn/design/js/jquery.treetable.js"></script>
+	</head>
+	<body>
+
+	<table>
+		<thead>
+			<td>name</td>
+			<td>url</td>
+			<td>keywords</td>
+		</thead>
+		<tbody>
+			{% for item in items %}
+				<tr data-tt-id="{{ item.id }}" data-tt-parent-id="{{ item.parent_id }}">
+					<td>{{ item.name }}</td>
+					<td>{{ item.url }}</td>
+					<td>{% if item.url %}
+					<textarea name="item_{{ item.id }}" cols="30" rows="3">{{ item.keywords }}</textarea>
+					{% endif %}
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+
+	</table>
+
+	<script>
+	$(document).ready(function(){
+		$('table').treetable({
+			expandable: true
+		});
+	});
+	</script>
+	</body>
+</html>

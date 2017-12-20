@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load fishca_tags %}
+
+{% block title %}{% if page > 1 %}Страница {{ page }} раздела {{ category.name }} интернет-магазина 20K{% elif category.level == 0 %}{{ category.title }}{% else %}Купить {{ category.name }} в Киеве. Продажа и цены на {{ category.name }} в Украине - интернет-магазин 20K{% endif %}{% endblock %}
+{% block description %}{% if page > 1 %}Страница {{ page }} раздела {{ category.name }} интернет-магазина 20K. Доставка по Украине. Звоните и заказывайте (044) 228-29-37{% elif category.level == 0 %}{{ category.metadesc }}{% else %}Интернет-магазин 20K предлагает вам купить {{ category.name }}. Доставка по Украине. Звоните и заказывайте (044) 228-29-37{% endif %}{% endblock %}
+{% block keywords %}{% if page > 1 %}Страница {{ page }}, раздел {{ category.name }}{% elif category.level == 0 %}{{ category.metakey }}{% else %}купить {{ category.name }}, интернет-магазин 20K{% endif %}{% endblock %}
+{% block amp %}
+<link rel="amphtml"  href="https://20k.com.ua{{ category.get_url }}amp/" />
+{% endblock amp %}
+
+{% block canonical %}
+
+  {% if active_filters or active_brands %}
+    <link rel="canonical" href="https://20k.com.ua{{ category.get_url }}{% if catalog_type == 'brandcategory' %}{{ brand.slug }}/{% endif %}{% if page > 1 %}page-{{ page }}/{% endif %}" />
+  {% endif %}
+{% endblock %}
+
+
+{% block rel %}
+
+  {% if items.paginator.num_pages > 1 %}
+    {% if items.has_previous %}
+    <link rel="prev" href="https://20k.com.ua{{ category.get_url }}{% if items.previous_page_number > 1 %}page-{{ items.previous_page_number }}/{% endif %}" />
+    {% endif %}
+    {% if items.has_next %}
+    <link rel="next" href="https://20k.com.ua{{ category.get_url }}page-{{ items.next_page_number }}/"/>
+    {% endif %}
+  {% endif %}
+
+{% endblock rel %}
+
+
+{% block bred %}
+
+<!-- Breadcrumbs -->
+<ol class="breadcrumb hidden-xs" vocab="https://schema.org/" typeof="BreadcrumbList">
+
+  <li  property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage"
+        href="https://20k.com.ua/">
+        <span property="name">Магазин электроники</span></a>
+        <meta property="position" content="1">
+  </li>
+
+  {% if category.parent %}
+  <li  property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage"
+        href="https://20k.com.ua{{ category.parent.get_url }}">
+        <span property="name">{{ category.parent.name }}</span></a>
+        <meta property="position" content="2">
+  </li>
+  {% endif %}
+
+
+  <li  property="itemListElement" typeof="ListItem">
+        <span property="name">{{ category.name }}</span>
+        <meta property="position" content="{% if category.parent %}3{% else %}2{% endif %}">
+  </li>
+
+
+</ol>
+<!-- End of Breadcrumbs -->
+
+{% endblock %}
+
+
+{% block css %}
+<link rel="stylesheet" href="/static_cdn/design/css/jquery-ui.min.css">
+{% endblock css %}
+
+
+{% block content %}
+
+  {% include 'include/catalog.html' %}
+
+{% endblock %}
+
+
+{% block scripts %}
+  <script src="/static_cdn/design/js/jquery-ui.min.js"></script>
+{% endblock scripts %}

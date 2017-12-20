@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load cache %}
+{% load action_tags %}
+
+{% block title %}{{ item.title }}{% endblock title %}
+
+{% block description %}{{ item.metaDesc }}{% endblock description %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+    <li><a href="/">Главная</a></li>
+    <li><a href="/profile/">Мой профиль</a></li>
+    <li class="active">Мои заказы</li>
+</ol>
+<div class="profile-inner">
+    <h1 class="profile-title"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Мои заказы</h1>
+    {% if items %}
+        <div class="table-responsive profile-table-orders">
+            <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                    <th data-class="expand" data-sort-initial="true"><span
+                            title="table sorted by this column on load">Номер заказа</span></th>
+                    <th data-hide="phone,tablet" data-sort-ignore="true">Товары</th>
+                    <th data-hide="phone,tablet">Метод оплаты</th>
+                    <th data-hide="phone,tablet">Способ доставки</th>
+                    <th data-hide="default">Цена</th>
+                    <th data-hide="default" data-type="numeric">Дата</th>
+                    <th data-hide="phone" data-type="numeric">Статус</th>
+                    <th data-hide="phone,tablet"> Подробности заказа</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>№{{ item.pk }}</td>
+                        <td>{{ item.allproducts }}
+                        </td>
+                        <td>{{ item.get_payment_display }}</td>
+                        <td>{{ item.get_delivery_display }}</td>
+                        <td>{{ item.allprice }}</td>
+                        <td data-value="78025368997">{{ item.pub_date }}</td>
+                        <td data-value="3">{% if item.proccessed %}<span class="label label-success"><i class="fa fa-check-circle-o" aria-hidden="true"></i>  Обработан</span>{% else %}<span class="label label-warning"><i class="fa fa-hourglass-half" aria-hidden="true"></i> В обработке</span>{% endif %}
+                        <td><a href="{% url 'order' item.pk %}" class="profile-order-lnk"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Открыть заказ</a></td>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+    <h1 class="title">У Вас пока нет заказов!</h1>
+    {% endif %}
+</div>
+
+{% endblock content %}

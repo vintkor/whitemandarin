@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE yml_catalog SYSTEM "shops.dtd">
+<yml_catalog date="{{ now.year }}-{{ now.month }}-{{ now.day }} {{ now.hour }}:{{ now.minute }}">
+    <shop>
+        <name>20k</name>
+        <company>20k</company>
+        <url>http://20k.com.ua/</url>
+
+        <currencies>
+            <currency id="UAH" rate="1" plus="0"/>
+        </currencies>
+
+        <categories>
+
+        {% for item in categories %}
+            <category id="{{ item.id }}" {% if item.parent %}parentId="{{ item.parent.id }}"{% endif %}>{{ item.name }}</category>
+        {% endfor %}
+        </categories>
+
+        <local_delivery_cost>40</local_delivery_cost>
+
+        <offers>
+        {% for item in items %}
+            <offer id="{{ item.id }}" bid="{{ item.category.id }}" available="{% if item.price %}true{% else %}false{% endif %}">
+                <url>http://20k.com.ua{{ item.get_url}}</url>
+                <price>{{ item.price }}</price>
+                <currencyId>UAH</currencyId>
+                <categoryId>{{item.category.id}}</categoryId>
+                <picture>http://20k.com.ua/media/{{ item.image }}</picture>
+                <delivery>true</delivery>
+                <local_delivery_cost>35</local_delivery_cost>
+                <typePrefix>{{ item.category }}</typePrefix>
+                <vendor>{{ item.brand.name }}</vendor>
+                <model>{{ item.name }}</model>
+                <description>{{ item.description }}</description>
+                <manufacturer_warranty>true</manufacturer_warranty>
+                <country_of_origin>Китай</country_of_origin>
+            </offer>
+        {% endfor %}
+        </offers>
+
+    </shop>
+</yml_catalog>

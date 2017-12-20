@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load fishca_tags %}
+{% load comments_tags %}
+
+{% load thumbnail %}
+{% block title %}{{ page.title }}{% endblock %}
+{% block description %}{{ page.metaDesc }}{% endblock %}
+{% block keywords %}{{ page.metaKey }}{% endblock %}
+{% block canonical %}{{ page.get_url }}{% endblock %}
+
+{% block bred %}
+
+<!-- Breadcrumbs -->
+<ol class="breadcrumb hidden-xs" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+  <li  property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage"
+        href="http://20k.com.ua/">
+        <span property="name">Магазин электроники</span></a>
+        <meta property="position" content="1">
+  </li>
+
+  {% if page.category %}
+  <li  property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage"
+        href="http://20k.com.ua/overviews/">
+        <span property="name">Обзоры</span></a>
+        <meta property="position" content="2">
+  </li>
+  {% endif %}
+
+  <li property="itemListElement" typeof="ListItem">
+        <span property="name">{{ page.name }}</span>
+        <meta property="position" content="{% if page.category %}3{% else %}2{% endif %}">
+  </li>
+</ol>
+<!-- End of Breadcrumbs -->
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="row">
+  <section class="col-md-{% if page.category %}12{% else %}8{% endif %} main-content" role="main">
+    <h1 >{{ page.name }}</h1>
+    {{page.full_text|safe}}
+  </section>
+  {% if not page.category %}
+	  <aside class="hidden-xs hidden-sm col-md-4 aside-column">
+
+	    {% snipet 1 %}
+
+	  </aside>
+  {% endif %}
+
+</div>
+
+
+{% endblock %}

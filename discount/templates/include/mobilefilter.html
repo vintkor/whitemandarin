@@ -1,0 +1,68 @@
+{% load fishca_tags %}
+<!-- Filter Mobile -->
+<a href="#sidebarFilter" class="hidden-md hidden-lg btn btn-default filter-btn-m"><strong><i class="fa fa-sliders" aria-hidden="true"></i></strong></a>
+<nav id="sidebarFilter" class="hidden-md hidden-lg sidebar-filter-mm">
+  <ul class="filter-mm">
+    <li class="filter-mm-i">
+      <span>
+        <select class="form-control input-sm" onchange="location = this.value;">
+          <option value="{% if get_full_path %}?{{ get_full_path }}&{% else %}?{%endif%}order_by=-id" {% if order_by == '-id' %}selected="selected"{% endif %}>Сортировать по умолчанию</option>
+          <option value="{% if get_full_path %}?{{ get_full_path }}&{% else %}?{%endif%}order_by=name"  {% if order_by == 'name' %}selected="selected"{% endif %}>Наименование (А -&gt; Я)</option>
+          <option value="{% if get_full_path %}?{{ get_full_path }}&{% else %}?{%endif%}order_by=-name"  {% if order_by == '-name' %}selected="selected"{% endif %}>Наименование (Я -&gt; А)</option>
+          <option value="{% if get_full_path %}?{{ get_full_path }}&{% else %}?{%endif%}order_by=price"  {% if order_by == 'price' %}selected="selected"{% endif %}>Цена (по возрастанию)</option>
+          <option value="{% if get_full_path %}?{{ get_full_path }}&{% else %}?{%endif%}order_by=-price"  {% if order_by == '-price' %}selected="selected"{% endif %}>Цена (по убыванию)</option>
+          <option value="{% if get_full_path %}?{{ get_full_path }}&{% else %}?{%endif%}order_by=count_views"  {% if order_by == 'count_views' %}selected="selected"{% endif %}>Рейтинг (по убыванию)</option>
+          <option value="{% if get_full_path %}?{{ get_full_path }}&{% else %}?{%endif%}order_by=-count_views"  {% if order_by == '-count_views' %}selected="selected"{% endif %}>Рейтинг (по возрастанию)</option>
+        </select>
+      </span>
+    </li>
+    <li class="filter-mm-i filter-mm-price">
+      <span>
+          <span>Цена, грн.</span>
+          <div class="row filters-wrap filters--price">
+            <div class="col-xs-5"><input type="number" name="min_now" class="form-control input-sm min_now" placeholder="0"></div>
+            <div class="col-xs-2 text-center">—</div>
+            <div class="col-xs-5"><input type="number" name="max_now" class="form-control input-sm max_now" placeholder="500"></div>
+          </div>
+          <!-- ДЛя проверки верстки - удалить потом -->
+          <!-- Завершаем ДЛя проверки верстки - удалить потом -->
+          <div id="price-range2"></div>
+      </span>
+    </li>
+    {% if brands %}
+          <li class="filter-mm-i active">
+            <span>Бренд<span class="filter-mm-delimiter">:</span> <small class="filter-mm-active">{% abrands brands active_brands %}</small></span>
+            <ul class="filter-mm-v">
+              {% for one in brands %}
+              <li class="checkbox checkbox-success filter-mm-checkbox">
+                <span>
+                  <input id="b_{{ one.id }}" class="styled" type="checkbox" name="brand_{{ one.id }}"{% if one.id in active_brands %} checked="checked"{% endif %}>
+                  <label for="b_{{ one.id }}">
+                    {{ one.name }}
+                  </label>
+                </span>
+              </li>
+              {% endfor %}
+            </ul>
+          </li>
+    {% endif %}
+   {% for filter in filters %}
+       <li class="filter-mm-i active">
+          <span>{{ filter.name }}<span class="filter-mm-delimiter">:</span> <small class="filter-mm-active">{% afilters filter.items active_filters %}</small></span>
+          <ul class="filter-mm-v">
+            {% for one in filter.items %}
+            <li class="checkbox checkbox-success filter-mm-checkbox">
+              <span>
+                <input id="f_{{ one.id }}" class="styled" type="checkbox"{% if one.id in active_filters %} checked="checked"{% endif %} name="prop_{{ one.id }}">
+                <label for="f_{{ one.id }}">
+                  {{ one.value }}
+                </label>
+              </span>
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+    {% endfor %}
+  </ul>
+</nav>
+<!-- End of Filter Mobile -->

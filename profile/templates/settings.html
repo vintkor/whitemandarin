@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load cache %}
+{% load action_tags %}
+
+{% block title %}{{ item.title }}{% endblock title %}
+
+{% block description %}{{ item.metaDesc }}{% endblock description %}
+
+{% block content %}
+<ol class="breadcrumb">
+    <li><a href="/">Главная</a></li>
+    <li><a href="/profile/">Мой профиль</a></li>
+    <li class="active">Мои настройки</li>
+</ol>
+<div class="profile-inner">
+    <form action="/profile/settings/" method="POST" class="settingsform">
+        <h1 class="profile-title"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Мои настройки
+            <div class="saveok hidden">Ваши настройки успешно сохранены.</div>
+        </h1>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Email" name="email" value="{{ request.user.email }}">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Имя" required name="name" value="{{ request.user.first_name }}">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Фамилия" name="lastname" value="{{ request.user.last_name }}">
+                </div>
+                <div class="form-group">
+                    <input id="exampleInputPhone" type="text" class="form-control" placeholder="Телефон" required name="phone" value="{{ request.user.phone }}">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Адрес" name="address" value="{{ request.user.address }}">
+                </div>
+                <div class="text-right">
+                    <button type="submit" class="btn brand-btn btn-success btn-buy btn-profile">Сохранить</button>
+                </div>
+                
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load fishca_tags %}
+{% load comments_tags %}
+
+
+{% load thumbnail %}
+{% block title %}Карта сайта{% endblock %}
+{% block description %}Основные категории каталога{% endblock %}
+{% block keywords %}карта сайта, навигация по сайту{% endblock %}
+
+{% block bred %}
+
+<div class="breadcrumb" itemscope="" itemtype="http://schema.org/WebPage">
+        <span temprop="breadcrumb" itemscope="" itemtype="http://schema.org/Breadcrumb"><a href="/" itemprop="url">
+            Магазин электроники
+            </a>
+             ›
+        </span>
+
+
+        <span temprop="breadcrumb" itemscope="" itemtype="http://schema.org/Breadcrumb">
+
+            Карта сайта
+
+
+        </span>
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+
+<div id="content" ><!-- breadcrumbs old place -->
+  <h1 >Карта сайта </h1>
+  <ul>
+  {% for c in categories %}
+  {% if not c.parent == 0 %}
+  <li><a href="{{c.get_url}}">{{c.name}}</a>
+     {% if not c.is_leaf_node %}
+     <ul>
+      {% for children in  c.get_children %}
+        <li><a href="{{children.get_url}}">{{children.name}}</a></li>
+    {% endfor %}
+
+     </ul>
+
+     {% endif %}
+
+  </li>
+  {% endif %}
+
+  {% endfor %}
+</ul>
+</div>
+{% endblock %}

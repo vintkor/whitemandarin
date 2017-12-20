@@ -1,0 +1,16 @@
+{% load thumbnail %}
+{% for i in items %}
+<div class="usfull_article">
+    <div class="usfull_name">
+        <a href="{% url 'usfull_item' i.slug %}">{{i.name}}</a>
+    </div>
+    <div class="usfull_content">
+        <a href="{% url 'usfull_item' i.slug %}">
+        <img style="margin:5px;" align="left" alt="{{i.name}}" src="{% thumbnail  i.image 80x80 sharpen %}"/>
+        </a> 
+        {{i.short_text|safe}}
+    </div>
+
+</div>
+
+{% endfor %}
